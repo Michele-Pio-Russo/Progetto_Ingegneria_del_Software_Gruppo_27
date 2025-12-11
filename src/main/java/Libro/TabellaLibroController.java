@@ -232,7 +232,7 @@ public class TabellaLibroController {
      *  Cambia criterio di ricerca del libro
      * * @post Il libro viene cercato con successo seguendo il criterio specifico
      *
-     * * @return void f
+     * * @return void
      */ 
     
     private void onCambio(){
