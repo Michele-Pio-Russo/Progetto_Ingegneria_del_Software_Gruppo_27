@@ -8,7 +8,7 @@
  *
  * @author Gianmichele Trotta
  * @date 8 Dicembre 2025
- * @version 1.0
+ * @version 1.1.
  */
 package Libro;
 
