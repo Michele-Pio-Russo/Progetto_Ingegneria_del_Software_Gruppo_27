@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['getannopubblicazione_0',['getAnnoPubblicazione',['../class_libro_1_1_libro.html#ae9f52a3531a4490592170da9be5940bd',1,'Libro::Libro']]],
+  ['getautore_1',['getAutore',['../class_libro_1_1_libro.html#a68e6dc52ca2df2d64a99cf3bd9bf540b',1,'Libro::Libro']]],
+  ['getcognome_2',['getCognome',['../class_utente_1_1_utente.html#a810b6d23a63c9a80bd6cea45b219f22b',1,'Utente::Utente']]],
+  ['getdatadiscadenza_3',['getDataDiScadenza',['../class_prestito_1_1_prestito.html#a1d990fd723c2ceac56e4953e33e0ee30',1,'Prestito::Prestito']]],
+  ['getemail_4',['getEmail',['../class_utente_1_1_utente.html#a9b6cd95cb750f6b369b7fb42771b7154',1,'Utente::Utente']]],
+  ['getisbn_5',['getIsbn',['../class_libro_1_1_libro.html#ad3ed42b938e4432ef0bc2099c5d5f252',1,'Libro::Libro']]],
+  ['getiscrizione_6',['getIscrizione',['../class_utente_1_1_utente.html#afb24ebcca387f389557ec69a4d815ac8',1,'Utente::Utente']]],
+  ['getlibri_7',['getLibri',['../class_libro_1_1_tabella_libro_model.html#aea77bfe6cdaceed2dd741ed8959a6950',1,'Libro::TabellaLibroModel']]],
+  ['getlibriinprestito_8',['getLibriInPrestito',['../class_utente_1_1_utente.html#a9a62f78b695ba54ecef196fe6d14bb2e',1,'Utente::Utente']]],
+  ['getlibro_9',['getLibro',['../class_prestito_1_1_prestito.html#a2f921d9a1b7af8d8d01504725e018dcc',1,'Prestito::Prestito']]],
+  ['getmatricola_10',['getMatricola',['../class_utente_1_1_utente.html#af8016e5e9f7ad2c1c61b72df0155d986',1,'Utente::Utente']]],
+  ['getnome_11',['getNome',['../class_utente_1_1_utente.html#a2b7a725ebce6200512f8d90c8763c562',1,'Utente::Utente']]],
+  ['getnumerocopie_12',['getNumeroCopie',['../class_libro_1_1_libro.html#af82de7a9a820bd15aef41c373cdcaf18',1,'Libro::Libro']]],
+  ['getpersone_13',['getPersone',['../class_utente_1_1_tabella_utente_model.html#aa2c2eaabc261d7fd9f981cac119cdb65',1,'Utente::TabellaUtenteModel']]],
+  ['getprestiti_14',['getPrestiti',['../class_prestito_1_1_tabella_prestito_model.html#acff301c6800920651ce97772e16d2bc2',1,'Prestito::TabellaPrestitoModel']]],
+  ['getprezzo_15',['getPrezzo',['../class_libro_1_1_libro.html#af67a0e74a3fb5fc4e95afd401650a0d4',1,'Libro::Libro']]],
+  ['gettitolo_16',['getTitolo',['../class_libro_1_1_libro.html#a45facb011864a7f031d7ef68052214ef',1,'Libro::Libro']]],
+  ['getusura_17',['getUsura',['../class_libro_1_1_libro.html#a22b5adbf03942a1a823c156ae6418153',1,'Libro::Libro']]],
+  ['getutente_18',['getUtente',['../class_prestito_1_1_prestito.html#a7bcfff6b30159970273ad6142e61b1ac',1,'Prestito::Prestito']]]
+];
