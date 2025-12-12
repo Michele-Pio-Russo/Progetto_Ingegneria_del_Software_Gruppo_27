@@ -40,7 +40,7 @@ public class Libro implements Serializable{
  * @param[in] usura Lo stato di usura del libro
  */
     
-    public Libro(String titolo, String autore, String isbn, int annoPublicazione, float prezzo, String usura, int numCopie) {
+    public Libro(String titolo, String autore, String isbn, int annoPublicazione, double prezzo, String usura, int numCopie) {
         this.titolo = titolo;
         this.autore = autore;
         this.isbn = isbn;
