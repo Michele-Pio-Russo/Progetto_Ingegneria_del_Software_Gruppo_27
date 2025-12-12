@@ -32,6 +32,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.LocalDateStringConverter;
 
 
@@ -174,21 +175,41 @@ public class TabellaUtenteController {
             }
         });
         
-
-
-iscrizioneCol.setCellFactory(TextFieldTableCell.<Utente, LocalDate>forTableColumn(dateConverter));
-iscrizioneCol.setOnEditCommit(event -> {
-    Utente U = event.getRowValue();
-    LocalDate nuovaIscrizioneData = event.getNewValue();
-
-    if (nuovaIscrizioneData != null) {
-        U.setIscrizione(nuovaIscrizioneData); 
-    } else {
-        mostraErrore("Data non valida", "La data di iscrizione deve essere nel formato 'YYYY-MM-DD'.");
-        tabella.refresh();
-    }
-});
-
+        emailCol.setCellFactory(TextFieldTableCell.<Utente>forTableColumn());
+        emailCol.setOnEditCommit(event -> {
+            Utente U = event.getRowValue();
+            String nuovaEmail = event.getNewValue();
+            if (nuovaEmail != null && !nuovaEmail.trim().isEmpty()) {
+                U.setNome(nuovaEmail.trim());
+            } else {
+                mostraErrore("Email non valida", "L'email non può essere vuota.");
+                tabella.refresh();
+            }
+        });
+        
+        iscrizioneCol.setCellFactory(TextFieldTableCell.<Utente, LocalDate>forTableColumn(dateConverter));
+        iscrizioneCol.setOnEditCommit(event -> {
+            Utente U = event.getRowValue();
+            LocalDate nuovaIscrizioneData = event.getNewValue();
+            if (nuovaIscrizioneData != null) {
+                U.setIscrizione(nuovaIscrizioneData); 
+             } else {
+                mostraErrore("Data non valida", "La data di iscrizione deve essere nel formato 'YYYY-MM-DD'.");
+                tabella.refresh();
+             }
+        });
+        
+        libriInPrestitoCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        libriInPrestitoCol.setOnEditCommit(event -> {
+            Utente U = event.getRowValue();
+            Integer nuovoLibroInPrestito = event.getNewValue();
+            if (nuovoLibroInPrestito != null && nuovoLibroInPrestito < 0) {
+                U.setLibriInPrestito(nuovoLibroInPrestito);
+            } else {
+                mostraErrore("Numero di libri in prestito non valido", "Il numero di libri in prestito non può essere vuota.");
+                tabella.refresh();
+            }
+        });
     }
 
     /**
