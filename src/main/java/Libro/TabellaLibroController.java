@@ -30,6 +30,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import static javafx.scene.control.cell.TextFieldTableCell.forTableColumn;
 import javafx.stage.Stage;
+import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 
 
@@ -102,7 +103,7 @@ public class TabellaLibroController {
     private TableColumn<Libro, Integer> copieCol; ///@brief Colonna che contiene il numero delle copie dei libri che sono stati inseriti
 
     @FXML
-    private TableColumn<Libro, Float> prezzoCol; ///@brief Colonna che contiene il prezzo dei libri che sono stati inseriti
+    private TableColumn<Libro, Double> prezzoCol; ///@brief Colonna che contiene il prezzo dei libri che sono stati inseriti
 
     @FXML
     private TableColumn<Libro, String> usuraCol; ///@brief Colonna che contiene la condizione di usura dei libri che sono stati inseriti
@@ -134,7 +135,7 @@ public class TabellaLibroController {
         isbnCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("isbn"));
         copieCol.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("copie"));
         annoPubblicazioneCol.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("annoPubblicazione"));
-        prezzoCol.setCellValueFactory(new PropertyValueFactory<Libro, Float>("prezzo"));
+        prezzoCol.setCellValueFactory(new PropertyValueFactory<Libro, Double>("prezzo"));
         usuraCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("usura"));
 
         // Rendo la tabella non editabile
@@ -161,6 +162,78 @@ public class TabellaLibroController {
                 l.setTitolo(nuovoTitolo.trim());
             } else {
                 mostraErrore("Titiolo non valido", "Il titolo non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
+        
+        autoreCol.setCellFactory(TextFieldTableCell.<Libro>forTableColumn());
+        autoreCol.setOnEditCommit(event -> {
+            Libro l = event.getRowValue();
+            String nuovoAutore = event.getNewValue();
+            if (nuovoAutore != null && !nuovoAutore.trim().isEmpty()) {
+                l.setAutore(nuovoAutore.trim());
+            } else {
+                mostraErrore("Autore non valido", "L'autore non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
+        
+        isbnCol.setCellFactory(TextFieldTableCell.<Libro>forTableColumn());
+        isbnCol.setOnEditCommit(event -> {
+            Libro l = event.getRowValue();
+            String nuovoIsbn = event.getNewValue();
+            if (nuovoIsbn != null && !nuovoIsbn.trim().isEmpty()) {
+                l.setIsbn(nuovoIsbn.trim());
+            } else {
+                mostraErrore("Isbn non valido", "L'isbn non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
+        
+        copieCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        copieCol.setOnEditCommit(event -> {
+            Libro l = event.getRowValue();
+            Integer nuovoCopie = event.getNewValue();
+            if (nuovoCopie != null && nuovoCopie < 0) {
+                l.setCopie(nuovoCopie);
+            } else {
+                mostraErrore("Numero di copie non valido", "Il numero di copie non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
+        
+        annoPubblicazioneCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        annoPubblicazioneCol.setOnEditCommit(event -> {
+            Libro l = event.getRowValue();
+            Integer nuovoAnnoPubblicazione = event.getNewValue();
+            if (nuovoAnnoPubblicazione != null && nuovoAnnoPubblicazione < 0) {
+                l.setAnnoPubblicazione(nuovoAnnoPubblicazione);
+            } else {
+                mostraErrore("Anno di pubblicazione non valido", "L'anno di pubblicazione non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
+        
+        prezzoCol.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+        prezzoCol.setOnEditCommit(event -> {
+            Libro l = event.getRowValue();
+            Double nuovoPrezzo = event.getNewValue();
+            if (nuovoPrezzo != null && nuovoPrezzo < 0) {
+                l.setPrezzo(nuovoPrezzo);
+            } else {
+                mostraErrore("Prezzo non valido", "Il prezzo non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
+        
+        usuraCol.setCellFactory(TextFieldTableCell.<Libro>forTableColumn());
+        usuraCol.setOnEditCommit(event -> {
+            Libro l = event.getRowValue();
+            String nuovaUsura = event.getNewValue();
+            if (nuovaUsura != null && !nuovaUsura.trim().isEmpty()) {
+                l.setUsura(nuovaUsura.trim());
+            } else {
+                mostraErrore("Usura non valido", "L'usura non può essere vuota.");
                 tabella.refresh();
             }
         });
@@ -388,13 +461,13 @@ public class TabellaLibroController {
                 // portiamo sottoforma numerica i valori
                 int intNumCopie = Integer.parseInt(strCopie);
                 int intAnno = Integer.parseInt(strAnnoPubblicazione);
-                float floatPrezzo = Float.parseFloat(strPrezzo);
+                double doublePrezzo = Double.parseDouble(strPrezzo);
                 
                 // controlli sul numero di copie e sul prezzo con eventuali messaggi di errore
                 if(intNumCopie < 0){
                     mostraErrore("Attenzione!", "Aggiungere almeno una copia");
                 }
-                if(floatPrezzo <= 0){
+                if(doublePrezzo <= 0){
                     mostraErrore("Attenzione!", "Il prezzo non può essere negativo o nullo");
                 }
                 
