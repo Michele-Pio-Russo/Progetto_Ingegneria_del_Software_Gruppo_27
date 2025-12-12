@@ -13,12 +13,26 @@
 
 package Utente;
 
+import Libro.Libro;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
+import javafx.util.converter.LocalDateStringConverter;
 
 
 public class TabellaUtenteController {
@@ -40,6 +54,12 @@ public class TabellaUtenteController {
 
     @FXML
     private Button aggiuntaUt; ///@brief Bottone che permette di aggiungere un utente alla tabella degli utenti
+    
+    @FXML
+    private Button X; ///@brief Bottone che ci permette di cancellare il campo di ricerca
+    
+    @FXML
+    private Button searchType; ///@brief Bottone che ci permette di cambiare il criterio di ricerca (nome, cognome, matricola)
 
     @FXML
     private TextField cercaField; ///@brief TextField che permette di cercare un utente
@@ -55,9 +75,6 @@ public class TabellaUtenteController {
 
     @FXML
     private TextField email; ///@brief TextField in cui è necessario inserire l'email dell'utente da aggiungere alla tabella degli utenti
-
-    @FXML
-    private TextField iscrizione; ///@brief TextField in cui è necessario inserire la data di iscrizione dell'utente da aggiungere alla tabella degli utenti
  
     @FXML
     private TableView<Utente> tabella; ///@brief Tabella che contiene gli utenti della libreria universitaria
@@ -80,8 +97,13 @@ public class TabellaUtenteController {
     @FXML
     private TableColumn<Utente, Integer> libriInPrestitoCol; ///@brief Colonna che contiene il numero dei libri in prestito associato ad ogni utente che è stato iscritto
 
-    private TabellaUtenteModel tabellaUtenteModel; ///@brief Model associato al controller
+    private TabellaUtenteModel tabellaUtenteModel; ///@brief Model associato al cotroller
     
+    private Stage principale;///@brief Stage unico dell'applicazione
+    
+    private Scene scenaPrincipale;///@brief Scena iniziale dell'applicazione
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private final LocalDateStringConverter dateConverter = new LocalDateStringConverter(DATE_FORMATTER, DATE_FORMATTER);
     /**
     * @brief Metodo di inizializzazione chiamato automaticamente dal JavaFX Loader
     *
@@ -93,8 +115,80 @@ public class TabellaUtenteController {
     *
     * @return void
     */
+    @FXML
     private void initialize() {
         
+           //collego le colonne ai getter di utente
+        nomeCol.setCellValueFactory(new PropertyValueFactory<Utente, String>("nome"));
+        cognomeCol.setCellValueFactory(new PropertyValueFactory<Utente, String>("cognome"));
+        matricolaCol.setCellValueFactory(new PropertyValueFactory<Utente, String>("matricola"));
+        emailCol.setCellValueFactory(new PropertyValueFactory<Utente, String>("email"));
+        iscrizioneCol.setCellValueFactory(new PropertyValueFactory<Utente, LocalDate>("iscrizione"));
+        libriInPrestitoCol.setCellValueFactory(new PropertyValueFactory<Utente, Integer>("libriInPrestito"));
+        
+
+    // Rendo la tabella non editabile
+        tabella.setEditable(false);
+        
+        rimozione.setDisable(true);
+        
+        aggiuntaUt.setDisable(true);
+        nome.setDisable(true);
+        cognome.setDisable(true);
+        matricola.setDisable(true);
+        email.setDisable(true);
+        
+        nomeCol.setCellFactory(TextFieldTableCell.<Utente>forTableColumn());
+        nomeCol.setOnEditCommit(event -> {
+            Utente U = event.getRowValue();
+            String nuovoNome = event.getNewValue();
+            if (nuovoNome != null && !nuovoNome.trim().isEmpty()) {
+                U.setNome(nuovoNome.trim());
+            } else {
+                mostraErrore("Nome non valido", "Il Nome non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
+        
+        cognomeCol.setCellFactory(TextFieldTableCell.<Utente>forTableColumn());
+        cognomeCol.setOnEditCommit(event -> {
+            Utente U = event.getRowValue();
+            String nuovoCognome = event.getNewValue();
+            if (nuovoCognome != null && !nuovoCognome.trim().isEmpty()) {
+                U.setNome(nuovoCognome.trim());
+            } else {
+                mostraErrore("Cognome non valido", "Il Cognome non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
+     
+        matricolaCol.setCellFactory(TextFieldTableCell.<Utente>forTableColumn());
+        matricolaCol.setOnEditCommit(event -> {
+            Utente U = event.getRowValue();
+            String nuovaMatricola = event.getNewValue();
+            if (nuovaMatricola != null && !nuovaMatricola.trim().isEmpty()) {
+                U.setNome(nuovaMatricola.trim());
+            } else {
+                mostraErrore("Matricola non valida", "La matricola non può essere vuota.");
+                tabella.refresh();
+            }
+        });
+        
+
+
+iscrizioneCol.setCellFactory(TextFieldTableCell.<Utente, LocalDate>forTableColumn(dateConverter));
+iscrizioneCol.setOnEditCommit(event -> {
+    Utente U = event.getRowValue();
+    LocalDate nuovaIscrizioneData = event.getNewValue();
+
+    if (nuovaIscrizioneData != null) {
+        U.setIscrizione(nuovaIscrizioneData); 
+    } else {
+        mostraErrore("Data non valida", "La data di iscrizione deve essere nel formato 'YYYY-MM-DD'.");
+        tabella.refresh();
+    }
+});
+
     }
 
     /**
@@ -105,12 +199,17 @@ public class TabellaUtenteController {
     * @pre E' necessario che venga dato in ingresso un model di tipo TabellaUtenteModel
     * @post Il model viene associato con successo
     *
-    * @param model L'istanza di TabellaUtenteModel da utilizzare.
+    * @param[in] model L'istanza di TabellaUtentiModel da utilizzare.
+    * @param[in] principale L'istanza dello stage univoco dell'applicazione
+    * @param[in] scenaPrincipale L'istanza della scena della schermata principale
     * 
     * @return void
     */
-    public void setModel(TabellaUtenteModel model) {
+    public void setModel(TabellaUtenteModel model, Stage principale, Scene scenaPrincipale) {
         this.tabellaUtenteModel = model;
+        this.principale = principale;
+        this.scenaPrincipale = scenaPrincipale;
+        tabella.setItems(model.getPersone());
     }
 
     /**
@@ -120,8 +219,15 @@ public class TabellaUtenteController {
     * 
     * @return void
     */
+    
+    @FXML
     private void onAggiungi() {
+        aggiuntaUt.setDisable(false);
         
+        nome.setDisable(false);
+        cognome.setDisable(false);
+        matricola.setDisable(false);
+        email.setDisable(false);
     }
 
     /**
@@ -135,8 +241,55 @@ public class TabellaUtenteController {
     * 
     * @return void
     */
+    @FXML
     private void onRimuovi() {
+        if(tabellaUtenteModel == null){
+            return;
+        }
         
+        // otteniamo l'utente selezionato da interfaccia libro
+        Utente utenteSelezionato = tabella.getSelectionModel().getSelectedItem();
+        
+        // nel caso non sia stato selezionato nessun utente, diamo un errore
+        if(utenteSelezionato == null) {
+            mostraErrore("Rimozione fallita!", "Utente da rimuovere non trovato");
+            return;
+        }
+        
+        // Parte di conferma: 
+        Alert conferma = new Alert(Alert.AlertType.CONFIRMATION);
+        conferma.setTitle("Conferma rimozione");
+        conferma.setHeaderText("Rimuovere l'utente selezionato?");
+        conferma.setContentText("Utente: " + utenteSelezionato.toString());
+
+        Optional<ButtonType> risultato = conferma.showAndWait();
+
+        // controllo finale e rimozione
+        if (risultato.isPresent() && risultato.get() == ButtonType.OK) {
+            tabellaUtenteModel.rimuoviPersona(utenteSelezionato);
+        }
+    }
+    
+      /**
+     * @brief Gestisce il pulsante 'searchType'
+     *
+     *  Cambia criterio di ricerca dell'utente
+     * * @post L'utente viene cercato con successo seguendo il criterio specifico
+     *
+     * * @return void
+     */ 
+        
+    @FXML
+    private void onCambio(){
+        if(searchType.getText().compareTo("N") == 0){
+            searchType.setText("C"); 
+        }
+        else if(searchType.getText().compareTo("C") == 0){
+            searchType.setText("M"); 
+        }
+        else if(searchType.getText().compareTo("M") == 0){
+            searchType.setText("N"); 
+        }
     }
 
     /**
@@ -149,8 +302,43 @@ public class TabellaUtenteController {
     * 
     * @return void
     */  
+    
+    @FXML
     private void onCerca() {
-        
+        ObservableList<Utente> ricercaUtenti = FXCollections.observableArrayList();
+                String contenuto = cercaField.getText().trim();
+                if(contenuto.isEmpty())
+                {
+                    mostraErrore("Attenzione!", "Inserire dei parametri di ricerca");
+                    return;
+                }
+                if(searchType.getText().compareTo("N") == 0){
+                        for(Utente U : tabellaUtenteModel.getPersone()){
+                                if(U.getNome().compareTo(contenuto)== 0){
+                                    ricercaUtenti.add(U);
+                                }
+                        }
+                }
+                if(searchType.getText().compareTo("C") == 0){
+                        for(Utente U : tabellaUtenteModel.getPersone()){
+                                if(U.getCognome().compareTo(contenuto)== 0){
+                                    ricercaUtenti.add(U);
+                                }
+                        }
+                }
+                if(searchType.getText().compareTo("M") == 0){
+                        for(Utente U : tabellaUtenteModel.getPersone()){
+                                if(U.getMatricola().compareTo(contenuto)== 0){
+                                    ricercaUtenti.add(U);
+                                }
+                        }
+                }
+                if (!ricercaUtenti.isEmpty()) {
+                tabella.setItems(ricercaUtenti);
+                }
+                else {
+                mostraErrore("Attenzione!", "Nessun utente trovato");
+                }
     }
 
     /**
@@ -163,8 +351,19 @@ public class TabellaUtenteController {
     * 
     * @return void
     */     
+    @FXML
     private void onModifica() {
-        
+        if (modifica.getText().trim().equals("Modifica")) {
+        modifica.setText("Termina modifica");
+        tabella.setEditable(true);
+        rimozione.setDisable(false);
+        mostraErrore("Avviso!", "Ora è possibile modifcare o eliminare gli utenti dalla tabella");
+        } else {
+            modifica.setText("Modifica");
+        tabella.setEditable(false);
+        rimozione.setDisable(true);
+        mostraErrore("Avviso!", "Ora non è possibile modifcare o eliminare gli utenti dalla tabella");
+        }
     }
 
     /**
@@ -178,8 +377,9 @@ public class TabellaUtenteController {
     * 
     * @return void
     */ 
-    private void onEsci() {
-        
+    @FXML
+    private void onEsci() throws Exception {
+        principale.setScene(scenaPrincipale);
     }
     
     /**
@@ -193,19 +393,68 @@ public class TabellaUtenteController {
     * 
     * @return void
     */
+    @FXML
     private void onAggiungiUt() {
+        if (tabellaUtenteModel == null) {
+            return;
+        }
+        String strNome = nome.getText().trim();
+        String strCognome = cognome.getText().trim();
+        String strMatricola = matricola.getText().trim();
+        String strEmail = email.getText().trim();
+        if (strNome.isEmpty() || strCognome.isEmpty() || strMatricola.isEmpty() || strEmail.isEmpty()) {
+            mostraErrore("Dati mancanti!", "Inserire ogni attributo");
+            return;
+        }
+        if (strMatricola.length() != 10) {
+            mostraErrore("Attenzione!", "Inserire una matricola valida");
+            return;
+        }
+        tabellaUtenteModel.aggiungiPersona(strNome, strCognome, strMatricola, strEmail, LocalDate.now());
+        nome.clear();
+        cognome.clear();
+        matricola.clear();
+        email.clear();
         
+        aggiuntaUt.setDisable(true);
+        nome.setDisable(true);
+        cognome.setDisable(true);
+        matricola.setDisable(true);
+        email.setDisable(true);
     }
-
+    
+     /**
+     * @brief Gestisce l'azione del pulsante "X"
+     *
+     *  Cancella il contenuto della textField "cercaField" e reimposta il
+     *  contenuto della tabella
+     * * @post Il contenuto della textField è stato cancellato con successo
+     *      e il contenuto della tabella è stato reimpostato
+     *
+     * * @return void
+     */
+    @FXML
+    private void onCancellaCerca() {
+        cercaField.clear();
+        tabella.setItems(tabellaUtenteModel.getPersone());
+    }
+    
     /**
     * @brief Mostra una finestra di dialogo di errore (Alert.AlertType.ERROR).
     *
     * Permette di visualizzare a schermo un messaggio di errore in caso errata compilazione di campi all'interno dell'interfaccia
     * 
+    * @param[in] titolo L'intestazione dell'errore
+    * @param[in] messaggio Il messaggio d'errore
+    * 
     * @return void
     */
-    private void mostraErrore() {
-        
-    }
     
+    private void mostraErrore(String titolo, String messaggio) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(titolo);
+        alert.setHeaderText(null);
+        alert.setContentText(messaggio);
+        alert.showAndWait();
+    }
 }

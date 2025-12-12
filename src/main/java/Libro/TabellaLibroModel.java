@@ -27,7 +27,7 @@ public class TabellaLibroModel {
  *
  * 
  */
-        public TabellaLibroModel() {
+    public TabellaLibroModel() {
         libri = FXCollections.observableArrayList();
     }
  /**

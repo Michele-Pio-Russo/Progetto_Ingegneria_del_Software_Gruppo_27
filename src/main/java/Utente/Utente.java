@@ -11,11 +11,11 @@
  * @version 1.0
  */
 package Utente;
-
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
-public class Utente {
+public class Utente implements Serializable{
 
     private String nome;    ///@brief Il nome dell'utente
     private String cognome;     ///@brief Il cognome dell'utente

@@ -17,20 +17,12 @@ import javafx.collections.ObservableList;
 
 public class TabellaUtenteModel {
         private ObservableList<Utente> utenti; /// @brief Questa ObservableList è una lista che contiene tutti gli utenti
+        
+        public TabellaUtenteModel(){
+            utenti = FXCollections.observableArrayList();
+        }
        
-       
- /**
- * @brief Costruttore della classe TabellaUtenteModel
- *
- * Questo metodo inizializza la Observable List che contiene gli utenti
- *
- * @post Inizializza l'oggetto
- *
- * 
- */
-        public TabellaUtenteModel() {
-        utenti = FXCollections.observableArrayList();
-    }
+        
  /**
  * @brief Metodo getter degli utenti
  *
@@ -42,6 +34,7 @@ public class TabellaUtenteModel {
  * @return Ritorna tutta l'Observable List
  */
     public ObservableList<Utente> getPersone() { 
+        return utenti;
     }
 
     
@@ -57,12 +50,13 @@ public class TabellaUtenteModel {
  * @param[in] cognome Il cognome dell'utente
  * @param[in] matricola La matricola dell'utente 
  * @param[in] email L'email dell'utente
- * @param[in] data La data di iscrizione dell'utente 
+ * @param[in] iscrizione La data di iscrizione dell'utente 
  * 
  * @return void
 
  */
-    public void aggiungiPersona(String nome, String cognome, String matricola, String email, LocalDate data) {
+    public void aggiungiPersona(String nome, String cognome, String matricola, String email, LocalDate iscrizione) {
+        utenti.add(new Utente(nome, cognome, matricola, email, iscrizione));
 
     }
 
@@ -80,6 +74,6 @@ public class TabellaUtenteModel {
 
  */
     public void rimuoviPersona(Utente u) { 
-
+        utenti.remove(u);
     }
 }

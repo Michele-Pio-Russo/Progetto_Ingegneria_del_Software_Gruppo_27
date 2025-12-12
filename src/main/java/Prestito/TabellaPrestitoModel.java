@@ -16,28 +16,20 @@
  */
 package Prestito;
 
+import Libro.Libro;
 import Prestito.Prestito;
+import Utente.Utente;
 import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class TabellaPrestitoModel {
         private ObservableList<Prestito> prestiti; /// @brief Questa ObservableList è una lista che contiene tutti i prestiti
-
         
-        
-                /**
- * @brief Costruttore della classe TabellaPrestitoModel
- *
- * Questo metodo inizializza la Observable List che contiene i prestiti
- *
- * @post Inizializza l'oggetto
- *
- * 
- */
-        public TabellaPrestitoModel() {
-        prestiti = FXCollections.observableArrayList();
-    }
+        public TabellaPrestitoModel()
+        {
+            prestiti = FXCollections.observableArrayList();
+        }
     
  /**
  * @brief Metodo getter dei prestiti
@@ -50,6 +42,8 @@ public class TabellaPrestitoModel {
  * @return Ritorna tutta l'Observable List
  */
     public ObservableList<Prestito> getPrestiti() {
+        return prestiti;
+        //
     }
 
      /**
@@ -68,7 +62,7 @@ public class TabellaPrestitoModel {
 
  */
     public void aggiungiPrestito(Utente utente, Libro libro, LocalDate scad) { 
-
+            prestiti.add(new Prestito(utente, libro, scad));
     }
 
     
@@ -86,6 +80,6 @@ public class TabellaPrestitoModel {
 
  */
     public void rimuoviPrestito(Prestito p) { 
-
+        prestiti.remove(p);
     }
 }

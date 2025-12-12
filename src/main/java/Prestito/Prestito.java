@@ -11,12 +11,12 @@
  * @version 1.0
  */
 package Prestito;
-
+import java.io.Serializable;
 import Libro.Libro;
 import Utente.Utente;
 import java.time.LocalDate;
 
-public class Prestito {
+public class Prestito implements Serializable{
 
     private Utente utente;  /// @brief Attributo di tipo Utente, gestisce l'utente interessato al prestito
     private Libro libro;        /// @brief Attributo di tipo Libro, gestisce il libro interessato al prestito
@@ -40,23 +40,43 @@ public class Prestito {
     }
 
  /**
- * @brief Metodo che permette di ottenere le informazioni relative a un utente
+ * @brief Metodo che permette di ottenere le informazioni relative al nome di un utente
  * 
- * @return utente Le informazioni relative all'utente a cui viene fatto il prestito
+ * @return utente Le informazioni relative al nome dell'utente a cui viene fatto il prestito
  */
     
-    public Utente getUtente() {
-        return utente;
+    public String getNome() {
+        return utente.getNome();
+    }
+    
+ /**
+ * @brief Metodo che permette di ottenere le informazioni relative al cognome di un utente
+ * 
+ * @return utente Le informazioni relative al cognome dell'utente a cui viene fatto il prestito
+ */
+    
+    public String getCognome() {
+        return utente.getCognome();
     }
 
   /**
- * @brief Metodo che permette di ottenere le informazioni relative a un libro
+ * @brief Metodo che permette di ottenere le informazioni relative al titolo di un libro
  * 
  * @return libro Le informazioni relative al libro preso in prestito
  */
     
-    public Libro getLibro() {
-        return libro;
+    public String getTitolo() {
+        return libro.getTitolo();
+    }
+    
+      /**
+ * @brief Metodo che permette di ottenere le informazioni relative all'isbn di un libro
+ * 
+ * @return libro Le informazioni relative al libro preso in prestito
+ */
+    
+    public String getIsbn() {
+        return libro.getIsbn();
     }
 
  /**

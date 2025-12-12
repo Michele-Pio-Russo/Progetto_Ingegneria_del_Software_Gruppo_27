@@ -8,18 +8,18 @@
  *
  * @author Gianmichele Trotta
  * @date 8 Dicembre 2025
- * @version 1.1.
+ * @version 1.0
  */
 package Libro;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Libro {
+public class Libro implements Serializable{
 
     private String titolo;  ///@brief Il titolo del libro
     private String autore;  ///@brief L'autore del libro
     private String isbn;    ///@brief Il codice ISBN del libro
-    private int numCopie = 1;   ///@brief Il numero di copie disponibili del libro
+    private int copie = 1;   ///@brief Il numero di copie disponibili del libro
     private int annoPublicazione;   ///@brief L'anno di pubblicazione del libro
     private float prezzo;   ///@brief Il prezzo del libro
     private String usura;   ///@brief Lo stato di usura del libro
@@ -47,7 +47,7 @@ public class Libro {
         this.annoPublicazione = annoPublicazione;
         this.prezzo = prezzo;
         this.usura = usura;
-        this.numCopie = numCopie; 
+        this.copie = numCopie; 
     }
 
   /**
@@ -86,8 +86,8 @@ public class Libro {
  * @return numeroCopie Il numero di copie del libro in formato int
  */
     
-    public int getNumeroCopie() {
-        return numCopie;
+    public int getCopie() {
+        return copie;
     }
 
   /**
@@ -164,8 +164,8 @@ public class Libro {
  * @return void
  */
     
-    public void setNumCopie(int numCopie) {
-        this.numCopie = numCopie;
+    public void setCopie(int numCopie) {
+        this.copie = numCopie;
     }
 
    /**
@@ -219,7 +219,7 @@ public class Libro {
                 "titolo='" + titolo + '\'' +
                 ", autore='" + autore + '\'' +
                 ", isbn='" + isbn + '\'' +
-                ", numCopie=" + numCopie +
+                ", numCopie=" + copie +
                 ", annoPublicazione=" + annoPublicazione +
                 ", prezzo=" + prezzo +
                 ", usura='" + usura + '\'' +

@@ -12,6 +12,7 @@
 
 package Libro;
 
+import static javafx.scene.control.cell.TextFieldTableCell.forTableColumn;
 import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -110,6 +111,8 @@ public class TabellaLibroController {
     
     private Stage principale;///@brief Stage unico dell'applicazione
     
+    private Scene scenaPrincipale;///@brief Scena iniziale dell'applicazione
+    
    
     /**
      * @brief Metodo di inizializzazione chiamato automaticamente dal JavaFX Loader
@@ -129,7 +132,7 @@ public class TabellaLibroController {
         titoloCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("titolo"));
         autoreCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("autore"));
         isbnCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("isbn"));
-        copieCol.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("numCopie"));
+        copieCol.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("copie"));
         annoPubblicazioneCol.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("annoPubblicazione"));
         prezzoCol.setCellValueFactory(new PropertyValueFactory<Libro, Float>("prezzo"));
         usuraCol.setCellValueFactory(new PropertyValueFactory<Libro, String>("usura"));
@@ -138,16 +141,29 @@ public class TabellaLibroController {
         tabella.setEditable(false);
         
         rimozione.setDisable(true);
-        aggiuntaLib.setDisable(true);
         
-        titolo.setEditable(false);
-        autore.setEditable(false);
-        isbn.setEditable(false);
-        prezzo.setEditable(false);
-        usura.setEditable(false);
-        annoPubblicazione.setEditable(false);
-        copie.setEditable(false);
-  
+        aggiuntaLib.setDisable(true);
+        titolo.setDisable(true);
+        autore.setDisable(true);
+        isbn.setDisable(true);
+        prezzo.setDisable(true);
+        usura.setDisable(true);
+        annoPubblicazione.setDisable(true);
+        copie.setDisable(true);
+        
+        //setting editabile delle celle
+        // Colonna Titolo: celle editabili
+        titoloCol.setCellFactory(TextFieldTableCell.<Libro>forTableColumn());
+        titoloCol.setOnEditCommit(event -> {
+            Libro l = event.getRowValue();
+            String nuovoTitolo = event.getNewValue();
+            if (nuovoTitolo != null && !nuovoTitolo.trim().isEmpty()) {
+                l.setTitolo(nuovoTitolo.trim());
+            } else {
+                mostraErrore("Titiolo non valido", "Il titolo non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
     }
 
     /**
@@ -158,11 +174,15 @@ public class TabellaLibroController {
      * @post Il model viene associato con successo
      *
      * @param[in] model L'istanza di TabellaLibriModel da utilizzare.
+     * @param[in] principale L'istanza dello stage univoco dell'applicazione
+     * @param[in] scenaPrincipale L'istanza della scena della schermata principale
+     * 
      * * @return void
      */
-    public void setModel(TabellaLibroModel model, Stage principale) {
+    public void setModel(TabellaLibroModel model, Stage principale, Scene scenaPrincipale) {
         this.tabellaLibroModel = model;
         this.principale = principale;
+        this.scenaPrincipale = scenaPrincipale;
         tabella.setItems(model.getLibri());
     }
 
@@ -175,15 +195,15 @@ public class TabellaLibroController {
     
     @FXML
     private void onAggiungi() {
-        aggiunta.setDisable(false);
+        aggiuntaLib.setDisable(false);
         
-        titolo.setEditable(true);
-        autore.setEditable(true);
-        isbn.setEditable(true);
-        prezzo.setEditable(true);
-        usura.setEditable(true);
-        annoPubblicazione.setEditable(true);
-        copie.setEditable(true);
+        titolo.setDisable(false);
+        autore.setDisable(false);
+        isbn.setDisable(false);
+        prezzo.setDisable(false);
+        usura.setDisable(false);
+        annoPubblicazione.setDisable(false);
+        copie.setDisable(false);
     }
 
     /**
@@ -234,15 +254,16 @@ public class TabellaLibroController {
      *
      * * @return void
      */ 
-    
+        
+    @FXML
     private void onCambio(){
         if(searchType.getText().compareTo("T") == 0){
-            searchType.setText("A"); 
+            searchType.setText("A");
         }
-        if(searchType.getText().compareTo("A") == 0){
+        else if(searchType.getText().compareTo("A") == 0){
             searchType.setText("I"); 
         }
-        if(searchType.getText().compareTo("I") == 0){
+        else if(searchType.getText().compareTo("I") == 0){
             searchType.setText("T"); 
         }
     }
@@ -255,22 +276,29 @@ public class TabellaLibroController {
      *
      * * @return void
      */ 
-        
+      @FXML  
     private void onCerca() {
                 ObservableList<Libro> ricercaLibri = FXCollections.observableArrayList();
                 String contenuto = cercaField.getText().trim();
+                if(contenuto.isEmpty())
+                {
+                    mostraErrore("Attenzione!", "Inserire dei parametri di ricerca");
+                    return;
+                }
                 if(searchType.getText().compareTo("T") == 0){
                         for(Libro l : tabellaLibroModel.getLibri()){
                                 if(l.getTitolo().compareTo(contenuto)== 0){
                                     ricercaLibri.add(l);
                                 }
                         }
+                }
                 if(searchType.getText().compareTo("A") == 0){
                         for(Libro l : tabellaLibroModel.getLibri()){
                                 if(l.getTitolo().compareTo(contenuto)== 0){
                                     ricercaLibri.add(l);
                                 }
                         }
+                }
                 if(searchType.getText().compareTo("I") == 0){
                         for(Libro l : tabellaLibroModel.getLibri()){
                                 if(l.getTitolo().compareTo(contenuto)== 0){
@@ -293,18 +321,19 @@ public class TabellaLibroController {
      * * @post Il libro viene modificato con successo nell'ObservableList ed i cambiamenti sono visibili nella tabella
      *
      * * @return void
-     */     
+     */    
+    @FXML
     private void onModifica() {
         
         if (modifica.getText().trim().equals("Modifica")) {
         modifica.setText("Termina modifica");
         tabella.setEditable(true);
-        rimozione.setDisable(true);
+        rimozione.setDisable(false);
         mostraErrore("Avviso!", "Ora è possibile modifcare o eliminare i libri dalla tabella");
         } else {
             modifica.setText("Modifica");
         tabella.setEditable(false);
-        rimozione.setDisable(false);
+        rimozione.setDisable(true);
         mostraErrore("Avviso!", "Ora non è possibile modifcare o eliminare i libri dalla tabella");
         }
     }
@@ -318,12 +347,9 @@ public class TabellaLibroController {
      *
      * * @return void
      */ 
+    @FXML
     private void onEsci() throws Exception{
-       FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("Interfaccia_Main.fxml"));
-        Parent root = loader.load();
-        Scene iniziale = new Scene(root, 800, 500);
-        principale.setScene(iniziale);
+        principale.setScene(scenaPrincipale);
     }
     
     /**
@@ -335,6 +361,7 @@ public class TabellaLibroController {
      *
      * * @return void
      */
+    @FXML
     private void onAggiungiLib() {
         // controllo se il model esiste    
         if (tabellaLibroModel == null) {
@@ -386,17 +413,27 @@ public class TabellaLibroController {
             } catch (NumberFormatException ex) { // nel caso in cui sia stato inserito un valore invalido dove andavano inseriti valori numerici
                             mostraErrore("Attenzione!" , "Inserire correttamente i dati");
             }
-        aggiunta.setDisable(true);
-        
-        titolo.setEditable(false);
-        autore.setEditable(false);
-        isbn.setEditable(false);
-        prezzo.setEditable(false);
-        usura.setEditable(false);
-        annoPubblicazione.setEditable(false);
-        copie.setEditable(false);
+        aggiuntaLib.setDisable(true);
+        titolo.setDisable(true);
+        autore.setDisable(true);
+        isbn.setDisable(true);
+        prezzo.setDisable(true);
+        usura.setDisable(true);
+        annoPubblicazione.setDisable(true);
+        copie.setDisable(true);
     }
     
+    /**
+     * @brief Gestisce l'azione del pulsante "X"
+     *
+     *  Cancella il contenuto della textField "cercaField" e reimposta il
+     *  contenuto della tabella
+     * * @post Il contenuto della textField è stato cancellato con successo
+     *      e il contenuto della tabella è stato reimpostato
+     *
+     * * @return void
+     */
+    @FXML
     private void onCancellaCerca() {
         cercaField.clear();
         tabella.setItems(tabellaLibroModel.getLibri());

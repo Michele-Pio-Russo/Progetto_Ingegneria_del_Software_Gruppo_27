@@ -1,16 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="255.0" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="30.0" style="-fx-background-color: #F0F0F0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.oop.progetto_ing_software_libreria.MainController">
    <children>
-      <Label text="Benvenuto nella Libreria" />
-      <Label text="Seleziona la sezione a cui vuoi accedere" />
-      <Button mnemonicParsing="false" text="Gestione Utenti" />
-      <Button mnemonicParsing="false" text="Gestione Libri" />
-      <Button mnemonicParsing="false" text="Gestione Prestiti" />
-      <Button mnemonicParsing="false" text="Esci" />
+      
+      <VBox alignment="CENTER" spacing="5.0">
+         <children>
+            <Label text="Benvenuto nella Libreria" textFill="#4a148c">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label text="Seleziona la sezione a cui vuoi accedere" textFill="#666666">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+
+      <HBox alignment="CENTER" prefHeight="150.0" prefWidth="600.0" spacing="20.0">
+         <children>
+            <Button fx:id="utenti" mnemonicParsing="false" onAction="#onUtentiClicked" prefHeight="120.0" prefWidth="140.0" style="-fx-background-color: #4A148C; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);" text="Gestione Utenti" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            
+            <Button fx:id="libri" mnemonicParsing="false" onAction="#onLibriClicked" prefHeight="120.0" prefWidth="140.0" style="-fx-background-color: #4A148C; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);" text="Gestione Libri" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            
+            <Button fx:id="prestiti" mnemonicParsing="false" onAction="#onPrestitiClicked" prefHeight="120.0" prefWidth="140.0" style="-fx-background-color: #4A148C; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);" text="Gestione Prestiti" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </HBox>
+
+      <Button fx:id="esci" mnemonicParsing="false" onAction="#onEsci" prefWidth="100.0" style="-fx-background-color: #555555; -fx-text-fill: white; -fx-background-radius: 20;" text="Esci">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      
    </children>
+   <padding>
+      <Insets bottom="20.0" top="20.0" />
+   </padding>
 </VBox>

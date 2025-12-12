@@ -1,127 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="991.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #F0F0F0;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Utente.TabellaUtenteController">
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="668.0" spacing="20.0">
+      <VBox alignment="CENTER" prefHeight="426.0" prefWidth="600.0" spacing="10.0">
          <children>
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="561.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="41.0" prefWidth="224.0" text="Sezione Utenti">
+                  <Label text="Sezione Utenti" textFill="#4a148c">
                      <font>
-                        <Font size="24.0" />
+                        <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
                </children>
                <VBox.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="29.0" prefWidth="454.0" spacing="20.0">
+            
+            <HBox alignment="CENTER" prefHeight="29.0" prefWidth="454.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="+" />
-                  <Button mnemonicParsing="false" text="-" />
-                  <Button mnemonicParsing="false" text="Cerca" />
-                  <TextField prefHeight="12.0" prefWidth="150.0">
-                     <HBox.margin>
-                        <Insets top="3.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button mnemonicParsing="false" text="Modifica" />
+                  <Button fx:id="aggiunta" mnemonicParsing="false" onAction="#onAggiungi" style="-fx-background-color: #4A148C; -fx-text-fill: white; -fx-background-radius: 5;" text="+" />
+                  <Button fx:id="rimozione" mnemonicParsing="false" onAction="#onRimuovi" style="-fx-background-color: #4A148C; -fx-text-fill: white; -fx-background-radius: 5;" text="-" />
+                  
+                  <Button fx:id="cerca" mnemonicParsing="false" onAction="#onCerca" style="-fx-background-color: #4A148C; -fx-text-fill: white; -fx-background-radius: 5;" text="Cerca" />
+                  
+                  <Button fx:id="searchType" mnemonicParsing="false" onAction="#onCambio" style="-fx-background-color: #7c43bd; -fx-text-fill: white; -fx-background-radius: 5;" text="N" />
+                  
+                  <TextField fx:id="cercaField" prefHeight="25.0" prefWidth="120.0" promptText="Cerca..." style="-fx-border-color: #4A148C; -fx-border-radius: 3;" />
+                  
+                  <Button fx:id="X" mnemonicParsing="false" onAction="#onCancellaCerca" style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-background-radius: 5;" text="X" />
+                  
+                  <Button fx:id="modifica" mnemonicParsing="false" onAction="#onModifica" style="-fx-background-color: #4A148C; -fx-text-fill: white; -fx-background-radius: 5;" text="Modifica" />
                </children>
             </HBox>
-            <TableView prefHeight="126.0" prefWidth="592.0">
-               <columns>
-                  <TableColumn prefWidth="75.0" text="Nome" />
-                  <TableColumn prefWidth="108.00007629394531" text="Cognome" />
-                  <TableColumn prefWidth="127.199951171875" text="Matricola" />
-                  <TableColumn prefWidth="116.0" text="Email" />
-                  <TableColumn prefWidth="108.79997558593755" text="Data Iscrizione" />
-                  <TableColumn prefWidth="108.79997558593755" text="Libri In Prestito" />
-               </columns>
-               <VBox.margin>
-                  <Insets bottom="50.0" left="10.0" right="10.0" />
-               </VBox.margin>
-            </TableView>
+            
+            <TableView fx:id="tabella" prefHeight="250.0" prefWidth="628.0" style="-fx-border-color: #4A148C; -fx-border-width: 2;">
+    <columns>
+        <TableColumn fx:id="nomeCol" prefWidth="71.19998216629028" text="Nome" />
+        <TableColumn fx:id="cognomeCol" prefWidth="93.60000610351562" text="Cognome" />
+        <TableColumn fx:id="matricolaCol" prefWidth="94.39996337890625" text="Matricola" />
+        <TableColumn fx:id="emailCol" prefWidth="68.79998779296875" text="Email" />
+        
+        <TableColumn fx:id="iscrizioneCol" prefWidth="158.39996337890625" text="Data Iscrizione" />
+        <TableColumn fx:id="libriInPrestitoCol" prefWidth="86.39996337890625" text="Libri Prestito" />
+    </columns>
+    <VBox.margin>
+        <Insets bottom="10.0" left="10.0" right="10.0" />
+    </VBox.margin>
+</TableView>
+            
             <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="561.0">
                <children>
-                  <Button mnemonicParsing="false" text="Esci">
+                  <Button fx:id="esci" mnemonicParsing="false" onAction="#onEsci" style="-fx-background-color: #555555; -fx-text-fill: white; -fx-background-radius: 5;" text="Esci">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Button>
                </children>
             </HBox>
-            <HBox prefHeight="0.0" prefWidth="544.0" />
          </children>
       </VBox>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="285.0" spacing="25.0">
+      
+      <VBox alignment="TOP_CENTER" prefHeight="388.0" prefWidth="300.0" spacing="10.0" style="-fx-background-color: #E8E8E8; -fx-padding: 10; -fx-border-color: #4A148C; -fx-border-width: 0 0 0 2;">
          <children>
-            <Label text="Sezione di Aggiunta">
+            <Label text="Aggiungi Utente" textFill="#4a148c">
                <font>
-                  <Font size="21.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
             </Label>
-            <HBox alignment="CENTER" prefHeight="29.0" prefWidth="605.0" spacing="20.0">
+            
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <Label text="Nome" />
-                  <TextField prefHeight="112.0" prefWidth="129.0">
-                     <HBox.margin>
-                        <Insets top="3.0" />
-                     </HBox.margin>
-                  </TextField>
+                  <Label prefWidth="70.0" text="Nome" textFill="#4a148c" />
+                  <TextField fx:id="nome" prefWidth="180.0" promptText="Inserire il nome" style="-fx-background-radius: 5;" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="29.0" prefWidth="605.0" spacing="20.0">
+            
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <Label text="Cognome" />
-                  <TextField prefHeight="112.0" prefWidth="129.0">
-                     <HBox.margin>
-                        <Insets top="3.0" />
-                     </HBox.margin>
-                  </TextField>
+                  <Label prefWidth="70.0" text="Cognome" textFill="#4a148c" />
+                  <TextField fx:id="cognome" prefWidth="180.0" promptText="Inserire il cognome" style="-fx-background-radius: 5;" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="29.0" prefWidth="605.0" spacing="20.0">
+            
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <Label text="Matricola" />
-                  <TextField prefHeight="112.0" prefWidth="129.0">
-                     <HBox.margin>
-                        <Insets top="3.0" />
-                     </HBox.margin>
-                  </TextField>
+                  <Label prefWidth="70.0" text="Matricola" textFill="#4a148c" />
+                  <TextField fx:id="matricola" prefWidth="180.0" promptText="Inserire la matricola" style="-fx-background-radius: 5;" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="29.0" prefWidth="605.0" spacing="30.0">
+            
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
                <children>
-                  <Label text="Email" />
-                  <TextField prefHeight="112.0" prefWidth="129.0">
-                     <HBox.margin>
-                        <Insets top="3.0" />
-                     </HBox.margin>
-                  </TextField>
+                  <Label prefWidth="70.0" text="Email" textFill="#4a148c" />
+                  <TextField fx:id="email" prefWidth="180.0" promptText="Inserire la email" style="-fx-background-radius: 5;" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="29.0" prefWidth="605.0" spacing="20.0">
-               <children>
-                  <Label text="Data Iscrizione" />
-                  <TextField prefHeight="112.0" prefWidth="129.0">
-                     <HBox.margin>
-                        <Insets top="3.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-            </HBox>
-            <Button mnemonicParsing="false" text="Aggiungi" />
+            
+            <Button fx:id="aggiuntaUt" mnemonicParsing="false" onAction="#onAggiungiUt" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #4A148C; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-weight: bold;" text="SALVA UTENTE">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </children>
