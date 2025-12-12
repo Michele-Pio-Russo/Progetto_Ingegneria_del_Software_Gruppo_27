@@ -65,7 +65,7 @@ public class TabellaLibroModel {
  * @return void
 
  */
-    public void aggiungiLibro(String titolo, String autore, String isbn, int anno, float prezzo, String usura, int numCopie) {
+    public void aggiungiLibro(String titolo, String autore, String isbn, int anno, double prezzo, String usura, int numCopie) {
             libri.add(new Libro(titolo, autore, isbn, anno, prezzo, usura, numCopie));
     }
 
