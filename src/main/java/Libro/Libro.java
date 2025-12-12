@@ -21,7 +21,7 @@ public class Libro implements Serializable{
     private String isbn;    ///@brief Il codice ISBN del libro
     private int copie = 1;   ///@brief Il numero di copie disponibili del libro
     private int annoPublicazione;   ///@brief L'anno di pubblicazione del libro
-    private float prezzo;   ///@brief Il prezzo del libro
+    private double prezzo;   ///@brief Il prezzo del libro
     private String usura;   ///@brief Lo stato di usura del libro
 
   /**
@@ -106,7 +106,7 @@ public class Libro implements Serializable{
  * @return prezzo Il prezzo del libro in formato float
  */
     
-    public float getPrezzo() {
+    public double getPrezzo() {
         return prezzo;
     }
 
@@ -188,7 +188,7 @@ public class Libro implements Serializable{
  * @return void
  */
     
-    public void setPrezzo(float prezzo) {
+    public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
     }
 
