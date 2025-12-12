@@ -49,14 +49,37 @@ public class Prestito implements Serializable{
         return utente.getNome();
     }
     
+    
  /**
- * @brief Metodo che permette di ottenere le informazioni relative al cognome di un utente
+ * @brief Metodo che permette di cambaire il nome di un utente
+ * 
+ * @return void
+ */
+    
+    public void setNome(String nome) {
+        utente.setNome(nome);
+    }
+    
+    
+ /**
+ * @brief Metodo che permette di ottenere le informazioni relative al cognome di un utente di un prestito
  * 
  * @return utente Le informazioni relative al cognome dell'utente a cui viene fatto il prestito
  */
     
     public String getCognome() {
         return utente.getCognome();
+    }
+    
+    
+     /**
+ * @brief Metodo che permette di cambaire il cognome di un utente di un prestito
+ * 
+ * @return void
+ */
+    
+    public void setCognome(String cognome) {
+        utente.setCognome(cognome);
     }
 
   /**
@@ -68,6 +91,18 @@ public class Prestito implements Serializable{
     public String getTitolo() {
         return libro.getTitolo();
     }
+    
+    
+        /**
+ * @brief Metodo che permette di cambaire il titolo di un libro di un prestito
+ * 
+ * @return void
+ */
+    
+    public void setTitolo(String titolo) {
+        libro.setTitolo(titolo);
+    }
+ 
     
       /**
  * @brief Metodo che permette di ottenere le informazioni relative all'isbn di un libro
@@ -84,6 +119,18 @@ public class Prestito implements Serializable{
  * 
  * @return dataDiScadenza La data di scadenza in formato LocalDate
  */
+    
+            /**
+ * @brief Metodo che permette di cambaire il titolo di un libro di un prestito
+ * 
+ * @return void
+ */
+    
+    public void setIsbn(String isbn) {
+        libro.setIsbn(isbn);
+    }
+    
+    
     
     public LocalDate getDataDiScadenza() {
         return dataDiScadenza;

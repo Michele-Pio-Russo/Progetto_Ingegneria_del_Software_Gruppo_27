@@ -23,13 +23,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+import javafx.util.converter.LocalDateStringConverter;
 
 public class TabellaPrestitoController {
 @FXML
@@ -124,6 +127,69 @@ public class TabellaPrestitoController {
         titoloCol.setCellValueFactory(new PropertyValueFactory<Prestito, String>("titolo"));
         isbnCol.setCellValueFactory(new PropertyValueFactory<Prestito, String>("isbn"));
         scadenzaCol.setCellValueFactory(new PropertyValueFactory<Prestito, LocalDate>("dataDiScadenza"));
+        
+        nomeCol.setCellFactory(TextFieldTableCell.<Prestito>forTableColumn());
+        nomeCol.setOnEditCommit(event -> {
+            Prestito P = event.getRowValue();
+            String nuovoNome = event.getNewValue();
+            if (nuovoNome != null && !nuovoNome.trim().isEmpty()) {
+                P.setNome(nuovoNome.trim());
+            } else {
+                mostraErrore("Nome non valido", "Il Nome non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
+        
+        cognomeCol.setCellFactory(TextFieldTableCell.<Prestito>forTableColumn());
+        cognomeCol.setOnEditCommit(event -> {
+            Prestito P = event.getRowValue();
+            String nuovoCognome = event.getNewValue();
+            if (nuovoCognome != null && !nuovoCognome.trim().isEmpty()) {
+                P.setCognome(nuovoCognome.trim());
+            } else {
+                mostraErrore("Cognome non valido", "Il Cognome non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
+        
+        titoloCol.setCellFactory(TextFieldTableCell.<Prestito>forTableColumn());
+        titoloCol.setOnEditCommit(event -> {
+            Prestito P = event.getRowValue();
+            String nuovoTitolo = event.getNewValue();
+            if (nuovoTitolo != null && !nuovoTitolo.trim().isEmpty()) {
+                P.setTitolo(nuovoTitolo.trim());
+            } else {
+                mostraErrore("Titolo non valido", "Il titolo non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
+        
+        
+        isbnCol.setCellFactory(TextFieldTableCell.<Prestito>forTableColumn());
+        isbnCol.setOnEditCommit(event -> {
+            Prestito P = event.getRowValue();
+            String nuovoIsbn = event.getNewValue();
+            if (nuovoIsbn != null && !nuovoIsbn.trim().isEmpty()) {
+                P.setIsbn(nuovoIsbn.trim());
+            } else {
+                mostraErrore("Isbn non valido", "L'Isbn non può essere vuoto.");
+                tabella.refresh();
+            }
+        });
+        
+        scadenzaCol.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateStringConverter(DateTimeFormatter.ofPattern("yyyy-MM-dd"),null)));
+        scadenzaCol.setOnEditCommit(event -> {
+        Prestito P = event.getRowValue();
+        LocalDate nuovaScadenza = event.getNewValue();
+        if (nuovaScadenza != null) {
+         P.setDataDiScadenza(nuovaScadenza);
+        } else {
+        P.setDataDiScadenza(event.getOldValue());
+        tabella.refresh();
+        mostraErrore("Data non valida", "La data deve essere nel formato YYYY-MM-DD e non può essere vuota.");
+    }
+});
+        
     }
 
     /**
