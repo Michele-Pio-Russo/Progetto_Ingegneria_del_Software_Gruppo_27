@@ -127,13 +127,13 @@ public class TabellaPrestitoController {
         titoloCol.setCellValueFactory(new PropertyValueFactory<Prestito, String>("titolo"));
         isbnCol.setCellValueFactory(new PropertyValueFactory<Prestito, String>("isbn"));
         scadenzaCol.setCellValueFactory(new PropertyValueFactory<Prestito, LocalDate>("dataDiScadenza"));
-        
         nomeCol.setCellFactory(TextFieldTableCell.<Prestito>forTableColumn());
         nomeCol.setOnEditCommit(event -> {
             Prestito P = event.getRowValue();
             String nuovoNome = event.getNewValue();
             if (nuovoNome != null && !nuovoNome.trim().isEmpty()) {
                 P.setNome(nuovoNome.trim());
+                            try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
             } else {
                 mostraErrore("Nome non valido", "Il Nome non può essere vuoto.");
                 tabella.refresh();
@@ -146,6 +146,7 @@ public class TabellaPrestitoController {
             String nuovoCognome = event.getNewValue();
             if (nuovoCognome != null && !nuovoCognome.trim().isEmpty()) {
                 P.setCognome(nuovoCognome.trim());
+                try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
             } else {
                 mostraErrore("Cognome non valido", "Il Cognome non può essere vuoto.");
                 tabella.refresh();
@@ -171,6 +172,7 @@ public class TabellaPrestitoController {
             String nuovoIsbn = event.getNewValue();
             if (nuovoIsbn != null && !nuovoIsbn.trim().isEmpty()) {
                 P.setIsbn(nuovoIsbn.trim());
+                try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
             } else {
                 mostraErrore("Isbn non valido", "L'Isbn non può essere vuoto.");
                 tabella.refresh();
@@ -183,6 +185,7 @@ public class TabellaPrestitoController {
         LocalDate nuovaScadenza = event.getNewValue();
         if (nuovaScadenza != null) {
          P.setDataDiScadenza(nuovaScadenza);
+         try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
         } else {
         P.setDataDiScadenza(event.getOldValue());
         tabella.refresh();
@@ -264,6 +267,8 @@ public class TabellaPrestitoController {
         // controllo finale e rimozione
         if (risultato.isPresent() && risultato.get() == ButtonType.OK) {
             tabellaPrestitoModel.rimuoviPrestito(prestitoSelezionato);
+            try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
+            
         }
     }
     
@@ -357,6 +362,7 @@ public class TabellaPrestitoController {
 
         try {
             tabellaPrestitoModel.aggiungiPrestito(new Utente(n, c, "", "", LocalDate.parse("2000-10-10")), new Libro(tit,"",strIsbn,0,0,"",0), LocalDate.parse(scad));
+            try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
             nome.clear();
             cognome.clear();
             titolo.clear();

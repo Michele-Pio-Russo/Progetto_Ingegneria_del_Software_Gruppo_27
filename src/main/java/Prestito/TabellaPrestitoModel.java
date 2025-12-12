@@ -19,16 +19,33 @@ package Prestito;
 import Libro.Libro;
 import Prestito.Prestito;
 import Utente.Utente;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class TabellaPrestitoModel {
         private ObservableList<Prestito> prestiti; /// @brief Questa ObservableList è una lista che contiene tutti i prestiti
-        
+        private final String FILE_BINARIO = "prestiti.bin";
         public TabellaPrestitoModel()
         {
             prestiti = FXCollections.observableArrayList();
+            try{
+                caricaDaBinario();
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+                    
         }
     
  /**
@@ -81,5 +98,38 @@ public class TabellaPrestitoModel {
  */
     public void rimuoviPrestito(Prestito p) { 
         prestiti.remove(p);
+    }
+        /**
+     * Salvataggio su file binario tramite ObjectOutputStream.
+     * Viene salvata una List<Prestito>.
+     */
+    public void salvaSuBinario() throws IOException {
+        List<Prestito> lista = new ArrayList<>(prestiti);
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_BINARIO))) {
+            out.writeObject(lista);
+        }
+    }
+        /**
+     * Caricamento da file binario.
+     * Formato atteso: una List<Prestito> serializzata.
+     */
+    public void caricaDaBinario() throws IOException, ClassNotFoundException {
+        File file = new File(FILE_BINARIO);
+        if (!file.exists()) {
+            throw new FileNotFoundException("File binario non trovato: " + FILE_BINARIO);
+        }
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+
+            Object obj = in.readObject();
+
+            List<Prestito> lista = (List<Prestito>) obj;
+            for (Object o : lista) {
+                if (o instanceof Prestito) {
+                    prestiti.add((Prestito) o);
+                }
+            }
+       
+        }
     }
 }
