@@ -449,7 +449,7 @@ public class TabellaLibroController {
      * * @return void
      */
     private void mostraErrore(String titolo, String messaggio) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titolo);
         alert.setHeaderText(null);
         alert.setContentText(messaggio);
