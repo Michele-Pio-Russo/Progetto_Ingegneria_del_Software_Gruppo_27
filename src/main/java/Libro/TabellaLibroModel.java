@@ -13,10 +13,20 @@ package Libro;
 import Libro.Libro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TabellaLibroModel {
         private ObservableList<Libro> libri; /// @brief Questa ObservableList è una lista che contiene tutti i libri
-       
+        private final String FILE_BINARIO = "libri.bin";
 
         /**
  * @brief Costruttore della classe TabellaLibroModel
@@ -29,6 +39,13 @@ public class TabellaLibroModel {
  */
     public TabellaLibroModel() {
         libri = FXCollections.observableArrayList();
+        try{
+                caricaDaBinario();
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
     }
  /**
  * @brief Metodo getter dei libri
@@ -84,4 +101,40 @@ public class TabellaLibroModel {
     public void rimuoviLibro(Libro lib) { 
             libri.remove(lib);
     }
+   /**
+     * Salvataggio su file binario tramite ObjectOutputStream.
+     * Viene salvata una List<Libro>.
+     */
+    public void salvaSuBinario() {
+        List<Libro> lista = new ArrayList<>(libri);
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_BINARIO))) {
+            out.writeObject(lista);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+         /**
+     * Caricamento da file binario.
+     * Formato atteso: una List<Libro> serializzata.
+     */
+     public void caricaDaBinario() throws IOException, ClassNotFoundException {
+        File file = new File(FILE_BINARIO);
+        if (!file.exists()) {
+            throw new FileNotFoundException("File binario non trovato: " + FILE_BINARIO);
+        }
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+
+            Object obj = in.readObject();
+
+            List<Libro> lista = (List<Libro>) obj;
+            for (Object o : lista) {
+                if (o instanceof Libro) {
+                    libri.add((Libro) o);
+                }
+            }
+        }
+    }
 }
+

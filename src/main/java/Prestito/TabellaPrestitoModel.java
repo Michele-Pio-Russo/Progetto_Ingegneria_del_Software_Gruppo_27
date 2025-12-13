@@ -35,6 +35,16 @@ import javafx.collections.ObservableList;
 public class TabellaPrestitoModel {
         private ObservableList<Prestito> prestiti; /// @brief Questa ObservableList è una lista che contiene tutti i prestiti
         private final String FILE_BINARIO = "prestiti.bin";
+        
+               /**
+ * @brief Costruttore della classe TabellaPrestitoModel
+ *
+ * Questo metodo inizializza la Observable List che contiene i libri
+ *
+ * @post Inizializza l'oggetto
+ *
+ * 
+ */
         public TabellaPrestitoModel()
         {
             prestiti = FXCollections.observableArrayList();
@@ -103,10 +113,12 @@ public class TabellaPrestitoModel {
      * Salvataggio su file binario tramite ObjectOutputStream.
      * Viene salvata una List<Prestito>.
      */
-    public void salvaSuBinario() throws IOException {
+    public void salvaSuBinario()  {
         List<Prestito> lista = new ArrayList<>(prestiti);
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_BINARIO))) {
             out.writeObject(lista);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
         /**

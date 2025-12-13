@@ -160,6 +160,7 @@ public class TabellaLibroController {
             String nuovoTitolo = event.getNewValue();
             if (nuovoTitolo != null && !nuovoTitolo.trim().isEmpty()) {
                 l.setTitolo(nuovoTitolo.trim());
+                    tabellaLibroModel.salvaSuBinario();
             } else {
                 mostraErrore("Titiolo non valido", "Il titolo non può essere vuoto.");
                 tabella.refresh();
@@ -172,6 +173,7 @@ public class TabellaLibroController {
             String nuovoAutore = event.getNewValue();
             if (nuovoAutore != null && !nuovoAutore.trim().isEmpty()) {
                 l.setAutore(nuovoAutore.trim());
+                    tabellaLibroModel.salvaSuBinario();
             } else {
                 mostraErrore("Autore non valido", "L'autore non può essere vuoto.");
                 tabella.refresh();
@@ -184,6 +186,7 @@ public class TabellaLibroController {
             String nuovoIsbn = event.getNewValue();
             if (nuovoIsbn != null && !nuovoIsbn.trim().isEmpty()) {
                 l.setIsbn(nuovoIsbn.trim());
+                    tabellaLibroModel.salvaSuBinario();
             } else {
                 mostraErrore("Isbn non valido", "L'isbn non può essere vuoto.");
                 tabella.refresh();
@@ -196,6 +199,7 @@ public class TabellaLibroController {
             Integer nuovoCopie = event.getNewValue();
             if (nuovoCopie != null && nuovoCopie < 0) {
                 l.setCopie(nuovoCopie);
+                    tabellaLibroModel.salvaSuBinario();
             } else {
                 mostraErrore("Numero di copie non valido", "Il numero di copie non può essere vuoto.");
                 tabella.refresh();
@@ -208,6 +212,7 @@ public class TabellaLibroController {
             Integer nuovoAnnoPubblicazione = event.getNewValue();
             if (nuovoAnnoPubblicazione != null && nuovoAnnoPubblicazione < 0) {
                 l.setAnnoPubblicazione(nuovoAnnoPubblicazione);
+                    tabellaLibroModel.salvaSuBinario();
             } else {
                 mostraErrore("Anno di pubblicazione non valido", "L'anno di pubblicazione non può essere vuoto.");
                 tabella.refresh();
@@ -220,6 +225,7 @@ public class TabellaLibroController {
             Double nuovoPrezzo = event.getNewValue();
             if (nuovoPrezzo != null && nuovoPrezzo < 0) {
                 l.setPrezzo(nuovoPrezzo);
+                    tabellaLibroModel.salvaSuBinario();
             } else {
                 mostraErrore("Prezzo non valido", "Il prezzo non può essere vuoto.");
                 tabella.refresh();
@@ -232,6 +238,7 @@ public class TabellaLibroController {
             String nuovaUsura = event.getNewValue();
             if (nuovaUsura != null && !nuovaUsura.trim().isEmpty()) {
                 l.setUsura(nuovaUsura.trim());
+                    tabellaLibroModel.salvaSuBinario();
             } else {
                 mostraErrore("Usura non valido", "L'usura non può essere vuota.");
                 tabella.refresh();
@@ -316,6 +323,8 @@ public class TabellaLibroController {
         // controllo finale e rimozione
         if (risultato.isPresent() && risultato.get() == ButtonType.OK) {
             tabellaLibroModel.rimuoviLibro(libroSelezionato);
+                tabellaLibroModel.salvaSuBinario();
+
         }
     }
 
@@ -473,7 +482,8 @@ public class TabellaLibroController {
                 
                 // aggiunta del libro
                 tabellaLibroModel.aggiungiLibro(strTitolo, strAutore, strIsbn, Integer.parseInt(strAnnoPubblicazione), Float.parseFloat(strPrezzo), strUsura, Integer.parseInt(strCopie));
-                
+                tabellaLibroModel.salvaSuBinario();
+
                 // puliamo i campi di libro
                 titolo.clear();
                 autore.clear();
