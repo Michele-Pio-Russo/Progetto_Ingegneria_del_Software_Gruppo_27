@@ -114,11 +114,7 @@ public class TabellaPrestitoController {
             
     @FXML
     private void initialize() {
-        try{
-            tabellaPrestitoModel.caricaDaBinario();
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
+      //  try{ tabellaPrestitoModel.caricaDaBinario();} catch(Exception e) {   System.out.println(e.getMessage());}
         tabella.setEditable(false);
         rimozione.setDisable(true);
         aggiuntaPre.setDisable(true);

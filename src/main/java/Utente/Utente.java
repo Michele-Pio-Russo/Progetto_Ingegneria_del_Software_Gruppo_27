@@ -199,4 +199,22 @@ public class Utente implements Serializable{
                 ", libriInPrestito=" + libriInPrestito +
                 '}';
     }
+    
+    /**
+ * @brief Controlla l'uguaglianza dell'oggetto passato con questo
+ * 
+ *
+ * @return True o False a dell'uguaglianza.
+ */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(obj==null)
+            return false;
+        if(obj==this)
+            return true;
+        if(!(obj.getClass() == this.getClass()))
+            return false;
+        return this.getNome().equals(((Utente)obj).getNome());
+    }
 }
