@@ -11,15 +11,41 @@
 package Utente;
 
 import Utente.Utente;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class TabellaUtenteModel {
         private ObservableList<Utente> utenti; /// @brief Questa ObservableList è una lista che contiene tutti gli utenti
+        private final String FILE_BINARIO = "utenti.bin";
         
+        /**
+ * @brief Costruttore della classe TabellaUtenteModel
+ *
+ * Questo metodo inizializza la Observable List che contiene gli utenti
+ *
+ * @post Inizializza l'oggetto
+ *
+ * 
+ */
         public TabellaUtenteModel(){
             utenti = FXCollections.observableArrayList();
+            try{
+                caricaDaBinario();
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
         }
        
         
@@ -75,5 +101,45 @@ public class TabellaUtenteModel {
  */
     public void rimuoviPersona(Utente u) { 
         utenti.remove(u);
+    }
+    
+    /**
+     * @brief Salvataggio su file binario tramite ObjectOutputStream.
+     *  Viene salvata una List<Utente>.
+     * 
+     * @return void
+     */
+    public void salvaSuBinario() {
+        List<Utente> lista = new ArrayList<>(utenti);
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_BINARIO))) {
+            out.writeObject(lista);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    /**
+     * @brief Caricamento da file binario.
+     * Formato atteso: una List<Utente> serializzata.
+     * 
+     * @return void
+     */
+     public void caricaDaBinario() throws IOException, ClassNotFoundException {
+        File file = new File(FILE_BINARIO);
+        if (!file.exists()) {
+            throw new FileNotFoundException("File binario non trovato: " + FILE_BINARIO);
+        }
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+
+            Object obj = in.readObject();
+
+            List<Utente> lista = (List<Utente>) obj;
+            for (Object o : lista) {
+                if (o instanceof Utente) {
+                    utenti.add((Utente) o);
+                }
+            }
+        }
     }
 }

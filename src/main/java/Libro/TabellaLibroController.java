@@ -480,7 +480,7 @@ public class TabellaLibroController {
                     mostraErrore("Attenzione!", "Il prezzo non può essere negativo o nullo");
                 }
                 
-                // aggiunta del libro
+                // aggiunta e salvataggio sul file di testo del libro
                 tabellaLibroModel.aggiungiLibro(strTitolo, strAutore, strIsbn, Integer.parseInt(strAnnoPubblicazione), Float.parseFloat(strPrezzo), strUsura, Integer.parseInt(strCopie));
                 tabellaLibroModel.salvaSuBinario();
 
@@ -496,6 +496,8 @@ public class TabellaLibroController {
             } catch (NumberFormatException ex) { // nel caso in cui sia stato inserito un valore invalido dove andavano inseriti valori numerici
                             mostraErrore("Attenzione!" , "Inserire correttamente i dati");
             }
+            
+        //Disabilito le textfield e il bottone di aggiunta
         aggiuntaLib.setDisable(true);
         titolo.setDisable(true);
         autore.setDisable(true);

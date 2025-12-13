@@ -39,7 +39,7 @@ public class TabellaPrestitoModel {
                /**
  * @brief Costruttore della classe TabellaPrestitoModel
  *
- * Questo metodo inizializza la Observable List che contiene i libri
+ * Questo metodo inizializza la Observable List che contiene i prestiti
  *
  * @post Inizializza l'oggetto
  *
@@ -110,8 +110,10 @@ public class TabellaPrestitoModel {
         prestiti.remove(p);
     }
         /**
-     * Salvataggio su file binario tramite ObjectOutputStream.
+     * @brief Salvataggio su file binario tramite ObjectOutputStream.
      * Viene salvata una List<Prestito>.
+     * 
+     * @return void
      */
     public void salvaSuBinario()  {
         List<Prestito> lista = new ArrayList<>(prestiti);
@@ -122,8 +124,10 @@ public class TabellaPrestitoModel {
         }
     }
         /**
-     * Caricamento da file binario.
+     * @brief Caricamento da file binario.
      * Formato atteso: una List<Prestito> serializzata.
+     * 
+     * @return void
      */
     public void caricaDaBinario() throws IOException, ClassNotFoundException {
         File file = new File(FILE_BINARIO);
