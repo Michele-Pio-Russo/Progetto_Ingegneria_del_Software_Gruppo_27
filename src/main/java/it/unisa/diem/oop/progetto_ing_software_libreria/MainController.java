@@ -9,29 +9,51 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
+/**
+ * @file MainController.java
+ * @brief Controller principale per la gestione del menu iniziale della libreria.
+ * * Questa classe gestisce la navigazione tra le varie sezioni dell'applicazione
+ * (Utenti, Libri, Prestiti) cambiando la scena visualizzata sullo stage principale.
+ */
 public class MainController implements Initializable {
 
     @FXML
-    private Button utenti;
+    private Button utenti;   ///@brief Questo bottone serve per accedere all'interfaccia Utente dalla schermata iniziale
+    
     @FXML
-    private Button libri;
+    private Button libri;    ///@brief Questo bottone serve per accedere all'interfaccia Libri dalla schermata iniziale
+    
     @FXML
-    private Button prestiti;
+    private Button prestiti; ///@brief Questo bottone serve per accedere all'interfaccia Prestito dalla schermata iniziale
+    
     @FXML
-    private Button esci;
+    private Button esci;     ///@brief Questo bottone serve per chiudere l'applicazione
 
-    // Riferimenti: mainStage finestra, altri contenuti (Scene)
-    private Stage mainStage;
-    private Scene sceneUtente;
-    private Scene sceneLibro;
-    private Scene scenePrestito;
+    
+    private Stage mainStage;     ///@brief Riferimento allo stage (finestra) principale dell'applicazione
+    private Scene sceneUtente;   ///@brief Riferimento alla scena che contiene l'interfaccia di gestione Utenti
+    private Scene sceneLibro;    ///@brief Riferimento alla scena che contiene l'interfaccia di gestione Libri
+    private Scene scenePrestito; ///@brief Riferimento alla scena che contiene l'interfaccia di gestione Prestiti
 
+    /**
+     * @brief Metodo di inizializzazione chiamato automaticamente da JavaFX.
+     * * @param url L'URL utilizzato per risolvere i percorsi relativi all'oggetto radice, o null se non noto.
+     * @param rb Il ResourceBundle utilizzato per localizzare l'oggetto radice, o null se non localizzato.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
     }
 
-
+    /**
+     * @brief Collega lo stage principale e le scene delle sottosezioni al controller.
+     * * Questo metodo permette al MainController di avere i riferimenti necessari
+     * per effettuare il cambio di scena (navigazione) quando vengono premuti i bottoni.
+     * * @param main Lo stage principale dell'applicazione.
+     * @param utente La scena pre-caricata per la gestione utenti.
+     * @param libro La scena pre-caricata per la gestione libri.
+     * @param prestito La scena pre-caricata per la gestione prestiti.
+     */
     public void associaStage(Stage main, Scene utente, Scene libro, Scene prestito) {
         this.mainStage = main;
         this.sceneUtente = utente;
@@ -39,6 +61,10 @@ public class MainController implements Initializable {
         this.scenePrestito = prestito;
     }
 
+    /**
+     * @brief Gestisce il click sul bottone 'Gestione Utenti'.
+     * * Cambia la scena attuale dello stage principale visualizzando l'interfaccia Utenti.
+     */
     @FXML
     private void onUtentiClicked() {
         if (sceneUtente != null) {
@@ -46,6 +72,10 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * @brief Gestisce il click sul bottone 'Gestione Libri'.
+     * * Cambia la scena attuale dello stage principale visualizzando l'interfaccia Libri.
+     */
     @FXML
     private void onLibriClicked() {
         if (sceneLibro != null) {
@@ -53,6 +83,10 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * @brief Gestisce il click sul bottone 'Gestione Prestiti'.
+     * * Cambia la scena attuale dello stage principale visualizzando l'interfaccia Prestiti.
+     */
     @FXML
     private void onPrestitiClicked() {
         if (scenePrestito != null) {
@@ -60,6 +94,11 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * @brief Gestisce il click sul bottone 'Esci'.
+     * * Esegue le operazioni di chiusura, come il salvataggio dei dati (se implementato)
+     * e termina l'esecuzione dell'applicazione.
+     */
     @FXML
     private void onEsci() {
         // DataManager.salvaTutto(); 

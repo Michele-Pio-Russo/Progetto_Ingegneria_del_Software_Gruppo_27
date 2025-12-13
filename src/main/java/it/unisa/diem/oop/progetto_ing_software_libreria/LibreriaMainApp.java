@@ -10,54 +10,85 @@ import Utente.*;
 import Prestito.*;
 import java.net.URL;
 
+/**
+ * @file LibreriaMainApp.java
+ * @brief Classe principale (Entry Point) dell'applicazione Gestione Libreria.
+ * * Questa classe si occupa di inizializzare l'ambiente JavaFX, caricare le viste FXML,
+ * istanziare i modelli (Model) e i controller, e collegare le dipendenze tra loro
+ * secondo il pattern MVC.
+ */
 public class LibreriaMainApp extends Application {
 
+    /**
+     * @brief Metodo di avvio dell'applicazione JavaFX.
+     * * Esegue le seguenti operazioni:
+     * 1. Inizializza i Modelli per la gestione dei dati.
+     * 2. Carica le interfacce grafiche (View) dai file FXML.
+     * 3. Recupera i Controller associati alle viste.
+     * 4. Collega i Controller ai relativi Modelli e imposta la navigazione tra le scene.
+     * * @param stage Lo stage primario (finestra principale) dell'applicazione.
+     * @throws Exception Se si verificano errori durante il caricamento dei file FXML.
+     */
     @Override
     public void start(Stage stage) throws Exception {
-        //Creo i model da associare ai controller
-        TabellaUtenteModel tabUtenteMod= new TabellaUtenteModel();
-        TabellaLibroModel tabLibroMod= new TabellaLibroModel();
-        TabellaPrestitoModel tabPrestitoMod= new TabellaPrestitoModel();
-        // Carico l'interfaccia principale (Menu)
+        
+        ///@brief Inizializzazione dei modelli (Model) per la gestione dei dati persistenti
+        TabellaUtenteModel tabUtenteMod = new TabellaUtenteModel();
+        TabellaLibroModel tabLibroMod = new TabellaLibroModel();
+        TabellaPrestitoModel tabPrestitoMod = new TabellaPrestitoModel();
+
+        ///@brief Caricamento dell'interfaccia principale (Menu)
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("Interfaccia_Main.fxml"));
-        URL mainLoadertry = getClass().getResource("Interfaccia_Main.fxml");
-       // System.out.println("\n\n\n\n\n\nprova= " + mainLoadertry);
         Parent rootMain = mainLoader.load();
-        // Recupero il controller del menu per passargli le altre schermate
-        MainController controller = mainLoader.getController();
-        // Uso lo slash '/' iniziale perché sono in package diversi alla radice, come ad esempio ("package Libro;"
-        // --- LIBRO ---
+        
+        ///@brief Recupero del controller principale per impostare la navigazione
+        MainController mainController = mainLoader.getController();
+
+        // --- Caricamento delle Viste secondarie (Libro, Utente, Prestito) ---
+        
+        ///@brief Caricamento vista Sezione Libri
         FXMLLoader libroLoader = new FXMLLoader(getClass().getResource("/Libro/Interfaccia_Libro.fxml"));
         Parent rootLibro = libroLoader.load();
         Scene sceneLibro = new Scene(rootLibro);
-        // --- UTENTE ---
+
+        ///@brief Caricamento vista Sezione Utenti
         FXMLLoader utenteLoader = new FXMLLoader(getClass().getResource("/Utente/Interfaccia_Utente.fxml"));
         Parent rootUtente = utenteLoader.load();
         Scene sceneUtente = new Scene(rootUtente);
-        // --- PRESTITO ---
+
+        ///@brief Caricamento vista Sezione Prestiti
         FXMLLoader prestitoLoader = new FXMLLoader(getClass().getResource("/Prestito/Interfaccia_Prestiti.fxml"));
         Parent rootPrestito = prestitoLoader.load();
         Scene scenePrestito = new Scene(rootPrestito);
         
-        //Carico gli altri controller
-        TabellaUtenteController utCotroller = utenteLoader.getController();
-        TabellaLibroController libCotroller = libroLoader.getController();
-        TabellaPrestitoController prestCotroller = prestitoLoader.getController();
+        ///@brief Recupero dei Controller specifici per ogni sezione
+        TabellaUtenteController utController = utenteLoader.getController();
+        TabellaLibroController libController = libroLoader.getController();
+        TabellaPrestitoController prestController = prestitoLoader.getController();
         
-        //scena principale
+        // Creazione della scena principale
         Scene scenePrincipale = new Scene(rootMain);
-        // collego tutto insieme usando associaStage
-        controller.associaStage(stage, sceneUtente, sceneLibro, scenePrestito);
+
+        ///@brief Configurazione della navigazione nel MainController (passaggio delle scene)
+        mainController.associaStage(stage, sceneUtente, sceneLibro, scenePrestito);
         
-        //collego i controller ai propri model
-        utCotroller.setModel(tabUtenteMod, stage, scenePrincipale);
-        libCotroller.setModel(tabLibroMod, stage, scenePrincipale);
-        prestCotroller.setModel(tabPrestitoMod, tabUtenteMod, tabLibroMod, stage, scenePrincipale);
+        ///@brief Iniezione delle dipendenze: Collegamento dei Controller ai relativi Model e allo Stage per la navigazione inversa
+        utController.setModel(tabUtenteMod, stage, scenePrincipale);
+        libController.setModel(tabLibroMod, stage, scenePrincipale);
+        
+        // Il controller dei prestiti necessita anche dei modelli Utente e Libro per i controlli incrociati
+        prestController.setModel(tabPrestitoMod, tabUtenteMod, tabLibroMod, stage, scenePrincipale);
                 
+        // Configurazione e avvio dello stage principale
         stage.setTitle("Gestione Libreria Universitaria");
         stage.setScene(scenePrincipale);
         stage.show();
     }
+
+    /**
+     * @brief Metodo main standard per l'avvio dell'applicazione.
+     * @param args Argomenti da riga di comando.
+     */
     public static void main(String[] args) {
         launch(args);
     }
