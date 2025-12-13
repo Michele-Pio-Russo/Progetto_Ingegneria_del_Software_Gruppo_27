@@ -400,6 +400,11 @@ public class TabellaUtenteController {
     */ 
     @FXML
     private void onEsci() throws Exception {
+        if(modifica.getText().trim().equals("Termina modifica")){
+        modifica.setText("Modifica");
+        tabella.setEditable(false);
+        rimozione.setDisable(true);
+        }
         principale.setScene(scenaPrincipale);
     }
     
