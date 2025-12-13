@@ -233,6 +233,11 @@ public class Libro implements Serializable{
     }
     
     @Override
+    public int hashCode(){
+        return 17 + isbn.hashCode();
+    }
+    
+    @Override
     public String toString() {
         return "Libro{" +
                 "titolo='" + titolo + '\'' +

@@ -200,6 +200,12 @@ public class Utente implements Serializable{
                 '}';
     }
     
+    
+     @Override
+    public int hashCode(){
+        return 17 + matricola.hashCode();
+    }
+    
     /**
  * @brief Controlla l'uguaglianza dell'oggetto passato con questo
  * 
@@ -218,3 +224,4 @@ public class Utente implements Serializable{
         return this.getNome().equals(((Utente)obj).getNome());
     }
 }
+

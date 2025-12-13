@@ -166,6 +166,10 @@ public class Prestito implements Serializable{
                 '}';
     }
     
+     @Override
+    public int hashCode(){
+        return 17 + libro.getIsbn().hashCode() + utente.getNome().hashCode();
+    }
     
         /**
  * @brief Controlla l'uguaglianza dell'oggetto passato con questo
