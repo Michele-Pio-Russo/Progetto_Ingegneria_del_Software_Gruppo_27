@@ -103,8 +103,6 @@ public class TabellaUtenteController {
     private Stage principale;///@brief Stage unico dell'applicazione
     
     private Scene scenaPrincipale;///@brief Scena iniziale dell'applicazione
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private final LocalDateStringConverter dateConverter = new LocalDateStringConverter(DATE_FORMATTER, DATE_FORMATTER);
     /**
     * @brief Metodo di inizializzazione chiamato automaticamente dal JavaFX Loader
     *
@@ -145,6 +143,7 @@ public class TabellaUtenteController {
             String nuovoNome = event.getNewValue();
             if (nuovoNome != null && !nuovoNome.trim().isEmpty()) {
                 U.setNome(nuovoNome.trim());
+                tabellaUtenteModel.salvaSuBinario();
             } else {
                 mostraErrore("Nome non valido", "Il Nome non può essere vuoto.");
                 tabella.refresh();
@@ -157,6 +156,7 @@ public class TabellaUtenteController {
             String nuovoCognome = event.getNewValue();
             if (nuovoCognome != null && !nuovoCognome.trim().isEmpty()) {
                 U.setNome(nuovoCognome.trim());
+                tabellaUtenteModel.salvaSuBinario();
             } else {
                 mostraErrore("Cognome non valido", "Il Cognome non può essere vuoto.");
                 tabella.refresh();
@@ -169,6 +169,7 @@ public class TabellaUtenteController {
             String nuovaMatricola = event.getNewValue();
             if (nuovaMatricola != null && !nuovaMatricola.trim().isEmpty()) {
                 U.setNome(nuovaMatricola.trim());
+                tabellaUtenteModel.salvaSuBinario();
             } else {
                 mostraErrore("Matricola non valida", "La matricola non può essere vuota.");
                 tabella.refresh();
@@ -181,35 +182,13 @@ public class TabellaUtenteController {
             String nuovaEmail = event.getNewValue();
             if (nuovaEmail != null && !nuovaEmail.trim().isEmpty()) {
                 U.setNome(nuovaEmail.trim());
+                tabellaUtenteModel.salvaSuBinario();
             } else {
                 mostraErrore("Email non valida", "L'email non può essere vuota.");
                 tabella.refresh();
             }
         });
         
-        iscrizioneCol.setCellFactory(TextFieldTableCell.<Utente, LocalDate>forTableColumn(dateConverter));
-        iscrizioneCol.setOnEditCommit(event -> {
-            Utente U = event.getRowValue();
-            LocalDate nuovaIscrizioneData = event.getNewValue();
-            if (nuovaIscrizioneData != null) {
-                U.setIscrizione(nuovaIscrizioneData); 
-             } else {
-                mostraErrore("Data non valida", "La data di iscrizione deve essere nel formato 'YYYY-MM-DD'.");
-                tabella.refresh();
-             }
-        });
-        
-        libriInPrestitoCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-        libriInPrestitoCol.setOnEditCommit(event -> {
-            Utente U = event.getRowValue();
-            Integer nuovoLibroInPrestito = event.getNewValue();
-            if (nuovoLibroInPrestito != null && nuovoLibroInPrestito < 0) {
-                U.setLibriInPrestito(nuovoLibroInPrestito);
-            } else {
-                mostraErrore("Numero di libri in prestito non valido", "Il numero di libri in prestito non può essere vuota.");
-                tabella.refresh();
-            }
-        });
     }
 
     /**
@@ -288,6 +267,7 @@ public class TabellaUtenteController {
         // controllo finale e rimozione
         if (risultato.isPresent() && risultato.get() == ButtonType.OK) {
             tabellaUtenteModel.rimuoviPersona(utenteSelezionato);
+            tabellaUtenteModel.salvaSuBinario();
         }
     }
     
@@ -421,27 +401,40 @@ public class TabellaUtenteController {
     */
     @FXML
     private void onAggiungiUt() {
+        //Controllo se il model esiste
         if (tabellaUtenteModel == null) {
             return;
         }
+        
+        // Prendiamo tutti gli attributi di utente sottoforma di stringa
         String strNome = nome.getText().trim();
         String strCognome = cognome.getText().trim();
         String strMatricola = matricola.getText().trim();
         String strEmail = email.getText().trim();
+        
+        // controllo se uno o più parametri sono vuoti, nel caso mando un messaggio di errore
         if (strNome.isEmpty() || strCognome.isEmpty() || strMatricola.isEmpty() || strEmail.isEmpty()) {
             mostraErrore("Dati mancanti!", "Inserire ogni attributo");
             return;
         }
+        
+        //Gestisco eventuali incongruenze sulla matricola
         if (strMatricola.length() != 10) {
             mostraErrore("Attenzione!", "Inserire una matricola valida");
             return;
         }
+        
+        //Aggiunta e salvataggio su file di testo dell'utente
         tabellaUtenteModel.aggiungiPersona(strNome, strCognome, strMatricola, strEmail, LocalDate.now());
+        tabellaUtenteModel.salvaSuBinario();
+        
+        //Puliamo i campi di utente
         nome.clear();
         cognome.clear();
         matricola.clear();
         email.clear();
         
+        //Disabilito le textfield e il bottone di aggiunta
         aggiuntaUt.setDisable(true);
         nome.setDisable(true);
         cognome.setDisable(true);

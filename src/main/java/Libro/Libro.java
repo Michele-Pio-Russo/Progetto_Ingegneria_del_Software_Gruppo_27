@@ -218,7 +218,7 @@ public class Libro implements Serializable{
  * @brief Controlla l'uguaglianza dell'oggetto passato con questo
  * 
  *
- * @return True o False a dell'uguaglianza.
+ * @return True o False dell'uguaglianza.
  */
     @Override
     public boolean equals(Object obj)

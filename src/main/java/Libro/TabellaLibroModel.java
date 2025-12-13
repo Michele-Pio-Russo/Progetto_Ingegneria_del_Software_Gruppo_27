@@ -102,8 +102,10 @@ public class TabellaLibroModel {
             libri.remove(lib);
     }
    /**
-     * Salvataggio su file binario tramite ObjectOutputStream.
-     * Viene salvata una List<Libro>.
+     * @brief Salvataggio su file binario tramite ObjectOutputStream.
+     *  Viene salvata una List<Libro>.
+     * 
+     * @return void
      */
     public void salvaSuBinario() {
         List<Libro> lista = new ArrayList<>(libri);
@@ -115,8 +117,10 @@ public class TabellaLibroModel {
     }
     
          /**
-     * Caricamento da file binario.
+     * @brief Caricamento da file binario.
      * Formato atteso: una List<Libro> serializzata.
+     * 
+     * @return void
      */
      public void caricaDaBinario() throws IOException, ClassNotFoundException {
         File file = new File(FILE_BINARIO);
