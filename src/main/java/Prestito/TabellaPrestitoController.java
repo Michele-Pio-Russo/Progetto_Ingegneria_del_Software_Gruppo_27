@@ -114,6 +114,11 @@ public class TabellaPrestitoController {
             
     @FXML
     private void initialize() {
+        try{
+            tabellaPrestitoModel.caricaDaBinario();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
         tabella.setEditable(false);
         rimozione.setDisable(true);
         aggiuntaPre.setDisable(true);
@@ -133,7 +138,7 @@ public class TabellaPrestitoController {
             String nuovoNome = event.getNewValue();
             if (nuovoNome != null && !nuovoNome.trim().isEmpty()) {
                 P.setNome(nuovoNome.trim());
-                            try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
+                            tabellaPrestitoModel.salvaSuBinario();
             } else {
                 mostraErrore("Nome non valido", "Il Nome non può essere vuoto.");
                 tabella.refresh();
@@ -146,7 +151,7 @@ public class TabellaPrestitoController {
             String nuovoCognome = event.getNewValue();
             if (nuovoCognome != null && !nuovoCognome.trim().isEmpty()) {
                 P.setCognome(nuovoCognome.trim());
-                try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
+                tabellaPrestitoModel.salvaSuBinario();
             } else {
                 mostraErrore("Cognome non valido", "Il Cognome non può essere vuoto.");
                 tabella.refresh();
@@ -159,6 +164,7 @@ public class TabellaPrestitoController {
             String nuovoTitolo = event.getNewValue();
             if (nuovoTitolo != null && !nuovoTitolo.trim().isEmpty()) {
                 P.setTitolo(nuovoTitolo.trim());
+                    tabellaPrestitoModel.salvaSuBinario();
             } else {
                 mostraErrore("Titolo non valido", "Il titolo non può essere vuoto.");
                 tabella.refresh();
@@ -172,7 +178,7 @@ public class TabellaPrestitoController {
             String nuovoIsbn = event.getNewValue();
             if (nuovoIsbn != null && !nuovoIsbn.trim().isEmpty()) {
                 P.setIsbn(nuovoIsbn.trim());
-                try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
+                tabellaPrestitoModel.salvaSuBinario();
             } else {
                 mostraErrore("Isbn non valido", "L'Isbn non può essere vuoto.");
                 tabella.refresh();
@@ -185,7 +191,7 @@ public class TabellaPrestitoController {
         LocalDate nuovaScadenza = event.getNewValue();
         if (nuovaScadenza != null) {
          P.setDataDiScadenza(nuovaScadenza);
-         try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
+        tabellaPrestitoModel.salvaSuBinario();
         } else {
         P.setDataDiScadenza(event.getOldValue());
         tabella.refresh();
@@ -208,11 +214,12 @@ public class TabellaPrestitoController {
     
     public void setModel(TabellaPrestitoModel model, TabellaUtenteModel utModel, TabellaLibroModel libModel, Stage principale, Scene scenaPrincipale) {
         this.tabellaPrestitoModel = model;
-        tabella.setItems(model.getPrestiti());
         this.principale=principale;
         this.scenaPrincipale=scenaPrincipale;
         tabellaLibroModel = libModel;
         tabellaUtenteModel = utModel;
+        tabella.setItems(model.getPrestiti());
+
     }
 
     /**
@@ -224,6 +231,7 @@ public class TabellaPrestitoController {
     @FXML
     private void onAggiungi() {
         aggiuntaPre.setDisable(false);
+        
         titolo.setDisable(false);
         scadenza.setDisable(false);
         isbn.setDisable(false);
@@ -267,7 +275,7 @@ public class TabellaPrestitoController {
         // controllo finale e rimozione
         if (risultato.isPresent() && risultato.get() == ButtonType.OK) {
             tabellaPrestitoModel.rimuoviPrestito(prestitoSelezionato);
-            try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
+            tabellaPrestitoModel.salvaSuBinario();
             
         }
     }
@@ -349,6 +357,7 @@ public class TabellaPrestitoController {
             return;
         }
 
+        // Prendiamo tutti gli attributi di prestito sottoforma di stringa
         String n = nome.getText().trim();
         String  c = cognome.getText().trim();
         String tit = titolo.getText().trim();
@@ -376,7 +385,7 @@ public class TabellaPrestitoController {
         }
         try {   
             tabellaPrestitoModel.aggiungiPrestito(new Utente(n, c, "", "", LocalDate.parse("2000-10-10")), new Libro(tit,"",strIsbn,0,0,"",0), LocalDate.parse(scad));
-            try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
+           tabellaPrestitoModel.salvaSuBinario();
             nome.clear();
             cognome.clear();
             titolo.clear();
