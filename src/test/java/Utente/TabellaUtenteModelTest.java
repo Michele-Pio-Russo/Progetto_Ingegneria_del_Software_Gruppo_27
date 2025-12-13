@@ -60,7 +60,6 @@ public class TabellaUtenteModelTest {
         
         assertEquals(sizeIniziale + 1, model.getPersone().size());
         
-        // Verifica l'aggiunta basandosi sul metodo equals() di Utente (che usa solo il nome)
         assertTrue(model.getPersone().contains(utenteTest));
     }
 
@@ -95,10 +94,8 @@ public class TabellaUtenteModelTest {
         ObservableList<Utente> utentiCaricati = nuovoModel.getPersone();
         assertEquals(1, utentiCaricati.size());
         
-        // La verifica dell'uguaglianza si basa su Utente.equals() (che usa solo il Nome)
         assertTrue(utentiCaricati.contains(utenteTest));
         
-        // Verifica dei dati caricati
         Utente utenteCaricato = utentiCaricati.get(0);
         assertEquals(MATRICOLA_TEST, utenteCaricato.getMatricola());
         assertEquals(EMAIL_TEST, utenteCaricato.getEmail());

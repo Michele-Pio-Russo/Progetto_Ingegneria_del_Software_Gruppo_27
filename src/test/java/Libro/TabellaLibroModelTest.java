@@ -17,7 +17,7 @@ public class TabellaLibroModelTest {
     private final double PREZZO = 19.99;
     private final String USURA = "Ottimo";
     private final int COPIE = 2;
-    private static final double DELTA = 0.001; // Per confronto double
+    private static final double DELTA = 0.001;
     
     private Libro libroTest;
 

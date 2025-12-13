@@ -13,7 +13,6 @@ public class TabellaPrestitoModelTest {
     private TabellaPrestitoModel model;
     private final String FILE_BINARIO = "prestiti.bin";
 
-    // Dati di test per Utente e Libro (dipendenze di Prestito)
     private final String NOME_UTENTE = "Mario";
     private final String COGNOME_UTENTE = "Rossi";
     private final String MATRICOLA_UTENTE = "M111";
@@ -37,15 +36,12 @@ public class TabellaPrestitoModelTest {
     public void setUp() {
         cleanupFile();
         
-        // Creazione delle dipendenze
         utenteTest = new Utente(NOME_UTENTE, COGNOME_UTENTE, MATRICOLA_UTENTE, EMAIL_UTENTE, ISCRIZIONE_UTENTE);
         libroTest = new Libro(TITOLO_LIBRO, AUTORE_LIBRO, ISBN_LIBRO, ANNO_LIBRO, PREZZO_LIBRO, USURA_LIBRO, COPIE_LIBRO);
         dataScadenzaTest = LocalDate.now().plusWeeks(2);
         
-        // Creazione dell'oggetto Prestito
         prestitoTest = new Prestito(utenteTest, libroTest, dataScadenzaTest);
         
-        // Inizializzazione del model
         model = new TabellaPrestitoModel();
     }
 
@@ -82,7 +78,6 @@ public class TabellaPrestitoModelTest {
         assertEquals(sizeIniziale + 1, model.getPrestiti().size());
         assertTrue(model.getPrestiti().contains(prestitoTest));
         
-        // Verifica che un nuovo Prestito con gli stessi dati non venga bloccato (comportamento atteso dal model)
         Prestito prestitoDuplicato = new Prestito(utenteTest, libroTest, dataScadenzaTest.plusDays(1));
         model.aggiungiPrestito(utenteTest, libroTest, dataScadenzaTest.plusDays(1));
         assertEquals(sizeIniziale + 2, model.getPrestiti().size());
@@ -119,10 +114,8 @@ public class TabellaPrestitoModelTest {
         ObservableList<Prestito> prestitiCaricati = nuovoModel.getPrestiti();
         assertEquals(1, prestitiCaricati.size());
         
-        // La verifica dell'uguaglianza si basa su Prestito.equals() (Nome Utente E ISBN)
         assertTrue(prestitiCaricati.contains(prestitoTest));
         
-        // Verifica dei dati caricati
         Prestito prestitoCaricato = prestitiCaricati.get(0);
         assertEquals(NOME_UTENTE, prestitoCaricato.getNome());
         assertEquals(ISBN_LIBRO, prestitoCaricato.getIsbn());
