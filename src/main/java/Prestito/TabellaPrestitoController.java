@@ -98,8 +98,8 @@ public class TabellaPrestitoController {
     private TabellaPrestitoModel tabellaPrestitoModel; ///@brief Model associato al controller, gestisce la logica dei dati dei prestiti
     private Scene scenaPrincipale;
     private Stage principale;
-    private TabellaLibroModel libM;
-    private TabellaUtenteModel utM;
+    private TabellaLibroModel tabellaLibroModel;
+    private TabellaUtenteModel tabellaUtenteModel;
     
     /**
      * @brief Metodo di inizializzazione chiamato automaticamente dal JavaFX Loader
@@ -211,8 +211,8 @@ public class TabellaPrestitoController {
         tabella.setItems(model.getPrestiti());
         this.principale=principale;
         this.scenaPrincipale=scenaPrincipale;
-        libM = libModel;
-        utM = utModel;
+        tabellaLibroModel = libModel;
+        tabellaUtenteModel = utModel;
     }
 
     /**
@@ -359,8 +359,22 @@ public class TabellaPrestitoController {
             mostraErrore("Dati mancanti", "Inserire tutti i dati richiesti.");
             return;
         }
-
-        try {
+        if(LocalDate.now().isAfter(LocalDate.parse(scad)))
+            {
+                mostraErrore("Errore scadenza", "Inserire una scadenza valida");
+                return;
+            }
+        if(!tabellaUtenteModel.getPersone().contains(new Utente(n, c, "", "", LocalDate.parse("2000-10-10"))))
+        {
+            mostraErrore("Errore utente", "Utente non presente nell'elenco degli utenti");
+            return;
+        }
+        if(!tabellaLibroModel.getLibri().contains(new Libro(tit,"",strIsbn,0,0,"",0)))
+        {
+            mostraErrore("Errore libro", "Libro non presente nell'elenco dei libri");
+            return;
+        }
+        try {   
             tabellaPrestitoModel.aggiungiPrestito(new Utente(n, c, "", "", LocalDate.parse("2000-10-10")), new Libro(tit,"",strIsbn,0,0,"",0), LocalDate.parse(scad));
             try{tabellaPrestitoModel.salvaSuBinario();}catch(Exception e){System.out.println(e.getMessage());}
             nome.clear();

@@ -165,4 +165,15 @@ public class Prestito implements Serializable{
                 ", dataDiScadenza=" + dataDiScadenza +
                 '}';
     }
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(obj==null)
+            return false;
+        if(obj==this)
+            return true;
+        if(!(obj.getClass() == this.getClass()))
+            return false;
+        return this.getNome().equals(((Prestito)obj).getNome()) && this.getIsbn().equals(((Prestito)obj).getIsbn());    }
 }
