@@ -2,7 +2,6 @@ package Utente;
 
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UtenteTest {
@@ -12,33 +11,33 @@ public class UtenteTest {
     private final String MATRICOLA_TEST = "M987654";
     private final String EMAIL_TEST = "giulia.bianchi@esempio.it";
     private final LocalDate ISCRIZIONE_TEST = LocalDate.of(2024, 9, 1);
-    private final int LIBRI_IN_PRESTITO_BASE = 0;
-    
-    private Utente instance;
+    private final int LIBRI_IN_PRESTITO_BASE = 0; 
 
-    @BeforeEach
-    public void setUp() {
-        instance = new Utente(NOME_TEST, COGNOME_TEST, MATRICOLA_TEST, EMAIL_TEST, ISCRIZIONE_TEST);
+    private Utente createTestUser() {
+        return new Utente(NOME_TEST, COGNOME_TEST, MATRICOLA_TEST, EMAIL_TEST, ISCRIZIONE_TEST);
     }
 
     @Test
     public void testCostruttoreAndGetters() {
         System.out.println("Test: Costruttore e Getters");
         
-        assertNotNull(instance, "L'istanza di Utente non deve essere null.");
+        Utente instance = createTestUser();
         
-        assertEquals(NOME_TEST, instance.getNome(), "getNome non corrisponde.");
-        assertEquals(COGNOME_TEST, instance.getCognome(), "getCognome non corrisponde.");
-        assertEquals(MATRICOLA_TEST, instance.getMatricola(), "getMatricola non corrisponde.");
-        assertEquals(EMAIL_TEST, instance.getEmail(), "getEmail non corrisponde.");
-        assertEquals(ISCRIZIONE_TEST, instance.getIscrizione(), "getIscrizione non corrisponde.");
+        assertNotNull(instance);
+        assertEquals(NOME_TEST, instance.getNome());
+        assertEquals(COGNOME_TEST, instance.getCognome());
+        assertEquals(MATRICOLA_TEST, instance.getMatricola());
+        assertEquals(EMAIL_TEST, instance.getEmail());
+        assertEquals(ISCRIZIONE_TEST, instance.getIscrizione());
         
-        assertEquals(LIBRI_IN_PRESTITO_BASE, instance.getLibriInPrestito(), "libriInPrestito non è 0 di default.");
+        assertEquals(LIBRI_IN_PRESTITO_BASE, instance.getLibriInPrestito());
     }
 
     @Test
     public void testSetters() {
         System.out.println("Test: Setters");
+        
+        Utente instance = createTestUser();
         
         String nuovoNome = "Marco";
         String nuovoCognome = "Verdi";
@@ -54,40 +53,43 @@ public class UtenteTest {
         instance.setIscrizione(nuovaIscrizione);
         instance.setLibriInPrestito(nuoviLibri);
         
-        assertEquals(nuovoNome, instance.getNome(), "setNome fallito.");
-        assertEquals(nuovoCognome, instance.getCognome(), "setCognome fallito.");
-        assertEquals(nuovaMatricola, instance.getMatricola(), "setMatricola fallito.");
-        assertEquals(nuovaEmail, instance.getEmail(), "setEmail fallito.");
-        assertEquals(nuovaIscrizione, instance.getIscrizione(), "setIscrizione fallito.");
-        assertEquals(nuoviLibri, instance.getLibriInPrestito(), "setLibriInPrestito fallito.");
+        assertEquals(nuovoNome, instance.getNome());
+        assertEquals(nuovoCognome, instance.getCognome());
+        assertEquals(nuovaMatricola, instance.getMatricola());
+        assertEquals(nuovaEmail, instance.getEmail());
+        assertEquals(nuovaIscrizione, instance.getIscrizione());
+        assertEquals(nuoviLibri, instance.getLibriInPrestito());
         
         instance.setLibriInPrestito(0);
-        assertEquals(0, instance.getLibriInPrestito(), "setLibriInPrestito a 0 fallito.");
+        assertEquals(0, instance.getLibriInPrestito());
     }
 
     @Test
     public void testEquals() {
         System.out.println("Test: equals() (Basato sul Nome)");
         
+        Utente instance = createTestUser();
+        
         Utente utenteUguale = new Utente(NOME_TEST, "Nero", "Z000000", "diverso@mail.it", LocalDate.now().minusYears(1));
         
         Utente utenteDiverso = new Utente("Marco", COGNOME_TEST, MATRICOLA_TEST, EMAIL_TEST, ISCRIZIONE_TEST);
 
-        assertTrue(instance.equals(instance), "equals() fallito: stesso oggetto.");
-
-        assertTrue(instance.equals(utenteUguale), "equals() fallito: stesso nome, matricola diversa (atteso True).");
+        assertTrue(instance.equals(instance));
+        assertTrue(instance.equals(utenteUguale));
         
-        assertFalse(instance.equals(utenteDiverso), "equals() fallito: nome diverso.");
+        assertFalse(instance.equals(utenteDiverso));
 
-        assertFalse(instance.equals(null), "equals() fallito: confronto con null.");
+        assertFalse(instance.equals(null));
         
         Object altraClasse = "Sono una Stringa";
-        assertFalse(instance.equals(altraClasse), "equals() fallito: confronto con classe diversa.");
+        assertFalse(instance.equals(altraClasse));
     }
 
     @Test
     public void testToString() {
         System.out.println("Test: toString()");
+        
+        Utente instance = createTestUser();
         
         int libriCorrenti = 1;
         instance.setLibriInPrestito(libriCorrenti);
@@ -103,6 +105,6 @@ public class UtenteTest {
         
         String result = instance.toString();
         
-        assertEquals(expResult, result, "Il metodo toString() non produce il formato 'Studente' atteso.");
+        assertEquals(expResult, result);
     }
 }
