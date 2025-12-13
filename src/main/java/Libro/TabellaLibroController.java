@@ -223,7 +223,7 @@ public class TabellaLibroController {
         prezzoCol.setOnEditCommit(event -> {
             Libro l = event.getRowValue();
             Double nuovoPrezzo = event.getNewValue();
-            if (nuovoPrezzo != null && nuovoPrezzo < 0) {
+            if (nuovoPrezzo != null && nuovoPrezzo > 0) {
                 l.setPrezzo(nuovoPrezzo);
                     tabellaLibroModel.salvaSuBinario();
             } else {

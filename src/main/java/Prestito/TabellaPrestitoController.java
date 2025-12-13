@@ -359,7 +359,8 @@ public class TabellaPrestitoController {
         String tit = titolo.getText().trim();
         String  strIsbn = isbn.getText().trim();
         String  scad = scadenza.getText().trim();
-
+        Utente ut = new Utente(n, c, "", "", LocalDate.parse("2000-10-10"));
+        Libro lib = new Libro(tit,"",strIsbn,0,0,"",0);
         if (n.isEmpty() || c.isEmpty() || tit.isEmpty() || strIsbn.isEmpty() || scad.isEmpty() ) {
             mostraErrore("Dati mancanti", "Inserire tutti i dati richiesti.");
             return;
@@ -369,19 +370,26 @@ public class TabellaPrestitoController {
                 mostraErrore("Errore scadenza", "Inserire una scadenza valida");
                 return;
             }
-        if(!tabellaUtenteModel.getPersone().contains(new Utente(n, c, "", "", LocalDate.parse("2000-10-10"))))
+        if(!tabellaUtenteModel.getPersone().contains(ut))
         {
             mostraErrore("Errore utente", "Utente non presente nell'elenco degli utenti");
             return;
+        } 
+        /* DA MODIFICARE
+        else 
+        {
+            ut.setLibriInPrestito(ut.getLibriInPrestito() + 1);
         }
-        if(!tabellaLibroModel.getLibri().contains(new Libro(tit,"",strIsbn,0,0,"",0)))
+         */
+        if(!tabellaLibroModel.getLibri().contains(lib))
         {
             mostraErrore("Errore libro", "Libro non presente nell'elenco dei libri");
             return;
         }
+        
         try {   
-            tabellaPrestitoModel.aggiungiPrestito(new Utente(n, c, "", "", LocalDate.parse("2000-10-10")), new Libro(tit,"",strIsbn,0,0,"",0), LocalDate.parse(scad));
-           tabellaPrestitoModel.salvaSuBinario();
+            tabellaPrestitoModel.aggiungiPrestito(ut, lib, LocalDate.parse(scad));
+            tabellaPrestitoModel.salvaSuBinario();
             nome.clear();
             cognome.clear();
             titolo.clear();
