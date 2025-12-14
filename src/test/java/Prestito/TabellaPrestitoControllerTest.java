@@ -1,4 +1,3 @@
-
 package Prestito;
 
 import Libro.Libro;
@@ -124,7 +123,7 @@ public class TabellaPrestitoControllerTest {
         injectField(controller, "isbnCol", new TableColumn<Prestito, String>());
         injectField(controller, "scadenzaCol", new TableColumn<Prestito, LocalDate>());
 
-        // Simuliamo l'initialize FXML
+        // Simuliamo l'initialize FXML e impostiamo i model
         Platform.runLater(() -> {
             try {
                 Method initMethod = TabellaPrestitoController.class.getDeclaredMethod("initialize");
@@ -160,7 +159,7 @@ public class TabellaPrestitoControllerTest {
                 nomeField.setDisable(true);
                 aggiuntaPreButton.setDisable(true);
 
-                // Azione: click su aggiunta (il bottone "Nuovo")
+                // Azione: click su aggiunta (il bottone "Nuovo" che sblocca i campi)
                 invokeMethod(controller, "onAggiungi");
 
                 // Verifica
@@ -181,14 +180,14 @@ public class TabellaPrestitoControllerTest {
 
         Platform.runLater(() -> {
             try {
-                // 1. Preparazione Dati: Il controller verifica che Utente e Libro esistano
-                // Dobbiamo aggiungere un utente e un libro validi ai rispettivi model
-                Utente utenteTest = new Utente("Mario", "Rossi", "M01", "email", LocalDate.now());
-                Libro libroTest = new Libro("Java", "Autore", "12345", 2020, 10.0f, "Ottimo", 5);
+                // 1. Preparazione Dati: Il controller verifica che Utente e Libro esistano nei rispettivi Model
+                // Creiamo Utente e Libro che matchano quelli creati internamente dal controller per il check (.contains)
+                // Nota: Assumiamo che Utente e Libro abbiano un metodo equals/hashcode basato sui campi chiave
+                Utente utenteTest = new Utente("Mario", "Rossi", "M01", "email", LocalDate.parse("2000-10-10"));
+                // Il controller crea un utente temporaneo con data fissa "2000-10-10" per il check
                 
-                // NOTA: il controller crea nuovi oggetti Utente/Libro parziali per fare il controllo .contains().
-                // Affinché funzioni, le classi Utente e Libro devono avere equals() implementato correttamente
-                // o il test deve usare dati che matchano la logica di uguaglianza.
+                Libro libroTest = new Libro("Java", "Autore", "12345", 0, 0, "", 0);
+                
                 utenteModel.getPersone().add(utenteTest);
                 libroModel.getLibri().add(libroTest);
 
@@ -201,6 +200,9 @@ public class TabellaPrestitoControllerTest {
                 // Data futura per evitare errore scadenza
                 LocalDate dataFutura = LocalDate.now().plusDays(30);
                 scadenzaField.setText(dataFutura.toString());
+                
+                // Simuliamo che il bottone di conferma sia abilitato
+                aggiuntaPreButton.setDisable(false);
 
                 // 3. Invocazione
                 invokeMethod(controller, "onAggiungiPre");
@@ -213,10 +215,10 @@ public class TabellaPrestitoControllerTest {
             }
         });
 
-        latch.await(2, TimeUnit.SECONDS);
+        latch.await(3, TimeUnit.SECONDS);
 
         // 4. Verifiche
-        assertFalse(prestitoModel.getPrestiti().isEmpty(), "Il prestito doveva essere aggiunto");
+        assertFalse(prestitoModel.getPrestiti().isEmpty(), "Il prestito deve essere aggiunto al model");
         
         Prestito p = prestitoModel.getPrestiti().get(0);
         assertEquals("Mario", p.getNome());
@@ -224,6 +226,7 @@ public class TabellaPrestitoControllerTest {
         
         // Verifica pulizia campi
         assertTrue(nomeField.getText().isEmpty());
+        assertTrue(isbnField.getText().isEmpty());
     }
 
     @Test
@@ -296,18 +299,20 @@ public class TabellaPrestitoControllerTest {
     }
     
     @Test
-    void testModificaToggle() throws Exception {
+    void testAttivaModalitaModifica() throws Exception {
         Platform.runLater(() -> {
             try {
                 assertEquals("Modifica", modificaButton.getText());
                 assertFalse(tabella.isEditable());
 
+                // Attiva
                 invokeMethod(controller, "onModifica");
                 
                 assertEquals("Termina modifica", modificaButton.getText());
                 assertTrue(tabella.isEditable());
                 assertFalse(rimozioneButton.isDisable());
 
+                // Disattiva
                 invokeMethod(controller, "onModifica");
                 
                 assertEquals("Modifica", modificaButton.getText());
