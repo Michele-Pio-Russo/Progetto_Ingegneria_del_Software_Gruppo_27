@@ -12,7 +12,7 @@ import javafx.scene.Scene;
 /**
  * @file MainController.java
  * @brief Controller principale per la gestione del menu iniziale della libreria.
- * * Questa classe gestisce la navigazione tra le varie sezioni dell'applicazione
+ * Questa classe gestisce la navigazione tra le varie sezioni dell'applicazione
  * (Utenti, Libri, Prestiti) cambiando la scena visualizzata sullo stage principale.
  */
 public class MainController implements Initializable {
@@ -37,8 +37,11 @@ public class MainController implements Initializable {
 
     /**
      * @brief Metodo di inizializzazione chiamato automaticamente da JavaFX.
-     * * @param url L'URL utilizzato per risolvere i percorsi relativi all'oggetto radice, o null se non noto.
-     * @param rb Il ResourceBundle utilizzato per localizzare l'oggetto radice, o null se non localizzato.
+     * 
+     * @param[in] url L'URL utilizzato per risolvere i percorsi relativi all'oggetto radice, o null se non noto.
+     * @param[in] rb Il ResourceBundle utilizzato per localizzare l'oggetto radice, o null se non localizzato.
+     * 
+     * @return void
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -47,12 +50,15 @@ public class MainController implements Initializable {
 
     /**
      * @brief Collega lo stage principale e le scene delle sottosezioni al controller.
-     * * Questo metodo permette al MainController di avere i riferimenti necessari
+     * Questo metodo permette al MainController di avere i riferimenti necessari
      * per effettuare il cambio di scena (navigazione) quando vengono premuti i bottoni.
-     * * @param main Lo stage principale dell'applicazione.
-     * @param utente La scena pre-caricata per la gestione utenti.
-     * @param libro La scena pre-caricata per la gestione libri.
-     * @param prestito La scena pre-caricata per la gestione prestiti.
+     * 
+     * @param[in] main Lo stage principale dell'applicazione.
+     * @param[in] utente La scena pre-caricata per la gestione utenti.
+     * @param[in] libro La scena pre-caricata per la gestione libri.
+     * @param[in] prestito La scena pre-caricata per la gestione prestiti
+     * 
+     * @return void
      */
     public void associaStage(Stage main, Scene utente, Scene libro, Scene prestito) {
         this.mainStage = main;
@@ -63,7 +69,10 @@ public class MainController implements Initializable {
 
     /**
      * @brief Gestisce il click sul bottone 'Gestione Utenti'.
-     * * Cambia la scena attuale dello stage principale visualizzando l'interfaccia Utenti.
+     * Cambia la scena attuale dello stage principale visualizzando l'interfaccia Utenti.
+     * 
+     * 
+     * @return void
      */
     @FXML
     private void onUtentiClicked() {
@@ -74,7 +83,9 @@ public class MainController implements Initializable {
 
     /**
      * @brief Gestisce il click sul bottone 'Gestione Libri'.
-     * * Cambia la scena attuale dello stage principale visualizzando l'interfaccia Libri.
+     * Cambia la scena attuale dello stage principale visualizzando l'interfaccia Libri.
+     * 
+     * @return void
      */
     @FXML
     private void onLibriClicked() {
@@ -85,7 +96,9 @@ public class MainController implements Initializable {
 
     /**
      * @brief Gestisce il click sul bottone 'Gestione Prestiti'.
-     * * Cambia la scena attuale dello stage principale visualizzando l'interfaccia Prestiti.
+     * Cambia la scena attuale dello stage principale visualizzando l'interfaccia Prestiti.
+     * 
+     * @return void
      */
     @FXML
     private void onPrestitiClicked() {
@@ -96,8 +109,10 @@ public class MainController implements Initializable {
 
     /**
      * @brief Gestisce il click sul bottone 'Esci'.
-     * * Esegue le operazioni di chiusura, come il salvataggio dei dati (se implementato)
+     * Esegue le operazioni di chiusura, come il salvataggio dei dati (se implementato)
      * e termina l'esecuzione dell'applicazione.
+     * 
+     * @return void
      */
     @FXML
     private void onEsci() {

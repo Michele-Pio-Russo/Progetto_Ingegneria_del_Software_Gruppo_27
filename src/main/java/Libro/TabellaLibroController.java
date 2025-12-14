@@ -120,7 +120,7 @@ public class TabellaLibroController {
      *
      * Configura le 'cell value factories' per collegare le colonne agli attributi
      * della classe Libro
-     * * @pre Gli elementi da inizializzare devono corrispondere a quelli presenti in TabellaLibroView
+     * @pre Gli elementi da inizializzare devono corrispondere a quelli presenti in TabellaLibroView
      * @post Gli elementi sono stati inizializzati con successo
      *
      * @return void
