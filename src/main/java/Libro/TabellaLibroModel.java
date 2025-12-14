@@ -124,7 +124,7 @@ public class TabellaLibroModel {
      */
      public void caricaDaBinario() throws IOException, ClassNotFoundException {
         File file = new File(FILE_BINARIO);
-        if (!file.exists()) {
+        if (!file.exists() || file.length() == 0) {
             throw new FileNotFoundException("File binario non trovato: " + FILE_BINARIO);
         }
 
@@ -141,4 +141,3 @@ public class TabellaLibroModel {
         }
     }
 }
-

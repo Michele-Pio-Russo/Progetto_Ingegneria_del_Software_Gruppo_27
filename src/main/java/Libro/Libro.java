@@ -213,7 +213,8 @@ public class Libro implements Serializable{
  * e stato di usura del libro
  */
     
-    
+  
+  
     /**
  * @brief Controlla l'uguaglianza dell'oggetto passato con questo
  * 
