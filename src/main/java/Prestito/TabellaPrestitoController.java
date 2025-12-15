@@ -95,11 +95,20 @@ public class TabellaPrestitoController {
     @FXML
     private TableColumn<Prestito, String> cognomeCol; ///@brief Colonna che contiene il prezzo dei libri associati ai prestiti
 
+    @FXML
     private TabellaPrestitoModel tabellaPrestitoModel; ///@brief Model associato al controller, gestisce la logica dei dati dei prestiti
-    private Scene scenaPrincipale;
-    private Stage principale;
-    private TabellaLibroModel tabellaLibroModel;
-    private TabellaUtenteModel tabellaUtenteModel;
+    
+    @FXML
+    private Scene scenaPrincipale; ///@brief Scena iniziale dell'applicazione
+    
+    @FXML
+    private Stage principale; ///@brief Stage unico dell'applicazione
+    
+    @FXML
+    private TabellaLibroModel tabellaLibroModel; ///@brief Model associato al controller di libro
+    
+    @FXML
+    private TabellaUtenteModel tabellaUtenteModel;///@brief Model associato al controller di utente
     
     /**
      * @brief Metodo di inizializzazione chiamato automaticamente dal JavaFX Loader

@@ -98,11 +98,13 @@
         @FXML
         private TableColumn<Utente, Integer> libriInPrestitoCol; ///@brief Colonna che contiene il numero dei libri in prestito associato ad ogni utente che è stato iscritto
 
-        private TabellaUtenteModel tabellaUtenteModel; ///@brief Model associato al cotroller
+        private TabellaUtenteModel tabellaUtenteModel; ///@brief Model associato al controller
 
         private Stage principale;///@brief Stage unico dell'applicazione
 
         private Scene scenaPrincipale;///@brief Scena iniziale dell'applicazione
+        
+        
         /**
         * @brief Metodo di inizializzazione chiamato automaticamente dal JavaFX Loader
         *
