@@ -90,19 +90,19 @@ class TabellaLibroControllerTest {
         tabella = new TableView<>();
         cercaField = new TextField();
 
-        setPrivateField("aggiuntaLib", aggiuntaLib);
-        setPrivateField("titolo", titolo);
-        setPrivateField("autore", autore);
-        setPrivateField("isbn", isbn);
-        setPrivateField("prezzo", prezzo);
-        setPrivateField("usura", usura);
-        setPrivateField("annoPubblicazione", annoPubblicazione);
-        setPrivateField("copie", copie);
-        setPrivateField("searchType", searchType);
-        setPrivateField("modifica", modifica);
-        setPrivateField("rimozione", rimozione);
-        setPrivateField("tabella", tabella);
-        setPrivateField("cercaField", cercaField);
+        impostaCampiPrivati("aggiuntaLib", aggiuntaLib);
+        impostaCampiPrivati("titolo", titolo);
+        impostaCampiPrivati("autore", autore);
+        impostaCampiPrivati("isbn", isbn);
+        impostaCampiPrivati("prezzo", prezzo);
+        impostaCampiPrivati("usura", usura);
+        impostaCampiPrivati("annoPubblicazione", annoPubblicazione);
+        impostaCampiPrivati("copie", copie);
+        impostaCampiPrivati("searchType", searchType);
+        impostaCampiPrivati("modifica", modifica);
+        impostaCampiPrivati("rimozione", rimozione);
+        impostaCampiPrivati("tabella", tabella);
+        impostaCampiPrivati("cercaField", cercaField);
     }
 
     /**
@@ -117,7 +117,7 @@ class TabellaLibroControllerTest {
      * 
      * @return void
      */
-    private void setPrivateField(String name, Object obj) throws Exception {
+    private void impostaCampiPrivati(String name, Object obj) throws Exception {
         Field f = TabellaLibroController.class.getDeclaredField(name);
         f.setAccessible(true);
         f.set(controller, obj);
@@ -132,7 +132,7 @@ class TabellaLibroControllerTest {
      * @param[in] name Nome del metodo privato da invocare.
      * @return void
      */
-    private void callPrivateMethod(String name) throws Exception {
+    private void chiamaMetodiProvati(String name) throws Exception {
         Method m = TabellaLibroController.class.getDeclaredMethod(name);
         m.setAccessible(true);
         m.invoke(controller);
@@ -166,7 +166,7 @@ class TabellaLibroControllerTest {
         aggiuntaLib.setDisable(true);
         titolo.setDisable(true);
         
-        callPrivateMethod("onAggiungi");
+        chiamaMetodiProvati("onAggiungi");
         
         assertFalse(aggiuntaLib.isDisable());
         assertFalse(titolo.isDisable());
@@ -185,13 +185,13 @@ class TabellaLibroControllerTest {
     @Test
     void testRicercaButtonChange() throws Exception {
         searchType.setText("T");
-        callPrivateMethod("onCambio");
+        chiamaMetodiProvati("onCambio");
         assertEquals("A", searchType.getText());
         
-        callPrivateMethod("onCambio");
+        chiamaMetodiProvati("onCambio");
         assertEquals("I", searchType.getText());
         
-        callPrivateMethod("onCambio");
+        chiamaMetodiProvati("onCambio");
         assertEquals("T", searchType.getText());
     }
 
@@ -209,13 +209,13 @@ class TabellaLibroControllerTest {
         rimozione.setDisable(true);
         tabella.setEditable(false);
         
-        callPrivateMethod("onModifica");
+        chiamaMetodiProvati("onModifica");
         
         assertEquals("Termina modifica", modifica.getText());
         assertFalse(rimozione.isDisable());
         assertTrue(tabella.isEditable());
         
-        callPrivateMethod("onModifica");
+        chiamaMetodiProvati("onModifica");
         
         assertEquals("Modifica", modifica.getText());
         assertTrue(rimozione.isDisable());
@@ -235,7 +235,7 @@ class TabellaLibroControllerTest {
         controller.setModel(model, stage, scene);
         
         cercaField.setText("Qualcosa");
-        callPrivateMethod("onCancellaCerca");
+        chiamaMetodiProvati("onCancellaCerca");
         
         assertEquals("", cercaField.getText());
     }

@@ -17,30 +17,30 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import java.time.LocalDate;
 
-
 public class TabellaPrestitoModelTest {
     
     private TabellaPrestitoModel model; /// @brief Istanza del modello da testare
-    private final String FILE_BINARIO = "prestiti.bin"; /// @brief Nome del file per il test di persistenza
+    private final String FILE_BINARIO = "prestiti.bin"; /// @brief Nome del file binario per il test di persistenza
 
-    private final String NOME_UTENTE = "Mario";
-    private final String COGNOME_UTENTE = "Rossi";
-    private final String MATRICOLA_UTENTE = "M111";
-    private final String EMAIL_UTENTE = "m.r@mail.it";
-    private final LocalDate ISCRIZIONE_UTENTE = LocalDate.of(2024, 1, 1);
+    // Costanti per i dati di test
+    private final String NOME_UTENTE = "Mario";         /// @brief Nome dell'utente di test
+    private final String COGNOME_UTENTE = "Rossi";      /// @brief Cognome dell'utente di test
+    private final String MATRICOLA_UTENTE = "M111";     /// @brief Matricola dell'utente di test
+    private final String EMAIL_UTENTE = "m.r@mail.it";  /// @brief Email dell'utente di test
+    private final LocalDate ISCRIZIONE_UTENTE = LocalDate.of(2024, 1, 1); /// @brief Data iscrizione utente
     
-    private final String TITOLO_LIBRO = "Test Book";
-    private final String AUTORE_LIBRO = "Test Author";
-    private final String ISBN_LIBRO = "978-1111111111";
-    private final int ANNO_LIBRO = 2020;
-    private final double PREZZO_LIBRO = 25.00;
-    private final String USURA_LIBRO = "Nuovo";
-    private final int COPIE_LIBRO = 3;
+    private final String TITOLO_LIBRO = "Test Book";      /// @brief Titolo del libro di test
+    private final String AUTORE_LIBRO = "Test Author";    /// @brief Autore del libro di test
+    private final String ISBN_LIBRO = "978-1111111111";   /// @brief ISBN del libro di test
+    private final int ANNO_LIBRO = 2020;                  /// @brief Anno pubblicazione libro
+    private final double PREZZO_LIBRO = 25.00;            /// @brief Prezzo libro
+    private final String USURA_LIBRO = "Nuovo";           /// @brief Stato usura libro
+    private final int COPIE_LIBRO = 3;                    /// @brief Numero copie libro
     
-    private Utente utenteTest;
-    private Libro libroTest;
-    private Prestito prestitoTest;
-    private LocalDate dataScadenzaTest;
+    private Utente utenteTest;        /// @brief Oggetto Utente di supporto per i test
+    private Libro libroTest;          /// @brief Oggetto Libro di supporto per i test
+    private Prestito prestitoTest;    /// @brief Oggetto Prestito di supporto per i test
+    private LocalDate dataScadenzaTest; /// @brief Data di scadenza per il prestito di test
 
     /**
      * @brief Configurazione dell'ambiente prima di ogni test
@@ -69,7 +69,8 @@ public class TabellaPrestitoModelTest {
     /**
      * @brief Pulizia dell'ambiente dopo ogni test
      *
-     * Rimuove il file binario creato durante l'esecuzione del test.
+     * Rimuove il file binario creato durante l'esecuzione del test per garantire
+     * l'idempotenza delle esecuzioni successive.
      *
      * @pre Il test è terminato
      * @post Il file di salvataggio viene eliminato
@@ -84,7 +85,9 @@ public class TabellaPrestitoModelTest {
     /**
      * @brief Metodo helper privato per eliminare il file binario
      *
-     * @pre Nessuna
+     * Controlla l'esistenza del file e, se presente, lo cancella.
+     *
+     * @pre Nessuna condizione specifica
      * @post Se il file esisteva, viene cancellato
      *
      * @return void
@@ -99,10 +102,11 @@ public class TabellaPrestitoModelTest {
     /**
      * @brief Test del metodo getter per la lista dei prestiti
      *
-     * Verifica che la lista restituita sia valida (non nulla) e inizialmente vuota.
+     * Verifica che la lista restituita sia valida (non nulla) e inizialmente vuota
+     * appena creato il modello.
      *
      * @pre Il modello è appena stato istanziato
-     * @post Ritorna una ObservableList vuota
+     * @post Ritorna una ObservableList non nulla e vuota
      *
      * @return void
      */
@@ -120,7 +124,7 @@ public class TabellaPrestitoModelTest {
      * @brief Test per l'aggiunta di un nuovo prestito
      *
      * Verifica che l'aggiunta incrementi la dimensione della lista e che l'elemento
-     * sia effettivamente presente.
+     * aggiunto sia effettivamente presente nella collezione.
      *
      * @pre La lista ha una dimensione N
      * @post La lista ha dimensione N+1 e contiene il nuovo prestito
@@ -138,6 +142,7 @@ public class TabellaPrestitoModelTest {
         assertEquals(sizeIniziale + 1, model.getPrestiti().size());
         assertTrue(model.getPrestiti().contains(prestitoTest));
         
+        // Test aggiunta secondo elemento
         Prestito prestitoDuplicato = new Prestito(utenteTest, libroTest, dataScadenzaTest.plusDays(1));
         model.aggiungiPrestito(utenteTest, libroTest, dataScadenzaTest.plusDays(1));
         assertEquals(sizeIniziale + 2, model.getPrestiti().size());
@@ -146,7 +151,8 @@ public class TabellaPrestitoModelTest {
     /**
      * @brief Test per la rimozione di un prestito esistente
      *
-     * Verifica che la rimozione decrementi la dimensione della lista e che l'elemento non sia più presente.
+     * Verifica che la rimozione decrementi la dimensione della lista e che l'elemento
+     * specificato non sia più presente nella collezione.
      *
      * @pre La lista contiene il prestito da rimuovere
      * @post Il prestito è rimosso e la dimensione della lista diminuisce di 1
@@ -171,10 +177,11 @@ public class TabellaPrestitoModelTest {
     /**
      * @brief Test della persistenza dei dati (Salvataggio e Caricamento)
      *
-     * Verifica che i prestiti salvati su file vengano correttamente ricaricati da una nuova istanza del modello.
+     * Verifica che i prestiti salvati su file binario vengano correttamente
+     * ricaricati da una nuova istanza del modello, mantenendo l'integrità dei dati.
      *
      * @pre Il modello contiene dei prestiti e viene invocato il salvataggio
-     * @post Una nuova istanza del modello carica correttamente i dati dal file
+     * @post Una nuova istanza del modello carica correttamente i dati dal file creato
      *
      * @return void
      */
@@ -206,7 +213,7 @@ public class TabellaPrestitoModelTest {
      * @brief Test del comportamento del costruttore in assenza di file di salvataggio
      *
      * Verifica che il modello venga inizializzato correttamente (con lista vuota)
-     * anche se il file binario non esiste.
+     * anche se il file binario non esiste, senza lanciare eccezioni.
      *
      * @pre Il file binario non esiste
      * @post Il modello è inizializzato senza errori e con lista vuota

@@ -101,10 +101,12 @@ public class TabellaPrestitoControllerTest {
         utenteModel = new TabellaUtenteModel();
         libroModel = new TabellaLibroModel();
         
+        // Pulizia dei model per garantire l'isolamento dei test
         if (prestitoModel.getPrestiti() != null) prestitoModel.getPrestiti().clear();
         if (utenteModel.getPersone() != null) utenteModel.getPersone().clear();
         if (libroModel.getLibri() != null) libroModel.getLibri().clear();
 
+        // Inizializzazione Componenti UI
         nomeField = new TextField();
         cognomeField = new TextField();
         titoloField = new TextField();
@@ -125,6 +127,7 @@ public class TabellaPrestitoControllerTest {
         
         tabella = new TableView<>();
 
+        // Injection via Reflection
         injectField(controller, "nome", nomeField);
         injectField(controller, "cognome", cognomeField);
         injectField(controller, "titolo", titoloField);
@@ -142,6 +145,7 @@ public class TabellaPrestitoControllerTest {
         injectField(controller, "cerca", cercaButton);
         injectField(controller, "tabella", tabella);
 
+        // Injection delle colonne
         injectField(controller, "nomeCol", new TableColumn<Prestito, String>());
         injectField(controller, "cognomeCol", new TableColumn<Prestito, String>());
         injectField(controller, "titoloCol", new TableColumn<Prestito, String>());
@@ -243,8 +247,8 @@ public class TabellaPrestitoControllerTest {
 
         Platform.runLater(() -> {
             try {
+                // Creiamo Utente e Libro che matchano quelli attesi dalla logica interna del controller
                 Utente utenteTest = new Utente("Mario", "Rossi", "M01", "email", LocalDate.parse("2000-10-10"));
-                
                 Libro libroTest = new Libro("Java", "Autore", "12345", 0, 0, "", 0);
                 
                 utenteModel.getPersone().add(utenteTest);
@@ -255,6 +259,7 @@ public class TabellaPrestitoControllerTest {
                 titoloField.setText("Java");
                 isbnField.setText("12345");
                 
+                // Impostiamo una data futura
                 LocalDate dataFutura = LocalDate.now().plusDays(30);
                 scadenzaField.setText(dataFutura.toString());
                 
