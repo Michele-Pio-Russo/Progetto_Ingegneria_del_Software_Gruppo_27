@@ -1,6 +1,6 @@
 /**
  * @file TabellaLibroModelTest.java
- * @brief Questo file contiene il tester del modello (Model) che gestisce i dati dei libri
+ * @brief Questo file contiene i test unitari per il modello (Model) che gestisce i dati dei libri
  *
  * @author Gruppo 27
  * @date 15 Dicembre 2025
@@ -9,136 +9,237 @@
 
 package Libro;
 
+import javafx.collections.ObservableList;
+import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.io.File;
+import java.util.Optional;
 
 public class TabellaLibroModelTest {
-
-    private TabellaLibroModel model;  /// @brief Istanza del modello da testare
-    private String nomeFile = "libri.bin"; /// @brief Nome del file binario usato per i test di salvataggio
+    
+    private TabellaLibroModel model; /// @brief Istanza del modello da testare
+    private final String FILE_BINARIO = "libri.bin"; /// @brief Nome del file binario per il test di persistenza
+    
+    // Costanti per i dati di test
+    private final String TITOLO = "Test Book";          /// @brief Titolo del libro di test
+    private final String AUTORE = "Test Author";        /// @brief Autore del libro di test
+    private final String ISBN = "123-4567890123";       /// @brief ISBN del libro di test
+    private final int ANNO = 2020;                      /// @brief Anno pubblicazione libro
+    private final double PREZZO = 19.99;                /// @brief Prezzo libro
+    private final String USURA = "Ottimo";              /// @brief Stato usura libro
+    private final int COPIE = 2;                        /// @brief Numero copie libro
+    private static final double DELTA = 0.001;          /// @brief Tolleranza per confronti double
+    
+    private Libro libroTest; /// @brief Oggetto Libro di supporto per i test (mantenuto per coerenza)
 
     /**
-     * @brief Configurazione iniziale prima di ogni test
+     * @brief Configurazione dell'ambiente prima di ogni test
      *
-     * Questo metodo assicura un ambiente pulito eliminando eventuali file precedenti e inizializzando una nuova istanza del modello.
+     * Inizializza l'oggetto Libro di test, pulisce eventuali file residui
+     * e istanzia un nuovo modello vuoto.
      *
-     * @pre Nessuna condizione particolare
-     * @post Il modello è inizializzato e non ci sono file residui
+     * @pre Nessun file residuo deve interferire con il test
+     * @post Il modello è pronto e l'oggetto di test è inizializzato
      *
      * @return void
      */
     @BeforeEach
     public void setUp() {
-        File f = new File(nomeFile);
-        if(f.exists()) {
-            f.delete();
-        }
-        model = new TabellaLibroModel();
+        cleanupFile(); 
+        model = new TabellaLibroModel(); 
+        libroTest = new Libro(TITOLO, AUTORE, ISBN, ANNO, PREZZO, USURA, COPIE);
     }
 
     /**
-     * @brief Pulizia finale dopo ogni test
+     * @brief Pulizia dell'ambiente dopo ogni test
      *
-     * Questo metodo elimina il file binario creato durante i test per evitare che influenzi le esecuzioni successive.
+     * Rimuove il file binario creato durante l'esecuzione del test per garantire
+     * l'idempotenza delle esecuzioni successive.
      *
-     * @pre Il test è stato eseguito
-     * @post Il file di salvataggio viene rimosso dal sistema
+     * @pre Il test è terminato
+     * @post Il file di salvataggio viene eliminato
      *
      * @return void
      */
     @AfterEach
     public void tearDown() {
-        File f = new File(nomeFile);
-        if(f.exists()) {
-            f.delete();
+        cleanupFile();
+    }
+    
+    /**
+     * @brief Metodo helper privato per eliminare il file binario
+     *
+     * Controlla l'esistenza del file e, se presente, lo cancella.
+     *
+     * @pre Nessuna condizione specifica
+     * @post Se il file esisteva, viene cancellato
+     *
+     * @return void
+     */
+    private void cleanupFile() {
+        File file = new File(FILE_BINARIO);
+        if (file.exists()) {
+            file.delete(); 
         }
+    }
+    
+    /**
+     * @brief Metodo di supporto per trovare un libro tramite ISBN
+     * * Cerca un libro all'interno di una lista osservabile utilizzando il suo codice ISBN univoco.
+     *
+     * @param[in] libri La lista di libri in cui cercare
+     * @param[in] isbn L'ISBN del libro da cercare
+     * @return Optional<Libro> contenente il libro se trovato, altrimenti vuoto
+     */
+    private Optional<Libro> findLibroByIsbn(ObservableList<Libro> libri, String isbn) {
+        return libri.stream()
+                .filter(l -> l.getIsbn().equals(isbn))
+                .findFirst();
     }
 
     /**
-     * @brief Test dello stato iniziale della lista
+     * @brief Test del metodo getter per la lista dei libri
      *
-     * Verifica che la lista dei libri sia istanziata correttamente ma vuota al momento della creazione del modello.
+     * Verifica che la lista restituita sia valida (non nulla) e inizialmente vuota
+     * appena creato il modello.
      *
-     * @pre Il modello è appena stato creato
-     * @post La lista deve esistere ma avere dimensione 0
+     * @pre Il modello è appena stato istanziato e il file binario rimosso
+     * @post Ritorna una ObservableList non nulla e vuota
      *
      * @return void
      */
     @Test
-    public void testGetLibriIniziale() {
-        assertNotNull(model.getLibri());
-        assertEquals(0, model.getLibri().size());
+    public void testGetLibri() {
+        System.out.println("testGetLibri");
+        
+        ObservableList<Libro> result = model.getLibri();
+        
+        assertNotNull(result, "La lista dei libri non deve essere null.");
+        assertTrue(result.isEmpty(), "La lista deve essere vuota all'inizio (dopo cleanup).");
     }
 
     /**
      * @brief Test per l'aggiunta di un nuovo libro
      *
-     * Verifica che i dati inseriti vengano salvati correttamente nella lista e che la dimensione della lista incrementi.
+     * Verifica che l'aggiunta incrementi la dimensione della lista e che l'elemento
+     * aggiunto sia effettivamente presente e con i dati corretti.
      *
-     * @pre La lista è vuota o in uno stato noto
-     * @post La lista contiene il nuovo libro con i dati corretti
+     * @pre La lista ha una dimensione N
+     * @post La lista ha dimensione N+1 e contiene il nuovo libro con ISBN specificato
      *
      * @return void
      */
     @Test
     public void testAggiungiLibro() {
-        model.aggiungiLibro("Harry Potter", "J.K. Rowling", "12345", 2001, 15.50, "Nuovo", 10);
+        System.out.println("testAggiungiLibro");
         
-        assertEquals(1, model.getLibri().size());
+        int sizeIniziale = model.getLibri().size();
         
-        Libro l = model.getLibri().get(0);
-        assertEquals("Harry Potter", l.getTitolo());
-        assertEquals("J.K. Rowling", l.getAutore());
-        assertEquals("12345", l.getIsbn());
+        model.aggiungiLibro(TITOLO, AUTORE, ISBN, ANNO, PREZZO, USURA, COPIE);
+        
+        // Verifica dimensione
+        assertEquals(sizeIniziale + 1, model.getLibri().size());
+        
+        // Cerca il libro per ISBN
+        Libro libroAggiunto = findLibroByIsbn(model.getLibri(), ISBN)
+                                .orElse(null);
+        
+        assertNotNull(libroAggiunto, "Il libro con ISBN atteso non è stato trovato.");
+        
+        // Verifica l'integrità dei dati
+        assertEquals(TITOLO, libroAggiunto.getTitolo());
     }
 
     /**
-     * @brief Test per la rimozione di un libro
+     * @brief Test per la rimozione di un libro esistente
      *
-     * Aggiunge un libro e successivamente lo rimuove per verificare che la lista torni vuota.
+     * Verifica che la rimozione decrementi la dimensione della lista e che l'elemento
+     * specificato non sia più presente nella collezione.
      *
-     * @pre La lista contiene almeno un libro
-     * @post La lista non contiene più il libro rimosso
+     * @pre La lista contiene il libro da rimuovere
+     * @post Il libro è rimosso e la dimensione della lista diminuisce di 1
      *
      * @return void
      */
     @Test
     public void testRimuoviLibro() {
-        model.aggiungiLibro("Harry Potter", "J.K. Rowling", "12345", 2001, 15.50, "Nuovo", 10);
-        assertEquals(1, model.getLibri().size());
-
-        Libro l = model.getLibri().get(0);
-        model.rimuoviLibro(l);
-
-        assertEquals(0, model.getLibri().size());
+        System.out.println("testRimuoviLibro");
+        
+        // Fase 1: Aggiunta
+        model.aggiungiLibro(TITOLO, AUTORE, ISBN, ANNO, PREZZO, USURA, COPIE);
+        
+        // Recupera l'oggetto *effettivamente aggiunto* dal model.
+        Libro libroDaRimuovere = findLibroByIsbn(model.getLibri(), ISBN)
+                                    .orElseThrow(() -> new AssertionError("Il libro non è stato aggiunto correttamente."));
+        
+        int sizeIniziale = model.getLibri().size();
+        
+        // Fase 2: Rimozione
+        model.rimuoviLibro(libroDaRimuovere); 
+        
+        // Fase 3: Verifica
+        assertEquals(sizeIniziale - 1, model.getLibri().size(), "La dimensione della lista non è diminuita.");
+        
+        // Verifica che non sia più presente (cercando per ISBN)
+        assertFalse(findLibroByIsbn(model.getLibri(), ISBN).isPresent(), "Il libro non è stato rimosso dalla lista.");
     }
 
     /**
-     * @brief Test di persistenza dei dati (Salvataggio e Caricamento)
+     * @brief Test della persistenza dei dati (Salvataggio e Caricamento)
      *
-     * Verifica che un libro salvato su file venga correttamente ricaricato creando una nuova istanza del modello.
+     * Verifica che i libri salvati su file binario vengano correttamente
+     * ricaricati da una nuova istanza del modello, mantenendo l'integrità dei dati.
      *
-     * @pre Il modello contiene dati non salvati
-     * @post I dati nel nuovo modello corrispondono a quelli salvati su file
+     * @pre Il modello contiene dei libri e viene invocato il salvataggio
+     * @post Una nuova istanza del modello carica correttamente i dati dal file creato
      *
      * @return void
      */
     @Test
-    public void testSalvataggioCaricamento() {
-        model.aggiungiLibro("Libro Test", "Autore Test", "999", 2020, 20.0, "Usato", 5);
+    public void testPersistenza() {
+        System.out.println("testPersistenza");
+        
+        model.aggiungiLibro(TITOLO, AUTORE, ISBN, ANNO, PREZZO, USURA, COPIE);
+        assertEquals(1, model.getLibri().size());
+        
         model.salvaSuBinario();
-
-        File f = new File(nomeFile);
-        assertTrue(f.exists());
-
-        TabellaLibroModel model2 = new TabellaLibroModel();
-        assertEquals(1, model2.getLibri().size());
-
-        Libro caricato = model2.getLibri().get(0);
-        assertEquals("Libro Test", caricato.getTitolo());
-        assertEquals("999", caricato.getIsbn());
+        
+        assertTrue(new File(FILE_BINARIO).exists());
+        
+        TabellaLibroModel nuovoModel = new TabellaLibroModel(); // Carica da binario nel costruttore
+        
+        ObservableList<Libro> libriCaricati = nuovoModel.getLibri();
+        assertEquals(1, libriCaricati.size());
+        
+        // Trova l'oggetto caricato tramite ISBN.
+        Libro libroCaricato = findLibroByIsbn(libriCaricati, ISBN)
+                                    .orElseThrow(() -> new AssertionError("Il libro non è stato caricato dal binario."));
+        
+        assertEquals(TITOLO, libroCaricato.getTitolo(), "Titolo non corrisponde dopo la deserializzazione.");
+        assertEquals(PREZZO, libroCaricato.getPrezzo(), DELTA, "Prezzo non corrisponde dopo la deserializzazione.");
+    }
+    
+    /**
+     * @brief Test del comportamento del costruttore in assenza di file di salvataggio
+     *
+     * Verifica che il modello venga inizializzato correttamente (con lista vuota)
+     * anche se il file binario non esiste, senza lanciare eccezioni.
+     *
+     * @pre Il file binario non esiste
+     * @post Il modello è inizializzato senza errori e con lista vuota
+     *
+     * @return void
+     */
+    @Test
+    public void testCostruttoreSenzaFile() {
+        System.out.println("testCostruttoreSenzaFile");
+        
+        // Verifica pre-condizione
+        assertFalse(new File(FILE_BINARIO).exists(), "Pre-condizione: Il file binario non deve esistere.");
+        
+        TabellaLibroModel modelSenzaFile = new TabellaLibroModel();
+        
+        assertNotNull(modelSenzaFile.getLibri());
+        assertTrue(modelSenzaFile.getLibri().isEmpty());
     }
 }

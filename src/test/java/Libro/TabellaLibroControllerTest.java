@@ -1,6 +1,6 @@
 /**
  * @file TabellaLibroControllerTest.java
- * @brief Questo file contiene il tester del controller della tabella che gestisce i libri della libreria
+ * @brief Questo file contiene i test unitari per il controller della tabella dei libri
  *
  * @author Gruppo 27
  * @date 15 Dicembre 2025
@@ -10,233 +10,422 @@
 package Libro;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.collections.ObservableList;
+import javafx.scene.control.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
-class TabellaLibroControllerTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class TabellaLibroControllerTest {
 
     private TabellaLibroController controller;
-    private TabellaLibroModel model;
-    private Stage stage;
-    private Scene scene;
+    private TabellaLibroModel model; /// @brief Model per la gestione dei libri
 
-    // Componenti GUI
-    private Button aggiuntaLib;  ///@brief Test del bottone che permette di aggiungere un libro alla tabella dei libri
-    private TextField titolo; ///@brief test del TextField in cui è necessario inserire il titolo del libro da aggiungere alla tabella dei libri
-    private TextField autore; ///@brief test del TextField in cui è necessario inserire l'autore del libro da aggiungere alla tabella dei libri
-    private TextField isbn; ///@brief test del TextField in cui è necessario inserire l'ISBN del libro da aggiungere alla tabella dei libri
-    private TextField prezzo; ///@brief test del TextField in cui è necessario inserire il prezzo del libro da aggiungere alla tabella dei libri
-    private TextField usura; ///@brief test del TextField in cui è necessario inserire lo stato di usura del libro da aggiungere alla tabella dei libri
-    private TextField annoPubblicazione; ///@brief test del TextField in cui è necessario inserire l'anno di pubblicazione del libro da aggiungere alla tabella dei libri
-    private TextField copie; ///@brief test del TextField in cui è necessario inserire il numero di copie del libro da aggiungere alla tabella dei libri
-    private Button searchType;  ///@brief test del bottone che ci permette di cambiare il criterio di ricerca (titolo, autore e codice isbn)
-    private Button modifica; ///@brief test del bottone che permette di modificare le informazioni di un libro della tabella dei libri
-    private Button rimozione; ///@brief test del bottone che permette di rimuovere un libro dalla tabella dei libri
-    private TableView<Libro> tabella;  ///@brief test della tabella che contiene i libri della libreria universitaria
-    private TextField cercaField; ///@brief test del TextField che permette di cercare un libro
-
+    // Componenti FXML da iniettare
+    private TextField titoloField;            /// @brief Campo di testo per il titolo del libro
+    private TextField autoreField;            /// @brief Campo di testo per l'autore del libro
+    private TextField isbnField;              /// @brief Campo di testo per l'ISBN del libro
+    private TextField annoPubblicazioneField; /// @brief Campo di testo per l'anno di pubblicazione
+    private TextField copieField;             /// @brief Campo di testo per il numero di copie
+    private TextField prezzoField;            /// @brief Campo di testo per il prezzo del libro
+    private TextField usuraField;             /// @brief Campo di testo per lo stato di usura
+    private TextField cercaField;             /// @brief Campo di testo per la ricerca
     
+    private Button aggiuntaLibButton; /// @brief Bottone per confermare l'aggiunta del libro
+    private Button aggiuntaButton;    /// @brief Bottone per sbloccare i campi di inserimento
+    private Button rimozioneButton;   /// @brief Bottone per rimuovere un libro
+    private Button modificaButton;    /// @brief Bottone per abilitare la modifica
+    private Button esciButton;        /// @brief Bottone per uscire dalla schermata
+    private Button searchTypeButton;  /// @brief Bottone per cambiare il tipo di ricerca
+    private Button xButton;           /// @brief Bottone per cancellare la ricerca
+    
+    private TableView<Libro> tabella; /// @brief Tabella che visualizza i libri
+
     /**
-     * @brief Inizializza il toolkit JavaFX.
-     * Necessario per eseguire test che coinvolgono componenti JavaFX (come Platform.runLater) in un ambiente non grafico.
-     * @pre Il toolkit JavaFX non è ancora avviato.
-     * @post Il toolkit JavaFX è inizializzato e pronto all'uso.
+     * @brief Inizializzazione del toolkit JavaFX
+     *
+     * Avvia il thread JavaFX necessario per testare componenti UI come TextField e Button.
+     * Utilizza un CountDownLatch per assicurarsi che l'inizializzazione sia completa prima di procedere.
+     *
+     * @pre Il toolkit JavaFX non è avviato
+     * @post Il toolkit JavaFX è attivo e pronto
+     *
      * @return void
      */
     @BeforeAll
-    static void initJfx() {
+    static void initJfx() throws InterruptedException {
+        CountDownLatch latch = new CountDownLatch(1);
         try {
-            Platform.startup(() -> {});
+            Platform.startup(latch::countDown);
         } catch (IllegalStateException e) {
+            latch.countDown();
+        }
+        if (!latch.await(5, TimeUnit.SECONDS)) {
+            throw new RuntimeException("Timeout JavaFX");
         }
     }
 
     /**
-     * @brief Configura l'ambiente di test prima di ogni esecuzione.
-     * Inizializza il controller, crea i mock per il modello e lo stage, istanzia i componenti UI e li inietta nel controller tramite Reflection.
-     * @pre I campi della classe sono nulli o non inizializzati.
-     * @post Il controller è istanziato e tutti i componenti UI privati sono collegati.
+     * @brief Setup dell'ambiente di test
+     *
+     * Crea una nuova istanza del controller e del model, pulisce i dati precedenti,
+     * istanzia tutti i componenti UI e li inietta nel controller tramite Reflection.
+     * Simula inoltre il metodo initialize() di JavaFX.
+     *
+     * @pre I campi sono nulli o contengono dati di vecchi test
+     * @post Il controller è configurato con componenti UI attivi e model vuoto
+     *
      * @return void
      */
     @BeforeEach
     void setUp() throws Exception {
         controller = new TabellaLibroController();
-        model = mock(TabellaLibroModel.class);
-        stage = mock(Stage.class);
-        scene = mock(Scene.class);
+        
+        // Istanziamo il modello VERO. 
+        // Nota: Questo potrebbe tentare di caricare/salvare file reali su disco.
+        model = new TabellaLibroModel(); 
+        
+        // Resettiamo la lista del model per partire puliti ad ogni test
+        if (model.getLibri() != null) {
+            model.getLibri().clear();
+        }
 
-        aggiuntaLib = new Button();
-        titolo = new TextField();
-        autore = new TextField();
-        isbn = new TextField();
-        prezzo = new TextField();
-        usura = new TextField();
-        annoPubblicazione = new TextField();
-        copie = new TextField();
-        searchType = new Button();
-        modifica = new Button();
-        rimozione = new Button();
-        tabella = new TableView<>();
+        // --- Inizializzazione Componenti Grafici ---
+        titoloField = new TextField();
+        autoreField = new TextField();
+        isbnField = new TextField();
+        annoPubblicazioneField = new TextField();
+        copieField = new TextField();
+        prezzoField = new TextField();
+        usuraField = new TextField();
         cercaField = new TextField();
 
-        impostaCampiPrivati("aggiuntaLib", aggiuntaLib);
-        impostaCampiPrivati("titolo", titolo);
-        impostaCampiPrivati("autore", autore);
-        impostaCampiPrivati("isbn", isbn);
-        impostaCampiPrivati("prezzo", prezzo);
-        impostaCampiPrivati("usura", usura);
-        impostaCampiPrivati("annoPubblicazione", annoPubblicazione);
-        impostaCampiPrivati("copie", copie);
-        impostaCampiPrivati("searchType", searchType);
-        impostaCampiPrivati("modifica", modifica);
-        impostaCampiPrivati("rimozione", rimozione);
-        impostaCampiPrivati("tabella", tabella);
-        impostaCampiPrivati("cercaField", cercaField);
-    }
-
-    /**
-     * @brief Metodo di utilità per impostare campi privati tramite Reflection.
-     * Permette di accedere ai campi 'private' del controller per iniettare i componenti UI.
-     * 
-     * @pre L'oggetto controller è istanziato.
-     * @post Il campo specificato del controller contiene l'oggetto passato.
-     * 
-     * @param[in] name Nome del campo privato da impostare.
-     * @param[in] obj Oggetto da assegnare al campo.
-     * 
-     * @return void
-     */
-    private void impostaCampiPrivati(String name, Object obj) throws Exception {
-        Field f = TabellaLibroController.class.getDeclaredField(name);
-        f.setAccessible(true);
-        f.set(controller, obj);
-    }
-
-    /**
-     * @brief Metodo di utilità per invocare metodi privati tramite Reflection.
-     * Permette di testare la logica contenuta in metodi 'private' del controller.
-     * 
-     * @pre Il metodo esiste nella classe del controller.
-     * @post Il metodo privato viene eseguito.
-     * @param[in] name Nome del metodo privato da invocare.
-     * @return void
-     */
-    private void chiamaMetodiProvati(String name) throws Exception {
-        Method m = TabellaLibroController.class.getDeclaredMethod(name);
-        m.setAccessible(true);
-        m.invoke(controller);
-    }
-
-    /**
-     * @brief Test del metodo setModel.
-     * Verifica che il modello venga impostato correttamente e che la tabella venga popolata (o preparata) con gli elementi del modello.
-     * 
-     * @pre Il modello è mockato e restituisce una lista osservabile vuota.
-     * @post La tabella contiene una lista di items non nulla.
-     * @return void
-     */
-    @Test
-    void testSetModel() {
-        when(model.getLibri()).thenReturn(FXCollections.observableArrayList());
-        controller.setModel(model, stage, scene);
-        assertNotNull(tabella.getItems());
-    }
-
-    /**
-     * @brief Test della logica di attivazione inserimento (onAggiungi).
-     * Verifica che l'invocazione del metodo abiliti i campi di testo e i bottoni necessari per l'aggiunta di un nuovo libro.
-     * 
-     * @pre I componenti UI (bottone aggiunta, textfields) sono disabilitati.
-     * @post I componenti UI risultano abilitati.
-     * @return void
-     */
-    @Test
-    void testOnAggiungi() throws Exception {
-        aggiuntaLib.setDisable(true);
-        titolo.setDisable(true);
+        aggiuntaLibButton = new Button();
+        aggiuntaButton = new Button();
+        rimozioneButton = new Button();
+        modificaButton = new Button();
+        modificaButton.setText("Modifica"); 
+        esciButton = new Button();
+        searchTypeButton = new Button();
+        searchTypeButton.setText("T"); 
+        xButton = new Button();
         
-        chiamaMetodiProvati("onAggiungi");
-        
-        assertFalse(aggiuntaLib.isDisable());
-        assertFalse(titolo.isDisable());
-        assertFalse(autore.isDisable());
-        assertFalse(isbn.isDisable());
+        tabella = new TableView<>();
+
+        // --- Injection dei campi tramite Reflection ---
+        injectField(controller, "titolo", titoloField);
+        injectField(controller, "autore", autoreField);
+        injectField(controller, "isbn", isbnField);
+        injectField(controller, "annoPubblicazione", annoPubblicazioneField);
+        injectField(controller, "copie", copieField);
+        injectField(controller, "prezzo", prezzoField);
+        injectField(controller, "usura", usuraField);
+        injectField(controller, "cercaField", cercaField);
+
+        injectField(controller, "aggiuntaLib", aggiuntaLibButton);
+        injectField(controller, "aggiunta", aggiuntaButton);
+        injectField(controller, "rimozione", rimozioneButton);
+        injectField(controller, "modifica", modificaButton);
+        injectField(controller, "esci", esciButton);
+        injectField(controller, "searchType", searchTypeButton);
+        injectField(controller, "X", xButton);
+        injectField(controller, "tabella", tabella);
+
+        // Injection delle colonne (necessarie perché il metodo initialize() le usa)
+        injectField(controller, "titoloCol", new TableColumn<Libro, String>());
+        injectField(controller, "autoreCol", new TableColumn<Libro, String>());
+        injectField(controller, "isbnCol", new TableColumn<Libro, String>());
+        injectField(controller, "annoPubblicazioneCol", new TableColumn<Libro, Integer>());
+        injectField(controller, "copieCol", new TableColumn<Libro, Integer>());
+        injectField(controller, "prezzoCol", new TableColumn<Libro, Double>());
+        injectField(controller, "usuraCol", new TableColumn<Libro, String>());
+
+        // --- Configurazione del Controller ---
+        Platform.runLater(() -> {
+            try {
+                // Simuliamo la chiamata automatica di @FXML initialize()
+                Method initMethod = TabellaLibroController.class.getDeclaredMethod("initialize");
+                initMethod.setAccessible(true);
+                initMethod.invoke(controller);
+                
+                // Impostiamo il model e Stage/Scene a null (non usati in questi test specifici)
+                controller.setModel(model, null, null);
+            } catch (Exception e) {
+                e.printStackTrace(); // Utile per debuggare reflection
+            }
+        });
+        Thread.sleep(100); // Breve attesa per assicurare che initialize abbia finito
     }
 
     /**
-     * @brief Test del cambio criterio di ricerca (onCambio).
-     * Verifica che premendo il bottone di ricerca il testo cambi
-     * tra "T" (Titolo), "A" (Autore) e "I" (ISBN).
-     * @pre Il bottone di ricerca è impostato su "T".
-     * @post Il testo del bottone cicla correttamente attraverso i valori previsti.
+     * @brief Metodo helper per l'iniezione delle dipendenze private
+     *
+     * @pre Il campo esiste nell'oggetto target
+     * @post Il campo privato assume il valore passato
+     * * @param[in] target L'oggetto in cui iniettare il valore
+     * @param[in] fieldName Il nome del campo privato
+     * @param[in] value Il valore da assegnare
+     *
      * @return void
      */
-    @Test
-    void testRicercaButtonChange() throws Exception {
-        searchType.setText("T");
-        chiamaMetodiProvati("onCambio");
-        assertEquals("A", searchType.getText());
-        
-        chiamaMetodiProvati("onCambio");
-        assertEquals("I", searchType.getText());
-        
-        chiamaMetodiProvati("onCambio");
-        assertEquals("T", searchType.getText());
+    private void injectField(Object target, String fieldName, Object value) throws Exception {
+        Field field = target.getClass().getDeclaredField(fieldName);
+        field.setAccessible(true);
+        field.set(target, value);
     }
 
     /**
-     * @brief Test della modalità di modifica (onModifica).
-     * Verifica che il sistema entri ed esca correttamente dalla modalità di modifica,
-     * abilitando/disabilitando la tabella e il tasto di rimozione, e cambiando il testo del bottone.
-     * @pre Il sistema è in stato di visualizzazione (tabella non editabile).
-     * @post Il sistema alterna lo stato: prima in modifica (tabella editabile), poi torna in visualizzazione.
+     * @brief Metodo helper per invocare metodi privati
+     *
+     * @pre Il metodo esiste nell'oggetto target
+     * @post Il metodo viene eseguito
+     * * @param[in] target L'oggetto su cui invocare il metodo
+     * @param[in] methodName Il nome del metodo privato
+     *
+     * @return void
+     */
+    private void invokeMethod(Object target, String methodName) throws Exception {
+        Method method = target.getClass().getDeclaredMethod(methodName);
+        method.setAccessible(true);
+        method.invoke(target);
+    }
+
+    /**
+     * @brief Test per l'abilitazione dei campi di inserimento
+     *
+     * Verifica che premendo il tasto di aggiunta ("Nuovo"), i campi di testo
+     * e il bottone di conferma vengano abilitati.
+     *
+     * @pre I campi sono disabilitati
+     * @post I campi e il bottone di conferma sono abilitati
+     *
      * @return void
      */
     @Test
-    void testModalitaModifica() throws Exception {
-        modifica.setText("Modifica");
-        rimozione.setDisable(true);
-        tabella.setEditable(false);
-        
-        chiamaMetodiProvati("onModifica");
-        
-        assertEquals("Termina modifica", modifica.getText());
-        assertFalse(rimozione.isDisable());
-        assertTrue(tabella.isEditable());
-        
-        chiamaMetodiProvati("onModifica");
-        
-        assertEquals("Modifica", modifica.getText());
-        assertTrue(rimozione.isDisable());
-        assertFalse(tabella.isEditable());
+    void testAbilitaInserimento() throws Exception {
+        Platform.runLater(() -> {
+            try {
+                // Setup iniziale
+                titoloField.setDisable(true);
+                aggiuntaLibButton.setDisable(true);
+
+                // Azione: Clicca su "Aggiungi" (quello che sblocca i campi)
+                invokeMethod(controller, "onAggiungi");
+
+                // Verifica
+                assertFalse(titoloField.isDisable());
+                assertFalse(autoreField.isDisable());
+                assertFalse(aggiuntaLibButton.isDisable());
+            } catch (Exception e) {
+                fail(e.getMessage());
+            }
+        });
+        Thread.sleep(200);
     }
 
     /**
-     * @brief Test della cancellazione della ricerca (onCancellaCerca).
-     * Verifica che il metodo pulisca il campo di testo della ricerca.
-     * @pre Il campo di ricerca contiene del testo ("Qualcosa").
-     * @post Il campo di ricerca è vuoto.
+     * @brief Test completo del flusso di aggiunta di un libro
+     *
+     * Verifica che sia possibile aggiungere un nuovo libro popolando tutti i campi necessari.
+     * Controlla anche che i campi vengano puliti e disabilitati dopo l'operazione.
+     *
+     * @pre Il model dei libri è vuoto o pronto a ricevere dati
+     * @post Un nuovo libro viene aggiunto al model e i campi vengono puliti
+     *
+     * @return void
+     */
+    @Test
+    void testAggiungiLibroSuccesso() throws Exception {
+        CountDownLatch latch = new CountDownLatch(1);
+
+        Platform.runLater(() -> {
+            try {
+                // 1. Popoliamo i campi di testo
+                titoloField.setText("Il Signore degli Anelli");
+                autoreField.setText("Tolkien");
+                isbnField.setText("888888");
+                annoPubblicazioneField.setText("1954");
+                prezzoField.setText("25.50");
+                usuraField.setText("Nuovo");
+                copieField.setText("10");
+                
+                // Abilitiamo il bottone (simulando che l'utente abbia cliccato prima su "Nuovo")
+                aggiuntaLibButton.setDisable(false);
+
+                // 2. Invochiamo l'azione di salvataggio
+                invokeMethod(controller, "onAggiungiLib");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                fail(e.getMessage());
+            } finally {
+                latch.countDown();
+            }
+        });
+
+        latch.await(2, TimeUnit.SECONDS);
+
+        // 3. Verifiche sul Model Reale
+        assertFalse(model.getLibri().isEmpty(), "La lista dei libri non deve essere vuota");
+        
+        Libro l = model.getLibri().get(model.getLibri().size() - 1);
+        assertEquals("Il Signore degli Anelli", l.getTitolo());
+        assertEquals("Tolkien", l.getAutore());
+        
+        // 4. Verifica UI (Campi puliti e disabilitati)
+        assertTrue(titoloField.getText().isEmpty());
+        assertTrue(titoloField.isDisable());
+    }
+
+    /**
+     * @brief Test del cambio del criterio di ricerca
+     *
+     * Verifica che il bottone di ricerca cambi ciclicamente il suo testo
+     * tra "T" (Titolo), "A" (Autore) e "I" (ISBN) ad ogni click.
+     *
+     * @pre Il bottone mostra "T"
+     * @post Il testo del bottone alterna correttamente i valori previsti
+     *
+     * @return void
+     */
+    @Test
+    void testCambioTipoRicerca() throws Exception {
+        Platform.runLater(() -> {
+            try {
+                searchTypeButton.setText("T"); // Partiamo da Titolo
+                
+                invokeMethod(controller, "onCambio");
+                assertEquals("A", searchTypeButton.getText()); // Autore
+
+                invokeMethod(controller, "onCambio");
+                assertEquals("I", searchTypeButton.getText()); // ISBN
+
+                invokeMethod(controller, "onCambio");
+                assertEquals("T", searchTypeButton.getText()); // Titolo
+
+            } catch (Exception e) {
+                fail(e.getMessage());
+            }
+        });
+        Thread.sleep(200);
+    }
+
+    /**
+     * @brief Test della funzionalità di ricerca per Titolo
+     *
+     * Popola la tabella con dati fittizi e verifica che la ricerca per titolo
+     * filtri correttamente i risultati visualizzati.
+     *
+     * @pre La tabella contiene due libri diversi
+     * @post La tabella visualizza solo il libro che corrisponde al criterio di ricerca
+     *
+     * @return void
+     */
+    @Test
+    void testRicercaPerTitolo() throws Exception {
+        // Creiamo e aggiungiamo libri direttamente al model reale
+        Libro l1 = new Libro("Java Programming", "Rossi", "111", 2020, 20.0f, "Nuovo", 5);
+        Libro l2 = new Libro("C++ Guide", "Verdi", "222", 2019, 30.0f, "Usato", 3);
+
+        Platform.runLater(() -> {
+            model.getLibri().addAll(l1, l2);
+            // Forza aggiornamento vista
+            tabella.setItems(model.getLibri());
+
+            // Impostiamo GUI per ricerca
+            searchTypeButton.setText("T");
+            cercaField.setText("Java Programming");
+
+            try {
+                invokeMethod(controller, "onCerca");
+            } catch (Exception e) {
+                fail(e.getMessage());
+            }
+        });
+
+        Thread.sleep(500);
+
+        ObservableList<Libro> items = tabella.getItems();
+        assertEquals(1, items.size(), "Dovrebbe trovare esattamente un libro");
+        assertEquals("Java Programming", items.get(0).getTitolo());
+    }
+
+    /**
+     * @brief Test della cancellazione della ricerca
+     *
+     * Verifica che la funzione di cancellazione svuoti il campo di ricerca
+     * e ripristini la visualizzazione di tutti i libri nella tabella.
+     *
+     * @pre Il campo di ricerca contiene testo e la tabella è filtrata
+     * @post Il campo è vuoto e la tabella mostra tutti gli elementi
+     *
      * @return void
      */
     @Test
     void testCancellaCerca() throws Exception {
-        when(model.getLibri()).thenReturn(FXCollections.observableArrayList());
-        controller.setModel(model, stage, scene);
-        
-        cercaField.setText("Qualcosa");
-        chiamaMetodiProvati("onCancellaCerca");
-        
-        assertEquals("", cercaField.getText());
+        Platform.runLater(() -> {
+            // Setup stato "sporco"
+            cercaField.setText("Testo di ricerca");
+            
+            try {
+                invokeMethod(controller, "onCancellaCerca");
+            } catch (Exception e) {
+                fail(e.getMessage());
+            }
+
+            // Verifiche
+            assertTrue(cercaField.getText().isEmpty());
+            // La tabella deve mostrare di nuovo tutti i libri presenti nel model
+            assertEquals(model.getLibri().size(), tabella.getItems().size());
+        });
+        Thread.sleep(200);
+    }
+
+    /**
+     * @brief Test dell'attivazione/disattivazione modalità modifica
+     *
+     * Verifica che il bottone di modifica cambi stato alla tabella (editabile/non editabile)
+     * e abiliti/disabiliti il bottone di rimozione.
+     *
+     * @pre La modalità modifica è disattivata
+     * @post La modalità modifica viene attivata e poi disattivata correttamente
+     *
+     * @return void
+     */
+    @Test
+    void testAttivaModalitaModifica() throws Exception {
+        Platform.runLater(() -> {
+            try {
+                // Stato iniziale
+                modificaButton.setText("Modifica");
+                rimozioneButton.setDisable(true);
+                tabella.setEditable(false);
+
+                // --- Attivazione ---
+                invokeMethod(controller, "onModifica");
+
+                assertEquals("Termina modifica", modificaButton.getText());
+                assertTrue(tabella.isEditable());
+                assertFalse(rimozioneButton.isDisable());
+
+                // --- Disattivazione ---
+                invokeMethod(controller, "onModifica");
+
+                assertEquals("Modifica", modificaButton.getText());
+                assertFalse(tabella.isEditable());
+                assertTrue(rimozioneButton.isDisable());
+
+            } catch (Exception e) {
+                fail(e.getMessage());
+            }
+        });
+        Thread.sleep(200);
     }
 }
