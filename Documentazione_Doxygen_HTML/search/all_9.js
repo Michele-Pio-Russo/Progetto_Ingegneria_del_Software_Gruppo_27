@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['salvasubinario_0',['salvaSuBinario',['../class_libro_1_1_tabella_libro_model.html#a3ed0852cc25ad09489bcb22dc7e234ed',1,'Libro.TabellaLibroModel.salvaSuBinario()'],['../class_prestito_1_1_tabella_prestito_model.html#a0525039cf838037ab160cee71434004f',1,'Prestito.TabellaPrestitoModel.salvaSuBinario()'],['../class_utente_1_1_tabella_utente_model.html#a80663ea71f32c767b6c2077d5383b74d',1,'Utente.TabellaUtenteModel.salvaSuBinario()']]],
+  ['setannopubblicazione_1',['setAnnoPubblicazione',['../class_libro_1_1_libro.html#ae3d360772dbde888008753c9b866a649',1,'Libro::Libro']]],
+  ['setautore_2',['setAutore',['../class_libro_1_1_libro.html#af324c47e4f8b2d8a763960e5457bf819',1,'Libro::Libro']]],
+  ['setcognome_3',['setCognome',['../class_prestito_1_1_prestito.html#af1aacd6473e35e16150d06afbdf90c2a',1,'Prestito.Prestito.setCognome()'],['../class_utente_1_1_utente.html#a22d2fec8a268c36c0b00aa76808f28a8',1,'Utente.Utente.setCognome()']]],
+  ['setcopie_4',['setCopie',['../class_libro_1_1_libro.html#aa8c5ef421473c51844b976f7a7505243',1,'Libro::Libro']]],
+  ['setdatadiscadenza_5',['setDataDiScadenza',['../class_prestito_1_1_prestito.html#a09dd6ab825d32f000c0dbf26479825f1',1,'Prestito::Prestito']]],
+  ['setemail_6',['setEmail',['../class_utente_1_1_utente.html#a952a888afd6040c8e4a17a01787eb753',1,'Utente::Utente']]],
+  ['setisbn_7',['setIsbn',['../class_libro_1_1_libro.html#ae8f8f6a57a90b2205a0b471e67328399',1,'Libro.Libro.setIsbn()'],['../class_prestito_1_1_prestito.html#a075ad975f97269b6df3beebc8d88128b',1,'Prestito.Prestito.setIsbn()']]],
+  ['setiscrizione_8',['setIscrizione',['../class_utente_1_1_utente.html#abdf3ed60d025338a1a90414dd596bd7a',1,'Utente::Utente']]],
+  ['setlibriinprestito_9',['setLibriInPrestito',['../class_utente_1_1_utente.html#abb5fc79442d62d7a01493047c66723aa',1,'Utente::Utente']]],
+  ['setmatricola_10',['setMatricola',['../class_utente_1_1_utente.html#a9e561fe7cf3959681f01d15cae507990',1,'Utente::Utente']]],
+  ['setmodel_11',['setModel',['../class_libro_1_1_tabella_libro_controller.html#a53a9f9f0f5be42b99187078cf7779613',1,'Libro.TabellaLibroController.setModel()'],['../class_prestito_1_1_tabella_prestito_controller.html#a9a02e1a747a50667857ae7b72b34c569',1,'Prestito.TabellaPrestitoController.setModel()'],['../class_utente_1_1_tabella_utente_controller.html#ae19fd49efb40c88c617315d408eae2e2',1,'Utente.TabellaUtenteController.setModel()']]],
+  ['setnome_12',['setNome',['../class_prestito_1_1_prestito.html#a86eb22ce33d7ed51cc6c35ac7322be23',1,'Prestito.Prestito.setNome()'],['../class_utente_1_1_utente.html#a7e621628b6edb1de7a814b25c51ead35',1,'Utente.Utente.setNome()']]],
+  ['setprezzo_13',['setPrezzo',['../class_libro_1_1_libro.html#a73d6d6b5ffb3a0dd7c27e31c83ad7167',1,'Libro::Libro']]],
+  ['settitolo_14',['setTitolo',['../class_libro_1_1_libro.html#a3e2bd2abd88f8dc922aa058380e39a1c',1,'Libro.Libro.setTitolo()'],['../class_prestito_1_1_prestito.html#abc5abca1cc29b8777010c09d41c9751a',1,'Prestito.Prestito.setTitolo()']]],
+  ['setup_15',['setUp',['../class_libro_1_1_tabella_libro_model_test.html#a7a7bd66609cb8ef64c8d1cb3713dfd98',1,'Libro.TabellaLibroModelTest.setUp()'],['../class_prestito_1_1_tabella_prestito_model_test.html#a215d27d7e96e4f7160b96667bbdcace1',1,'Prestito.TabellaPrestitoModelTest.setUp()'],['../class_utente_1_1_tabella_utente_model_test.html#aef768ef753403cb4cc7f50dd50e61203',1,'Utente.TabellaUtenteModelTest.setUp()']]],
+  ['setusura_16',['setUsura',['../class_libro_1_1_libro.html#a9d3e58fceecc5d94e0642bb2f22ec72b',1,'Libro::Libro']]],
+  ['start_17',['start',['../classit_1_1unisa_1_1diem_1_1oop_1_1progetto__ing__software__libreria_1_1_libreria_main_app.html#ade6b50b3d54f3d02b185bf6969b14531',1,'it::unisa::diem::oop::progetto_ing_software_libreria::LibreriaMainApp']]]
+];

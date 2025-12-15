@@ -94,13 +94,41 @@ $(function(){initNavTree('class_prestito_1_1_tabella_prestito_model.html','','cl
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membri pubblici</h2></td></tr>
+<tr class="memitem:a6c92ad361058560629b7ebd7c9254537" id="r_a6c92ad361058560629b7ebd7c9254537"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c92ad361058560629b7ebd7c9254537">TabellaPrestitoModel</a> ()</td></tr>
+<tr class="memdesc:a6c92ad361058560629b7ebd7c9254537"><td class="mdescLeft">&#160;</td><td class="mdescRight">Costruttore della classe <a class="el" href="class_prestito_1_1_tabella_prestito_model.html">TabellaPrestitoModel</a>.  <br /></td></tr>
 <tr class="memitem:acff301c6800920651ce97772e16d2bc2" id="r_acff301c6800920651ce97772e16d2bc2"><td class="memItemLeft" align="right" valign="top">ObservableList&lt; <a class="el" href="class_prestito_1_1_prestito.html">Prestito</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acff301c6800920651ce97772e16d2bc2">getPrestiti</a> ()</td></tr>
-<tr class="memdesc:acff301c6800920651ce97772e16d2bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Questa ObservableList è una lista che contiene tutti i prestiti.  <br /></td></tr>
+<tr class="memdesc:acff301c6800920651ce97772e16d2bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Metodo getter dei prestiti.  <br /></td></tr>
 <tr class="memitem:a33b0f1b80a2fe27a52be3f5ccb26e539" id="r_a33b0f1b80a2fe27a52be3f5ccb26e539"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a33b0f1b80a2fe27a52be3f5ccb26e539">aggiungiPrestito</a> (<a class="el" href="class_utente_1_1_utente.html">Utente</a> utente, <a class="el" href="class_libro_1_1_libro.html">Libro</a> libro, LocalDate scad)</td></tr>
 <tr class="memdesc:a33b0f1b80a2fe27a52be3f5ccb26e539"><td class="mdescLeft">&#160;</td><td class="mdescRight">Metodo che permette di aggiungere un prestito.  <br /></td></tr>
 <tr class="memitem:ab58c819794f561d149d18391384d7615" id="r_ab58c819794f561d149d18391384d7615"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab58c819794f561d149d18391384d7615">rimuoviPrestito</a> (<a class="el" href="class_prestito_1_1_prestito.html">Prestito</a> p)</td></tr>
 <tr class="memdesc:ab58c819794f561d149d18391384d7615"><td class="mdescLeft">&#160;</td><td class="mdescRight">Metodo che permette di rimuovere un prestito.  <br /></td></tr>
+<tr class="memitem:a0525039cf838037ab160cee71434004f" id="r_a0525039cf838037ab160cee71434004f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0525039cf838037ab160cee71434004f">salvaSuBinario</a> ()</td></tr>
+<tr class="memdesc:a0525039cf838037ab160cee71434004f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Salvataggio su file binario tramite ObjectOutputStream. Viene salvata una List&lt;Prestito&gt;.  <br /></td></tr>
+<tr class="memitem:a5f80b8be32fe988c67fb77f27080c6fe" id="r_a5f80b8be32fe988c67fb77f27080c6fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f80b8be32fe988c67fb77f27080c6fe">caricaDaBinario</a> ()  throws IOException, ClassNotFoundException </td></tr>
+<tr class="memdesc:a5f80b8be32fe988c67fb77f27080c6fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Caricamento da file binario. Formato atteso: una List&lt;Prestito&gt; serializzata.  <br /></td></tr>
 </table>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Documentazione dei costruttori e dei distruttori</h2>
+<a id="a6c92ad361058560629b7ebd7c9254537" name="a6c92ad361058560629b7ebd7c9254537"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c92ad361058560629b7ebd7c9254537">&#9670;&#160;</a></span>TabellaPrestitoModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Prestito.TabellaPrestitoModel.TabellaPrestitoModel </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Costruttore della classe <a class="el" href="class_prestito_1_1_tabella_prestito_model.html">TabellaPrestitoModel</a>. </p>
+<p>Questo metodo inizializza la Observable List che contiene i prestiti</p>
+<dl class="section post"><dt>Postcondizione</dt><dd>Inizializza l'oggetto </dd></dl>
+
+</div>
+</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentazione delle funzioni membro</h2>
 <a id="a33b0f1b80a2fe27a52be3f5ccb26e539" name="a33b0f1b80a2fe27a52be3f5ccb26e539"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a33b0f1b80a2fe27a52be3f5ccb26e539">&#9670;&#160;</a></span>aggiungiPrestito()</h2>
@@ -142,6 +170,26 @@ Membri pubblici</h2></td></tr>
 
 </div>
 </div>
+<a id="a5f80b8be32fe988c67fb77f27080c6fe" name="a5f80b8be32fe988c67fb77f27080c6fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f80b8be32fe988c67fb77f27080c6fe">&#9670;&#160;</a></span>caricaDaBinario()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Prestito.TabellaPrestitoModel.caricaDaBinario </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> throws IOException, ClassNotFoundException</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Caricamento da file binario. Formato atteso: una List&lt;Prestito&gt; serializzata. </p>
+<dl class="section return"><dt>Restituisce</dt><dd>void </dd></dl>
+
+</div>
+</div>
 <a id="acff301c6800920651ce97772e16d2bc2" name="acff301c6800920651ce97772e16d2bc2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acff301c6800920651ce97772e16d2bc2">&#9670;&#160;</a></span>getPrestiti()</h2>
 
@@ -157,8 +205,7 @@ Membri pubblici</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Questa ObservableList è una lista che contiene tutti i prestiti. </p>
-<p>Metodo getter dei prestiti</p>
+<p>Metodo getter dei prestiti. </p>
 <p>Questo metodo permette di prendere i prestiti dalla Observable List</p>
 <dl class="section pre"><dt>Precondizione</dt><dd>Deve esserci almeno un prestito </dd></dl>
 <dl class="section post"><dt>Postcondizione</dt><dd>Deve restituire l'Observable List che contiene i prestiti</dd></dl>
@@ -195,8 +242,28 @@ Membri pubblici</h2></td></tr>
 
 </div>
 </div>
+<a id="a0525039cf838037ab160cee71434004f" name="a0525039cf838037ab160cee71434004f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0525039cf838037ab160cee71434004f">&#9670;&#160;</a></span>salvaSuBinario()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Prestito.TabellaPrestitoModel.salvaSuBinario </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Salvataggio su file binario tramite ObjectOutputStream. Viene salvata una List&lt;Prestito&gt;. </p>
+<dl class="section return"><dt>Restituisce</dt><dd>void </dd></dl>
+
+</div>
+</div>
 <hr/>La documentazione per questa classe è stata generata a partire dal seguente file:<ul>
-<li>Progetto_Ing_Software_Libreria/src/main/java/Prestito/<a class="el" href="_tabella_prestito_model_8java.html">TabellaPrestitoModel.java</a></li>
+<li>src/main/java/Prestito/<a class="el" href="_tabella_prestito_model_8java.html">TabellaPrestitoModel.java</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

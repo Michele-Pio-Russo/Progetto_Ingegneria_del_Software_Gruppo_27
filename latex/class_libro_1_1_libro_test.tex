@@ -1,0 +1,107 @@
+\doxysection{Riferimenti per la classe Libro.\+Libro\+Test}
+\hypertarget{class_libro_1_1_libro_test}{}\label{class_libro_1_1_libro_test}\index{Libro.LibroTest@{Libro.LibroTest}}
+\doxysubsubsection*{Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_libro_1_1_libro_test_a55d0f01599db136737f1dd6715314eda}{test\+Costruttore\+EGetters}} ()
+\begin{DoxyCompactList}\small\item\em Test del costruttore e dei metodi Getter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_libro_test_a6dde559f3eba09f6e6a05c3914ac5504}{test\+Setters}} ()
+\begin{DoxyCompactList}\small\item\em Test dei metodi Setter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_libro_test_a86ff979ab701bac9a57a319c20f5c4fa}{test\+Equals}} ()
+\begin{DoxyCompactList}\small\item\em Test del metodo equals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_libro_test_a554f2839d77cf590e7471464c038aa88}{test\+To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Test del metodo to\+String. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_libro_1_1_libro_test_doc-func-members}
+\doxysubsection{Documentazione delle funzioni membro}
+\Hypertarget{class_libro_1_1_libro_test_a55d0f01599db136737f1dd6715314eda}\index{Libro.LibroTest@{Libro.LibroTest}!testCostruttoreEGetters@{testCostruttoreEGetters}}
+\index{testCostruttoreEGetters@{testCostruttoreEGetters}!Libro.LibroTest@{Libro.LibroTest}}
+\doxysubsubsection{\texorpdfstring{testCostruttoreEGetters()}{testCostruttoreEGetters()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_libro_test_a55d0f01599db136737f1dd6715314eda} 
+void Libro.\+Libro\+Test.\+test\+Costruttore\+EGetters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test del costruttore e dei metodi Getter. 
+
+Verifica che un oggetto \doxylink{class_libro_1_1_libro}{Libro} venga istanziato correttamente e che i metodi getter restituiscano i valori passati al costruttore.
+
+\begin{DoxyPrecond}{Precondizione}
+La classe \doxylink{class_libro_1_1_libro}{Libro} deve essere compilata correttamente. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Tutti i valori restituiti dai getter devono corrispondere alle costanti di test.
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_libro_test_a86ff979ab701bac9a57a319c20f5c4fa}\index{Libro.LibroTest@{Libro.LibroTest}!testEquals@{testEquals}}
+\index{testEquals@{testEquals}!Libro.LibroTest@{Libro.LibroTest}}
+\doxysubsubsection{\texorpdfstring{testEquals()}{testEquals()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_libro_test_a86ff979ab701bac9a57a319c20f5c4fa} 
+void Libro.\+Libro\+Test.\+test\+Equals (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test del metodo equals. 
+
+Verifica la logica di uguaglianza tra due oggetti \doxylink{class_libro_1_1_libro}{Libro}, basata principalmente sul codice ISBN. Testa uguaglianza per riferimento, uguaglianza logica (stesso ISBN), disuguaglianza (ISBN diverso), confronto con null e confronto con oggetti di tipo diverso.
+
+\begin{DoxyPrecond}{Precondizione}
+Due o più istanze di \doxylink{class_libro_1_1_libro}{Libro} (o null/altri oggetti) per il confronto. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il metodo equals deve restituire true solo se l\textquotesingle{}ISBN coincide, false altrimenti.
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_libro_test_a6dde559f3eba09f6e6a05c3914ac5504}\index{Libro.LibroTest@{Libro.LibroTest}!testSetters@{testSetters}}
+\index{testSetters@{testSetters}!Libro.LibroTest@{Libro.LibroTest}}
+\doxysubsubsection{\texorpdfstring{testSetters()}{testSetters()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_libro_test_a6dde559f3eba09f6e6a05c3914ac5504} 
+void Libro.\+Libro\+Test.\+test\+Setters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test dei metodi Setter. 
+
+Verifica che i metodi setter modifichino correttamente lo stato dell\textquotesingle{}oggetto \doxylink{class_libro_1_1_libro}{Libro}.
+
+\begin{DoxyPrecond}{Precondizione}
+Un oggetto \doxylink{class_libro_1_1_libro}{Libro} deve essere stato istanziato. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Gli attributi dell\textquotesingle{}oggetto devono corrispondere ai nuovi valori impostati.
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_libro_test_a554f2839d77cf590e7471464c038aa88}\index{Libro.LibroTest@{Libro.LibroTest}!testToString@{testToString}}
+\index{testToString@{testToString}!Libro.LibroTest@{Libro.LibroTest}}
+\doxysubsubsection{\texorpdfstring{testToString()}{testToString()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_libro_test_a554f2839d77cf590e7471464c038aa88} 
+void Libro.\+Libro\+Test.\+test\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test del metodo to\+String. 
+
+Verifica che la stringa generata dal metodo to\+String rispetti il formato atteso.
+
+\begin{DoxyPrecond}{Precondizione}
+Un oggetto \doxylink{class_libro_1_1_libro}{Libro} valido. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+La stringa restituita deve contenere tutti i campi formattati correttamente.
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+
+
+La documentazione per questa classe è stata generata a partire dal seguente file\+:\begin{DoxyCompactItemize}
+\item 
+src/test/java/\+Libro/\mbox{\hyperlink{_libro_test_8java}{Libro\+Test.\+java}}\end{DoxyCompactItemize}

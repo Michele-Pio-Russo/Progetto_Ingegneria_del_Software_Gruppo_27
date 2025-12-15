@@ -1,0 +1,150 @@
+\doxysection{Riferimenti per la classe Prestito.\+Tabella\+Prestito\+Model}
+\hypertarget{class_prestito_1_1_tabella_prestito_model}{}\label{class_prestito_1_1_tabella_prestito_model}\index{Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}}
+\doxysubsubsection*{Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_a6c92ad361058560629b7ebd7c9254537}{Tabella\+Prestito\+Model}} ()
+\begin{DoxyCompactList}\small\item\em Costruttore della classe \doxylink{class_prestito_1_1_tabella_prestito_model}{Tabella\+Prestito\+Model}. \end{DoxyCompactList}\item 
+Observable\+List$<$ \mbox{\hyperlink{class_prestito_1_1_prestito}{Prestito}} $>$ \mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_acff301c6800920651ce97772e16d2bc2}{get\+Prestiti}} ()
+\begin{DoxyCompactList}\small\item\em Metodo getter dei prestiti. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_a33b0f1b80a2fe27a52be3f5ccb26e539}{aggiungi\+Prestito}} (\mbox{\hyperlink{class_utente_1_1_utente}{Utente}} utente, \mbox{\hyperlink{class_libro_1_1_libro}{Libro}} libro, Local\+Date scad)
+\begin{DoxyCompactList}\small\item\em Metodo che permette di aggiungere un prestito. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_ab58c819794f561d149d18391384d7615}{rimuovi\+Prestito}} (\mbox{\hyperlink{class_prestito_1_1_prestito}{Prestito}} p)
+\begin{DoxyCompactList}\small\item\em Metodo che permette di rimuovere un prestito. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_a0525039cf838037ab160cee71434004f}{salva\+Su\+Binario}} ()
+\begin{DoxyCompactList}\small\item\em Salvataggio su file binario tramite Object\+Output\+Stream. Viene salvata una List$<$\+Prestito$>$. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_a5f80b8be32fe988c67fb77f27080c6fe}{carica\+Da\+Binario}} ()  throws IOException, Class\+Not\+Found\+Exception 
+\begin{DoxyCompactList}\small\item\em Caricamento da file binario. Formato atteso\+: una List$<$\+Prestito$>$ serializzata. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_doc-constructors}
+\doxysubsection{Documentazione dei costruttori e dei distruttori}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_a6c92ad361058560629b7ebd7c9254537}\index{Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}!TabellaPrestitoModel@{TabellaPrestitoModel}}
+\index{TabellaPrestitoModel@{TabellaPrestitoModel}!Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}}
+\doxysubsubsection{\texorpdfstring{TabellaPrestitoModel()}{TabellaPrestitoModel()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_a6c92ad361058560629b7ebd7c9254537} 
+Prestito.\+Tabella\+Prestito\+Model.\+Tabella\+Prestito\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Costruttore della classe \doxylink{class_prestito_1_1_tabella_prestito_model}{Tabella\+Prestito\+Model}. 
+
+Questo metodo inizializza la Observable List che contiene i prestiti
+
+\begin{DoxyPostcond}{Postcondizione}
+Inizializza l\textquotesingle{}oggetto 
+\end{DoxyPostcond}
+
+
+\label{doc-func-members}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_doc-func-members}
+\doxysubsection{Documentazione delle funzioni membro}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_a33b0f1b80a2fe27a52be3f5ccb26e539}\index{Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}!aggiungiPrestito@{aggiungiPrestito}}
+\index{aggiungiPrestito@{aggiungiPrestito}!Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}}
+\doxysubsubsection{\texorpdfstring{aggiungiPrestito()}{aggiungiPrestito()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_a33b0f1b80a2fe27a52be3f5ccb26e539} 
+void Prestito.\+Tabella\+Prestito\+Model.\+aggiungi\+Prestito (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_utente_1_1_utente}{Utente}}}]{utente}{, }\item[{\mbox{\hyperlink{class_libro_1_1_libro}{Libro}}}]{libro}{, }\item[{Local\+Date}]{scad}{}\end{DoxyParamCaption})}
+
+
+
+Metodo che permette di aggiungere un prestito. 
+
+Questo metodo permette aggiungere un prestito alla Observable List
+
+\begin{DoxyPrecond}{Precondizione}
+Deve esserci un prestito da aggiungere 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il prestito deve essere presente nell\textquotesingle{}Observable List
+\end{DoxyPostcond}
+
+\begin{DoxyParams}[1]{Parametri}
+\mbox{\texttt{in}}  & {\em utente} & \doxylink{class_utente_1_1_utente}{Utente} che vuole ottenere un prestito \\
+\hline
+\mbox{\texttt{in}}  & {\em libro} & Il libro da dover prestare all\textquotesingle{}utente \\
+\hline
+\mbox{\texttt{in}}  & {\em scad} & La data di scadenza del prestito\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_a5f80b8be32fe988c67fb77f27080c6fe}\index{Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}!caricaDaBinario@{caricaDaBinario}}
+\index{caricaDaBinario@{caricaDaBinario}!Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}}
+\doxysubsubsection{\texorpdfstring{caricaDaBinario()}{caricaDaBinario()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_a5f80b8be32fe988c67fb77f27080c6fe} 
+void Prestito.\+Tabella\+Prestito\+Model.\+carica\+Da\+Binario (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) throws IOException, Class\+Not\+Found\+Exception}
+
+
+
+Caricamento da file binario. Formato atteso\+: una List$<$\+Prestito$>$ serializzata. 
+
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_acff301c6800920651ce97772e16d2bc2}\index{Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}!getPrestiti@{getPrestiti}}
+\index{getPrestiti@{getPrestiti}!Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}}
+\doxysubsubsection{\texorpdfstring{getPrestiti()}{getPrestiti()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_acff301c6800920651ce97772e16d2bc2} 
+Observable\+List$<$ \mbox{\hyperlink{class_prestito_1_1_prestito}{Prestito}} $>$ Prestito.\+Tabella\+Prestito\+Model.\+get\+Prestiti (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Metodo getter dei prestiti. 
+
+Questo metodo permette di prendere i prestiti dalla Observable List
+
+\begin{DoxyPrecond}{Precondizione}
+Deve esserci almeno un prestito 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Deve restituire l\textquotesingle{}Observable List che contiene i prestiti
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+Ritorna tutta l\textquotesingle{}Observable List 
+\end{DoxyReturn}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_ab58c819794f561d149d18391384d7615}\index{Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}!rimuoviPrestito@{rimuoviPrestito}}
+\index{rimuoviPrestito@{rimuoviPrestito}!Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}}
+\doxysubsubsection{\texorpdfstring{rimuoviPrestito()}{rimuoviPrestito()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_ab58c819794f561d149d18391384d7615} 
+void Prestito.\+Tabella\+Prestito\+Model.\+rimuovi\+Prestito (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_prestito_1_1_prestito}{Prestito}}}]{p}{}\end{DoxyParamCaption})}
+
+
+
+Metodo che permette di rimuovere un prestito. 
+
+Questo metodo permette rimuovere un prestito dalla Observable List
+
+\begin{DoxyPrecond}{Precondizione}
+Deve esserci un prestito da rimuovere 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il prestito è stato rimosso dall\textquotesingle{}Observable List
+\end{DoxyPostcond}
+
+\begin{DoxyParams}[1]{Parametri}
+\mbox{\texttt{in}}  & {\em p} & prestito da rimuovere\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_a0525039cf838037ab160cee71434004f}\index{Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}!salvaSuBinario@{salvaSuBinario}}
+\index{salvaSuBinario@{salvaSuBinario}!Prestito.TabellaPrestitoModel@{Prestito.TabellaPrestitoModel}}
+\doxysubsubsection{\texorpdfstring{salvaSuBinario()}{salvaSuBinario()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_a0525039cf838037ab160cee71434004f} 
+void Prestito.\+Tabella\+Prestito\+Model.\+salva\+Su\+Binario (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Salvataggio su file binario tramite Object\+Output\+Stream. Viene salvata una List$<$\+Prestito$>$. 
+
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+
+
+La documentazione per questa classe è stata generata a partire dal seguente file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/\+Prestito/\mbox{\hyperlink{_tabella_prestito_model_8java}{Tabella\+Prestito\+Model.\+java}}\end{DoxyCompactItemize}

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['prestito_0',['Prestito',['../class_prestito_1_1_prestito.html',1,'Prestito.Prestito'],['../class_prestito_1_1_prestito.html#a1ac2ac8c006e61a856731168069b0257',1,'Prestito.Prestito.Prestito()']]],
-  ['prestito_2ejava_1',['Prestito.java',['../_prestito_8java.html',1,'']]]
+  ['initialize_0',['initialize',['../classit_1_1unisa_1_1diem_1_1oop_1_1progetto__ing__software__libreria_1_1_main_controller.html#ac700e28f4ad36a3131bb0433152a3da4',1,'it::unisa::diem::oop::progetto_ing_software_libreria::MainController']]]
 ];

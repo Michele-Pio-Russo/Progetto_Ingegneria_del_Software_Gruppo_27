@@ -1,6 +1,7 @@
 var class_utente_1_1_utente =
 [
     [ "Utente", "class_utente_1_1_utente.html#aee70f59abe713fe471f3be1be4bfed21", null ],
+    [ "equals", "class_utente_1_1_utente.html#a8d0cee9900cf1c533ef67ea55bf1dc0a", null ],
     [ "getCognome", "class_utente_1_1_utente.html#a810b6d23a63c9a80bd6cea45b219f22b", null ],
     [ "getEmail", "class_utente_1_1_utente.html#a9b6cd95cb750f6b369b7fb42771b7154", null ],
     [ "getIscrizione", "class_utente_1_1_utente.html#afb24ebcca387f389557ec69a4d815ac8", null ],

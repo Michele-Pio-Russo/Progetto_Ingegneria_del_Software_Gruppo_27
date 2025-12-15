@@ -1,0 +1,178 @@
+\doxysection{Riferimenti per la classe Libro.\+Tabella\+Libro\+Model\+Test}
+\hypertarget{class_libro_1_1_tabella_libro_model_test}{}\label{class_libro_1_1_tabella_libro_model_test}\index{Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}}
+\doxysubsubsection*{Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_libro_1_1_tabella_libro_model_test_a7a7bd66609cb8ef64c8d1cb3713dfd98}{set\+Up}} ()
+\begin{DoxyCompactList}\small\item\em Oggetto \doxylink{class_libro_1_1_libro}{Libro} di supporto per i test (mantenuto per coerenza). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_tabella_libro_model_test_a9412537deb705c239971c2fd421f4e94}{tear\+Down}} ()
+\begin{DoxyCompactList}\small\item\em Pulizia dell\textquotesingle{}ambiente dopo ogni test. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_tabella_libro_model_test_a354d01907f8277b994185cc11cfeca96}{test\+Get\+Libri}} ()
+\begin{DoxyCompactList}\small\item\em Test del metodo getter per la lista dei libri. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_tabella_libro_model_test_af2e31c39c549530f9f5b660327615d9f}{test\+Aggiungi\+Libro}} ()
+\begin{DoxyCompactList}\small\item\em Test per l\textquotesingle{}aggiunta di un nuovo libro. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_tabella_libro_model_test_ad15521a5cde94fe2cab6bb4270de3eb2}{test\+Rimuovi\+Libro}} ()
+\begin{DoxyCompactList}\small\item\em Test per la rimozione di un libro esistente. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_tabella_libro_model_test_a017dccfe4f2012d5fb5fcdda888500c0}{test\+Persistenza}} ()
+\begin{DoxyCompactList}\small\item\em Test della persistenza dei dati (Salvataggio e Caricamento). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_tabella_libro_model_test_ac07cdec95c0d9c097b16b61d4fe9a394}{test\+Costruttore\+Senza\+File}} ()
+\begin{DoxyCompactList}\small\item\em Test del comportamento del costruttore in assenza di file di salvataggio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_libro_1_1_tabella_libro_model_test_doc-func-members}
+\doxysubsection{Documentazione delle funzioni membro}
+\Hypertarget{class_libro_1_1_tabella_libro_model_test_a7a7bd66609cb8ef64c8d1cb3713dfd98}\index{Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}!setUp@{setUp}}
+\index{setUp@{setUp}!Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}}
+\doxysubsubsection{\texorpdfstring{setUp()}{setUp()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_test_a7a7bd66609cb8ef64c8d1cb3713dfd98} 
+void Libro.\+Tabella\+Libro\+Model\+Test.\+set\+Up (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Oggetto \doxylink{class_libro_1_1_libro}{Libro} di supporto per i test (mantenuto per coerenza). 
+
+Configurazione dell\textquotesingle{}ambiente prima di ogni test
+
+Inizializza l\textquotesingle{}oggetto \doxylink{class_libro_1_1_libro}{Libro} di test, pulisce eventuali file residui e istanzia un nuovo modello vuoto.
+
+\begin{DoxyPrecond}{Precondizione}
+Nessun file residuo deve interferire con il test 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il modello è pronto e l\textquotesingle{}oggetto di test è inizializzato
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_tabella_libro_model_test_a9412537deb705c239971c2fd421f4e94}\index{Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}!tearDown@{tearDown}}
+\index{tearDown@{tearDown}!Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}}
+\doxysubsubsection{\texorpdfstring{tearDown()}{tearDown()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_test_a9412537deb705c239971c2fd421f4e94} 
+void Libro.\+Tabella\+Libro\+Model\+Test.\+tear\+Down (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Pulizia dell\textquotesingle{}ambiente dopo ogni test. 
+
+Rimuove il file binario creato durante l\textquotesingle{}esecuzione del test per garantire l\textquotesingle{}idempotenza delle esecuzioni successive.
+
+\begin{DoxyPrecond}{Precondizione}
+Il test è terminato 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il file di salvataggio viene eliminato
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_tabella_libro_model_test_af2e31c39c549530f9f5b660327615d9f}\index{Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}!testAggiungiLibro@{testAggiungiLibro}}
+\index{testAggiungiLibro@{testAggiungiLibro}!Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}}
+\doxysubsubsection{\texorpdfstring{testAggiungiLibro()}{testAggiungiLibro()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_test_af2e31c39c549530f9f5b660327615d9f} 
+void Libro.\+Tabella\+Libro\+Model\+Test.\+test\+Aggiungi\+Libro (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test per l\textquotesingle{}aggiunta di un nuovo libro. 
+
+Verifica che l\textquotesingle{}aggiunta incrementi la dimensione della lista e che l\textquotesingle{}elemento aggiunto sia effettivamente presente e con i dati corretti.
+
+\begin{DoxyPrecond}{Precondizione}
+La lista ha una dimensione N 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+La lista ha dimensione N+1 e contiene il nuovo libro con ISBN specificato
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_tabella_libro_model_test_ac07cdec95c0d9c097b16b61d4fe9a394}\index{Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}!testCostruttoreSenzaFile@{testCostruttoreSenzaFile}}
+\index{testCostruttoreSenzaFile@{testCostruttoreSenzaFile}!Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}}
+\doxysubsubsection{\texorpdfstring{testCostruttoreSenzaFile()}{testCostruttoreSenzaFile()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_test_ac07cdec95c0d9c097b16b61d4fe9a394} 
+void Libro.\+Tabella\+Libro\+Model\+Test.\+test\+Costruttore\+Senza\+File (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test del comportamento del costruttore in assenza di file di salvataggio. 
+
+Verifica che il modello venga inizializzato correttamente (con lista vuota) anche se il file binario non esiste, senza lanciare eccezioni.
+
+\begin{DoxyPrecond}{Precondizione}
+Il file binario non esiste 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il modello è inizializzato senza errori e con lista vuota
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_tabella_libro_model_test_a354d01907f8277b994185cc11cfeca96}\index{Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}!testGetLibri@{testGetLibri}}
+\index{testGetLibri@{testGetLibri}!Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}}
+\doxysubsubsection{\texorpdfstring{testGetLibri()}{testGetLibri()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_test_a354d01907f8277b994185cc11cfeca96} 
+void Libro.\+Tabella\+Libro\+Model\+Test.\+test\+Get\+Libri (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test del metodo getter per la lista dei libri. 
+
+Verifica che la lista restituita sia valida (non nulla) e inizialmente vuota appena creato il modello.
+
+\begin{DoxyPrecond}{Precondizione}
+Il modello è appena stato istanziato e il file binario rimosso 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Ritorna una Observable\+List non nulla e vuota
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_tabella_libro_model_test_a017dccfe4f2012d5fb5fcdda888500c0}\index{Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}!testPersistenza@{testPersistenza}}
+\index{testPersistenza@{testPersistenza}!Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}}
+\doxysubsubsection{\texorpdfstring{testPersistenza()}{testPersistenza()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_test_a017dccfe4f2012d5fb5fcdda888500c0} 
+void Libro.\+Tabella\+Libro\+Model\+Test.\+test\+Persistenza (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test della persistenza dei dati (Salvataggio e Caricamento). 
+
+Verifica che i libri salvati su file binario vengano correttamente ricaricati da una nuova istanza del modello, mantenendo l\textquotesingle{}integrità dei dati.
+
+\begin{DoxyPrecond}{Precondizione}
+Il modello contiene dei libri e viene invocato il salvataggio 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Una nuova istanza del modello carica correttamente i dati dal file creato
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_tabella_libro_model_test_ad15521a5cde94fe2cab6bb4270de3eb2}\index{Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}!testRimuoviLibro@{testRimuoviLibro}}
+\index{testRimuoviLibro@{testRimuoviLibro}!Libro.TabellaLibroModelTest@{Libro.TabellaLibroModelTest}}
+\doxysubsubsection{\texorpdfstring{testRimuoviLibro()}{testRimuoviLibro()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_test_ad15521a5cde94fe2cab6bb4270de3eb2} 
+void Libro.\+Tabella\+Libro\+Model\+Test.\+test\+Rimuovi\+Libro (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test per la rimozione di un libro esistente. 
+
+Verifica che la rimozione decrementi la dimensione della lista e che l\textquotesingle{}elemento specificato non sia più presente nella collezione.
+
+\begin{DoxyPrecond}{Precondizione}
+La lista contiene il libro da rimuovere 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il libro è rimosso e la dimensione della lista diminuisce di 1
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+
+
+La documentazione per questa classe è stata generata a partire dal seguente file\+:\begin{DoxyCompactItemize}
+\item 
+src/test/java/\+Libro/\mbox{\hyperlink{_tabella_libro_model_test_8java}{Tabella\+Libro\+Model\+Test.\+java}}\end{DoxyCompactItemize}

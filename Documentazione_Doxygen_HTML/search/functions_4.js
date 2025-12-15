@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['rimuovilibro_0',['rimuoviLibro',['../class_libro_1_1_tabella_libro_model.html#a2d91dd89b447878421be6929f482c8c2',1,'Libro::TabellaLibroModel']]],
-  ['rimuovipersona_1',['rimuoviPersona',['../class_utente_1_1_tabella_utente_model.html#a206beb807f5c4f444de1de69f3ddcd24',1,'Utente::TabellaUtenteModel']]],
-  ['rimuoviprestito_2',['rimuoviPrestito',['../class_prestito_1_1_tabella_prestito_model.html#ab58c819794f561d149d18391384d7615',1,'Prestito::TabellaPrestitoModel']]]
+  ['initialize_0',['initialize',['../classit_1_1unisa_1_1diem_1_1oop_1_1progetto__ing__software__libreria_1_1_main_controller.html#ac700e28f4ad36a3131bb0433152a3da4',1,'it::unisa::diem::oop::progetto_ing_software_libreria::MainController']]]
 ];

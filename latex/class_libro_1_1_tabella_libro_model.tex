@@ -1,0 +1,158 @@
+\doxysection{Riferimenti per la classe Libro.\+Tabella\+Libro\+Model}
+\hypertarget{class_libro_1_1_tabella_libro_model}{}\label{class_libro_1_1_tabella_libro_model}\index{Libro.TabellaLibroModel@{Libro.TabellaLibroModel}}
+\doxysubsubsection*{Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_libro_1_1_tabella_libro_model_a2d86248e89e5ba0573d12b30df12e36d}{Tabella\+Libro\+Model}} ()
+\begin{DoxyCompactList}\small\item\em Costruttore della classe \doxylink{class_libro_1_1_tabella_libro_model}{Tabella\+Libro\+Model}. \end{DoxyCompactList}\item 
+Observable\+List$<$ \mbox{\hyperlink{class_libro_1_1_libro}{Libro}} $>$ \mbox{\hyperlink{class_libro_1_1_tabella_libro_model_aea77bfe6cdaceed2dd741ed8959a6950}{get\+Libri}} ()
+\begin{DoxyCompactList}\small\item\em Metodo getter dei libri. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_tabella_libro_model_a048f2ed45b8d05f9315e00b10880c490}{aggiungi\+Libro}} (String titolo, String autore, String isbn, int anno, double prezzo, String usura, int num\+Copie)
+\begin{DoxyCompactList}\small\item\em Metodo che permette di aggiungere un libro. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_tabella_libro_model_a2d91dd89b447878421be6929f482c8c2}{rimuovi\+Libro}} (\mbox{\hyperlink{class_libro_1_1_libro}{Libro}} lib)
+\begin{DoxyCompactList}\small\item\em Metodo che permette di rimuovere un libro. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_tabella_libro_model_a3ed0852cc25ad09489bcb22dc7e234ed}{salva\+Su\+Binario}} ()
+\begin{DoxyCompactList}\small\item\em Salvataggio su file binario tramite Object\+Output\+Stream. Viene salvata una List$<$\+Libro$>$. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_libro_1_1_tabella_libro_model_a275b09bd45f3c3e4f2c87e382bec9c27}{carica\+Da\+Binario}} ()  throws IOException, Class\+Not\+Found\+Exception 
+\begin{DoxyCompactList}\small\item\em Caricamento da file binario. Formato atteso\+: una List$<$\+Libro$>$ serializzata. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_libro_1_1_tabella_libro_model_doc-constructors}
+\doxysubsection{Documentazione dei costruttori e dei distruttori}
+\Hypertarget{class_libro_1_1_tabella_libro_model_a2d86248e89e5ba0573d12b30df12e36d}\index{Libro.TabellaLibroModel@{Libro.TabellaLibroModel}!TabellaLibroModel@{TabellaLibroModel}}
+\index{TabellaLibroModel@{TabellaLibroModel}!Libro.TabellaLibroModel@{Libro.TabellaLibroModel}}
+\doxysubsubsection{\texorpdfstring{TabellaLibroModel()}{TabellaLibroModel()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_a2d86248e89e5ba0573d12b30df12e36d} 
+Libro.\+Tabella\+Libro\+Model.\+Tabella\+Libro\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Costruttore della classe \doxylink{class_libro_1_1_tabella_libro_model}{Tabella\+Libro\+Model}. 
+
+Questo metodo inizializza la Observable List che contiene i libri
+
+\begin{DoxyPostcond}{Postcondizione}
+Inizializza l\textquotesingle{}oggetto 
+\end{DoxyPostcond}
+
+
+\label{doc-func-members}
+\Hypertarget{class_libro_1_1_tabella_libro_model_doc-func-members}
+\doxysubsection{Documentazione delle funzioni membro}
+\Hypertarget{class_libro_1_1_tabella_libro_model_a048f2ed45b8d05f9315e00b10880c490}\index{Libro.TabellaLibroModel@{Libro.TabellaLibroModel}!aggiungiLibro@{aggiungiLibro}}
+\index{aggiungiLibro@{aggiungiLibro}!Libro.TabellaLibroModel@{Libro.TabellaLibroModel}}
+\doxysubsubsection{\texorpdfstring{aggiungiLibro()}{aggiungiLibro()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_a048f2ed45b8d05f9315e00b10880c490} 
+void Libro.\+Tabella\+Libro\+Model.\+aggiungi\+Libro (\begin{DoxyParamCaption}\item[{String}]{titolo}{, }\item[{String}]{autore}{, }\item[{String}]{isbn}{, }\item[{int}]{anno}{, }\item[{double}]{prezzo}{, }\item[{String}]{usura}{, }\item[{int}]{num\+Copie}{}\end{DoxyParamCaption})}
+
+
+
+Metodo che permette di aggiungere un libro. 
+
+Questo metodo permette aggiungere un libro alla Observable List
+
+\begin{DoxyPrecond}{Precondizione}
+Deve esserci un libro da aggiungere 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il libro deve essere presente nell\textquotesingle{}Observable List
+\end{DoxyPostcond}
+
+\begin{DoxyParams}[1]{Parametri}
+\mbox{\texttt{in}}  & {\em titolo} & Il titolo del libro \\
+\hline
+\mbox{\texttt{in}}  & {\em autore} & L\textquotesingle{}autore del libro \\
+\hline
+\mbox{\texttt{in}}  & {\em isbn} & Codice ISBN del libro \\
+\hline
+\mbox{\texttt{in}}  & {\em num\+Copie} & Numero di copie attualmente disponibili per quel libro \\
+\hline
+\mbox{\texttt{in}}  & {\em anno} & Anno di pubblicazione del libro \\
+\hline
+\mbox{\texttt{in}}  & {\em prezzo} & Prezzo del libro \\
+\hline
+\mbox{\texttt{in}}  & {\em usura} & stato di usura del libro\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_tabella_libro_model_a275b09bd45f3c3e4f2c87e382bec9c27}\index{Libro.TabellaLibroModel@{Libro.TabellaLibroModel}!caricaDaBinario@{caricaDaBinario}}
+\index{caricaDaBinario@{caricaDaBinario}!Libro.TabellaLibroModel@{Libro.TabellaLibroModel}}
+\doxysubsubsection{\texorpdfstring{caricaDaBinario()}{caricaDaBinario()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_a275b09bd45f3c3e4f2c87e382bec9c27} 
+void Libro.\+Tabella\+Libro\+Model.\+carica\+Da\+Binario (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) throws IOException, Class\+Not\+Found\+Exception}
+
+
+
+Caricamento da file binario. Formato atteso\+: una List$<$\+Libro$>$ serializzata. 
+
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_tabella_libro_model_aea77bfe6cdaceed2dd741ed8959a6950}\index{Libro.TabellaLibroModel@{Libro.TabellaLibroModel}!getLibri@{getLibri}}
+\index{getLibri@{getLibri}!Libro.TabellaLibroModel@{Libro.TabellaLibroModel}}
+\doxysubsubsection{\texorpdfstring{getLibri()}{getLibri()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_aea77bfe6cdaceed2dd741ed8959a6950} 
+Observable\+List$<$ \mbox{\hyperlink{class_libro_1_1_libro}{Libro}} $>$ Libro.\+Tabella\+Libro\+Model.\+get\+Libri (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Metodo getter dei libri. 
+
+Questo metodo permette di prendere i libri dalla Observable List
+
+\begin{DoxyPrecond}{Precondizione}
+Deve esserci almeno un libro 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Deve restituire l\textquotesingle{}Observable List che contiene i libri
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+Ritorna tutta l\textquotesingle{}Observable List 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_tabella_libro_model_a2d91dd89b447878421be6929f482c8c2}\index{Libro.TabellaLibroModel@{Libro.TabellaLibroModel}!rimuoviLibro@{rimuoviLibro}}
+\index{rimuoviLibro@{rimuoviLibro}!Libro.TabellaLibroModel@{Libro.TabellaLibroModel}}
+\doxysubsubsection{\texorpdfstring{rimuoviLibro()}{rimuoviLibro()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_a2d91dd89b447878421be6929f482c8c2} 
+void Libro.\+Tabella\+Libro\+Model.\+rimuovi\+Libro (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_libro_1_1_libro}{Libro}}}]{lib}{}\end{DoxyParamCaption})}
+
+
+
+Metodo che permette di rimuovere un libro. 
+
+Questo metodo permette rimuovere un libro dalla Observable List
+
+\begin{DoxyPrecond}{Precondizione}
+Il libro da rimuovere deve essere disponibile 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il libro è stato rimosso dall\textquotesingle{}Observable List
+\end{DoxyPostcond}
+
+\begin{DoxyParams}[1]{Parametri}
+\mbox{\texttt{in}}  & {\em lib} & \doxylink{class_libro_1_1_libro}{Libro} da rimuovere\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_libro_1_1_tabella_libro_model_a3ed0852cc25ad09489bcb22dc7e234ed}\index{Libro.TabellaLibroModel@{Libro.TabellaLibroModel}!salvaSuBinario@{salvaSuBinario}}
+\index{salvaSuBinario@{salvaSuBinario}!Libro.TabellaLibroModel@{Libro.TabellaLibroModel}}
+\doxysubsubsection{\texorpdfstring{salvaSuBinario()}{salvaSuBinario()}}
+{\footnotesize\ttfamily \label{class_libro_1_1_tabella_libro_model_a3ed0852cc25ad09489bcb22dc7e234ed} 
+void Libro.\+Tabella\+Libro\+Model.\+salva\+Su\+Binario (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Salvataggio su file binario tramite Object\+Output\+Stream. Viene salvata una List$<$\+Libro$>$. 
+
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+
+
+La documentazione per questa classe è stata generata a partire dal seguente file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/\+Libro/\mbox{\hyperlink{_tabella_libro_model_8java}{Tabella\+Libro\+Model.\+java}}\end{DoxyCompactItemize}

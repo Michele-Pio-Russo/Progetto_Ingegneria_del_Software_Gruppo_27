@@ -31,8 +31,12 @@ var menudata={children:[
 {text:"Membri dei composti",url:"functions.html",children:[
 {text:"Tutto",url:"functions.html",children:[
 {text:"a",url:"functions.html#index_a"},
+{text:"c",url:"functions.html#index_c"},
+{text:"e",url:"functions.html#index_e"},
 {text:"g",url:"functions.html#index_g"},
+{text:"i",url:"functions.html#index_i"},
 {text:"l",url:"functions.html#index_l"},
+{text:"m",url:"functions.html#index_m"},
 {text:"p",url:"functions.html#index_p"},
 {text:"r",url:"functions.html#index_r"},
 {text:"s",url:"functions.html#index_s"},
@@ -40,8 +44,12 @@ var menudata={children:[
 {text:"u",url:"functions.html#index_u"}]},
 {text:"Funzioni",url:"functions_func.html",children:[
 {text:"a",url:"functions_func.html#index_a"},
+{text:"c",url:"functions_func.html#index_c"},
+{text:"e",url:"functions_func.html#index_e"},
 {text:"g",url:"functions_func.html#index_g"},
+{text:"i",url:"functions_func.html#index_i"},
 {text:"l",url:"functions_func.html#index_l"},
+{text:"m",url:"functions_func.html#index_m"},
 {text:"p",url:"functions_func.html#index_p"},
 {text:"r",url:"functions_func.html#index_r"},
 {text:"s",url:"functions_func.html#index_s"},

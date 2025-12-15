@@ -1,0 +1,178 @@
+\doxysection{Riferimenti per la classe Prestito.\+Tabella\+Prestito\+Model\+Test}
+\hypertarget{class_prestito_1_1_tabella_prestito_model_test}{}\label{class_prestito_1_1_tabella_prestito_model_test}\index{Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}}
+\doxysubsubsection*{Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_test_a215d27d7e96e4f7160b96667bbdcace1}{set\+Up}} ()
+\begin{DoxyCompactList}\small\item\em Data di scadenza per il prestito di test. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_test_a6c3990847b748e2f00b089ef2f6f1287}{tear\+Down}} ()
+\begin{DoxyCompactList}\small\item\em Pulizia dell\textquotesingle{}ambiente dopo ogni test. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_test_a7110a45542c7edf0fe2fb408abbc909a}{test\+Get\+Prestiti}} ()
+\begin{DoxyCompactList}\small\item\em Test del metodo getter per la lista dei prestiti. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_test_a8ca76a5937d89f834086d114e30193bd}{test\+Aggiungi\+Prestito}} ()
+\begin{DoxyCompactList}\small\item\em Test per l\textquotesingle{}aggiunta di un nuovo prestito. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_test_aa60a646a4c13fd1f63819751dcb612c5}{test\+Rimuovi\+Prestito}} ()
+\begin{DoxyCompactList}\small\item\em Test per la rimozione di un prestito esistente. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_test_a2333d76aaee49709f988d52a41b3722c}{test\+Persistenza}} ()
+\begin{DoxyCompactList}\small\item\em Test della persistenza dei dati (Salvataggio e Caricamento). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_prestito_1_1_tabella_prestito_model_test_a5178094181bbfa0e4451e4c2130b19ba}{test\+Costruttore\+Senza\+File}} ()
+\begin{DoxyCompactList}\small\item\em Test del comportamento del costruttore in assenza di file di salvataggio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_test_doc-func-members}
+\doxysubsection{Documentazione delle funzioni membro}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_test_a215d27d7e96e4f7160b96667bbdcace1}\index{Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}!setUp@{setUp}}
+\index{setUp@{setUp}!Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}}
+\doxysubsubsection{\texorpdfstring{setUp()}{setUp()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_test_a215d27d7e96e4f7160b96667bbdcace1} 
+void Prestito.\+Tabella\+Prestito\+Model\+Test.\+set\+Up (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Data di scadenza per il prestito di test. 
+
+Configurazione dell\textquotesingle{}ambiente prima di ogni test
+
+Inizializza gli oggetti \doxylink{class_utente_1_1_utente}{Utente}, \doxylink{class_libro_1_1_libro}{Libro} e \doxylink{class_prestito_1_1_prestito}{Prestito} di test, pulisce eventuali file residui e istanzia un nuovo modello vuoto.
+
+\begin{DoxyPrecond}{Precondizione}
+Nessun file residuo deve interferire con il test 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il modello è pronto e gli oggetti di test sono inizializzati
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_test_a6c3990847b748e2f00b089ef2f6f1287}\index{Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}!tearDown@{tearDown}}
+\index{tearDown@{tearDown}!Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}}
+\doxysubsubsection{\texorpdfstring{tearDown()}{tearDown()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_test_a6c3990847b748e2f00b089ef2f6f1287} 
+void Prestito.\+Tabella\+Prestito\+Model\+Test.\+tear\+Down (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Pulizia dell\textquotesingle{}ambiente dopo ogni test. 
+
+Rimuove il file binario creato durante l\textquotesingle{}esecuzione del test per garantire l\textquotesingle{}idempotenza delle esecuzioni successive.
+
+\begin{DoxyPrecond}{Precondizione}
+Il test è terminato 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il file di salvataggio viene eliminato
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_test_a8ca76a5937d89f834086d114e30193bd}\index{Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}!testAggiungiPrestito@{testAggiungiPrestito}}
+\index{testAggiungiPrestito@{testAggiungiPrestito}!Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}}
+\doxysubsubsection{\texorpdfstring{testAggiungiPrestito()}{testAggiungiPrestito()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_test_a8ca76a5937d89f834086d114e30193bd} 
+void Prestito.\+Tabella\+Prestito\+Model\+Test.\+test\+Aggiungi\+Prestito (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test per l\textquotesingle{}aggiunta di un nuovo prestito. 
+
+Verifica che l\textquotesingle{}aggiunta incrementi la dimensione della lista e che l\textquotesingle{}elemento aggiunto sia effettivamente presente nella collezione.
+
+\begin{DoxyPrecond}{Precondizione}
+La lista ha una dimensione N 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+La lista ha dimensione N+1 e contiene il nuovo prestito
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_test_a5178094181bbfa0e4451e4c2130b19ba}\index{Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}!testCostruttoreSenzaFile@{testCostruttoreSenzaFile}}
+\index{testCostruttoreSenzaFile@{testCostruttoreSenzaFile}!Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}}
+\doxysubsubsection{\texorpdfstring{testCostruttoreSenzaFile()}{testCostruttoreSenzaFile()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_test_a5178094181bbfa0e4451e4c2130b19ba} 
+void Prestito.\+Tabella\+Prestito\+Model\+Test.\+test\+Costruttore\+Senza\+File (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test del comportamento del costruttore in assenza di file di salvataggio. 
+
+Verifica che il modello venga inizializzato correttamente (con lista vuota) anche se il file binario non esiste, senza lanciare eccezioni.
+
+\begin{DoxyPrecond}{Precondizione}
+Il file binario non esiste 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il modello è inizializzato senza errori e con lista vuota
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_test_a7110a45542c7edf0fe2fb408abbc909a}\index{Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}!testGetPrestiti@{testGetPrestiti}}
+\index{testGetPrestiti@{testGetPrestiti}!Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}}
+\doxysubsubsection{\texorpdfstring{testGetPrestiti()}{testGetPrestiti()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_test_a7110a45542c7edf0fe2fb408abbc909a} 
+void Prestito.\+Tabella\+Prestito\+Model\+Test.\+test\+Get\+Prestiti (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test del metodo getter per la lista dei prestiti. 
+
+Verifica che la lista restituita sia valida (non nulla) e inizialmente vuota appena creato il modello.
+
+\begin{DoxyPrecond}{Precondizione}
+Il modello è appena stato istanziato 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Ritorna una Observable\+List non nulla e vuota
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_test_a2333d76aaee49709f988d52a41b3722c}\index{Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}!testPersistenza@{testPersistenza}}
+\index{testPersistenza@{testPersistenza}!Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}}
+\doxysubsubsection{\texorpdfstring{testPersistenza()}{testPersistenza()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_test_a2333d76aaee49709f988d52a41b3722c} 
+void Prestito.\+Tabella\+Prestito\+Model\+Test.\+test\+Persistenza (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test della persistenza dei dati (Salvataggio e Caricamento). 
+
+Verifica che i prestiti salvati su file binario vengano correttamente ricaricati da una nuova istanza del modello, mantenendo l\textquotesingle{}integrità dei dati.
+
+\begin{DoxyPrecond}{Precondizione}
+Il modello contiene dei prestiti e viene invocato il salvataggio 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Una nuova istanza del modello carica correttamente i dati dal file creato
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_prestito_1_1_tabella_prestito_model_test_aa60a646a4c13fd1f63819751dcb612c5}\index{Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}!testRimuoviPrestito@{testRimuoviPrestito}}
+\index{testRimuoviPrestito@{testRimuoviPrestito}!Prestito.TabellaPrestitoModelTest@{Prestito.TabellaPrestitoModelTest}}
+\doxysubsubsection{\texorpdfstring{testRimuoviPrestito()}{testRimuoviPrestito()}}
+{\footnotesize\ttfamily \label{class_prestito_1_1_tabella_prestito_model_test_aa60a646a4c13fd1f63819751dcb612c5} 
+void Prestito.\+Tabella\+Prestito\+Model\+Test.\+test\+Rimuovi\+Prestito (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Test per la rimozione di un prestito esistente. 
+
+Verifica che la rimozione decrementi la dimensione della lista e che l\textquotesingle{}elemento specificato non sia più presente nella collezione.
+
+\begin{DoxyPrecond}{Precondizione}
+La lista contiene il prestito da rimuovere 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Il prestito è rimosso e la dimensione della lista diminuisce di 1
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+
+
+La documentazione per questa classe è stata generata a partire dal seguente file\+:\begin{DoxyCompactItemize}
+\item 
+src/test/java/\+Prestito/\mbox{\hyperlink{_tabella_prestito_model_test_8java}{Tabella\+Prestito\+Model\+Test.\+java}}\end{DoxyCompactItemize}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tostring_0',['toString',['../class_libro_1_1_libro.html#a0a6cab7b603e50150a53c9de6d7b07a2',1,'Libro.Libro.toString()'],['../class_prestito_1_1_prestito.html#a133d0fa3eb15630b92a48325eadc9d46',1,'Prestito.Prestito.toString()'],['../class_utente_1_1_utente.html#acbb01b1191df33077073f13cf099433f',1,'Utente.Utente.toString()']]]
+  ['main_0',['main',['../classit_1_1unisa_1_1diem_1_1oop_1_1progetto__ing__software__libreria_1_1_libreria_main_app.html#ae2961d7aa1dc34a58f2ab5952d33d175',1,'it::unisa::diem::oop::progetto_ing_software_libreria::LibreriaMainApp']]]
 ];

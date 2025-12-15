@@ -1,0 +1,154 @@
+\doxysection{Riferimenti per la classe Utente.\+Tabella\+Utente\+Model}
+\hypertarget{class_utente_1_1_tabella_utente_model}{}\label{class_utente_1_1_tabella_utente_model}\index{Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}}
+\doxysubsubsection*{Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_utente_1_1_tabella_utente_model_a3eefdba16597044d3d32173d0edfae68}{Tabella\+Utente\+Model}} ()
+\begin{DoxyCompactList}\small\item\em Costruttore della classe \doxylink{class_utente_1_1_tabella_utente_model}{Tabella\+Utente\+Model}. \end{DoxyCompactList}\item 
+Observable\+List$<$ \mbox{\hyperlink{class_utente_1_1_utente}{Utente}} $>$ \mbox{\hyperlink{class_utente_1_1_tabella_utente_model_aa2c2eaabc261d7fd9f981cac119cdb65}{get\+Persone}} ()
+\begin{DoxyCompactList}\small\item\em Metodo getter degli utenti. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_utente_1_1_tabella_utente_model_a0264165113a796188145b46dc072919b}{aggiungi\+Persona}} (String nome, String cognome, String matricola, String email, Local\+Date iscrizione)
+\begin{DoxyCompactList}\small\item\em Metodo che permette di aggiungere un utente. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_utente_1_1_tabella_utente_model_a206beb807f5c4f444de1de69f3ddcd24}{rimuovi\+Persona}} (\mbox{\hyperlink{class_utente_1_1_utente}{Utente}} u)
+\begin{DoxyCompactList}\small\item\em Metodo che permette di rimuovere un utente. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_utente_1_1_tabella_utente_model_a80663ea71f32c767b6c2077d5383b74d}{salva\+Su\+Binario}} ()
+\begin{DoxyCompactList}\small\item\em Salvataggio su file binario tramite Object\+Output\+Stream. Viene salvata una List$<$\+Utente$>$. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_utente_1_1_tabella_utente_model_a78c20519e596014f3b174c9bf9a956d7}{carica\+Da\+Binario}} ()  throws IOException, Class\+Not\+Found\+Exception 
+\begin{DoxyCompactList}\small\item\em Caricamento da file binario. Formato atteso\+: una List$<$\+Utente$>$ serializzata. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_utente_1_1_tabella_utente_model_doc-constructors}
+\doxysubsection{Documentazione dei costruttori e dei distruttori}
+\Hypertarget{class_utente_1_1_tabella_utente_model_a3eefdba16597044d3d32173d0edfae68}\index{Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}!TabellaUtenteModel@{TabellaUtenteModel}}
+\index{TabellaUtenteModel@{TabellaUtenteModel}!Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}}
+\doxysubsubsection{\texorpdfstring{TabellaUtenteModel()}{TabellaUtenteModel()}}
+{\footnotesize\ttfamily \label{class_utente_1_1_tabella_utente_model_a3eefdba16597044d3d32173d0edfae68} 
+Utente.\+Tabella\+Utente\+Model.\+Tabella\+Utente\+Model (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Costruttore della classe \doxylink{class_utente_1_1_tabella_utente_model}{Tabella\+Utente\+Model}. 
+
+Questo metodo inizializza la Observable List che contiene gli utenti
+
+\begin{DoxyPostcond}{Postcondizione}
+Inizializza l\textquotesingle{}oggetto 
+\end{DoxyPostcond}
+
+
+\label{doc-func-members}
+\Hypertarget{class_utente_1_1_tabella_utente_model_doc-func-members}
+\doxysubsection{Documentazione delle funzioni membro}
+\Hypertarget{class_utente_1_1_tabella_utente_model_a0264165113a796188145b46dc072919b}\index{Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}!aggiungiPersona@{aggiungiPersona}}
+\index{aggiungiPersona@{aggiungiPersona}!Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}}
+\doxysubsubsection{\texorpdfstring{aggiungiPersona()}{aggiungiPersona()}}
+{\footnotesize\ttfamily \label{class_utente_1_1_tabella_utente_model_a0264165113a796188145b46dc072919b} 
+void Utente.\+Tabella\+Utente\+Model.\+aggiungi\+Persona (\begin{DoxyParamCaption}\item[{String}]{nome}{, }\item[{String}]{cognome}{, }\item[{String}]{matricola}{, }\item[{String}]{email}{, }\item[{Local\+Date}]{iscrizione}{}\end{DoxyParamCaption})}
+
+
+
+Metodo che permette di aggiungere un utente. 
+
+Questo metodo permette aggiungere un utente alla Observable List
+
+\begin{DoxyPrecond}{Precondizione}
+Deve esserci un utente da aggiungere 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+L\textquotesingle{}utente deve essere presente nell\textquotesingle{}Observable List
+\end{DoxyPostcond}
+
+\begin{DoxyParams}[1]{Parametri}
+\mbox{\texttt{in}}  & {\em nome} & Il nome dell\textquotesingle{}utente \\
+\hline
+\mbox{\texttt{in}}  & {\em cognome} & Il cognome dell\textquotesingle{}utente \\
+\hline
+\mbox{\texttt{in}}  & {\em matricola} & La matricola dell\textquotesingle{}utente \\
+\hline
+\mbox{\texttt{in}}  & {\em email} & L\textquotesingle{}email dell\textquotesingle{}utente \\
+\hline
+\mbox{\texttt{in}}  & {\em iscrizione} & La data di iscrizione dell\textquotesingle{}utente\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_utente_1_1_tabella_utente_model_a78c20519e596014f3b174c9bf9a956d7}\index{Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}!caricaDaBinario@{caricaDaBinario}}
+\index{caricaDaBinario@{caricaDaBinario}!Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}}
+\doxysubsubsection{\texorpdfstring{caricaDaBinario()}{caricaDaBinario()}}
+{\footnotesize\ttfamily \label{class_utente_1_1_tabella_utente_model_a78c20519e596014f3b174c9bf9a956d7} 
+void Utente.\+Tabella\+Utente\+Model.\+carica\+Da\+Binario (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) throws IOException, Class\+Not\+Found\+Exception}
+
+
+
+Caricamento da file binario. Formato atteso\+: una List$<$\+Utente$>$ serializzata. 
+
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_utente_1_1_tabella_utente_model_aa2c2eaabc261d7fd9f981cac119cdb65}\index{Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}!getPersone@{getPersone}}
+\index{getPersone@{getPersone}!Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}}
+\doxysubsubsection{\texorpdfstring{getPersone()}{getPersone()}}
+{\footnotesize\ttfamily \label{class_utente_1_1_tabella_utente_model_aa2c2eaabc261d7fd9f981cac119cdb65} 
+Observable\+List$<$ \mbox{\hyperlink{class_utente_1_1_utente}{Utente}} $>$ Utente.\+Tabella\+Utente\+Model.\+get\+Persone (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Metodo getter degli utenti. 
+
+Questo metodo permette di prendere gli utenti dalla Observable List
+
+\begin{DoxyPrecond}{Precondizione}
+Deve esserci almeno un utente 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+Deve restituire l\textquotesingle{}Observable List che contiene gli utenti
+\end{DoxyPostcond}
+\begin{DoxyReturn}{Restituisce}
+Ritorna tutta l\textquotesingle{}Observable List 
+\end{DoxyReturn}
+\Hypertarget{class_utente_1_1_tabella_utente_model_a206beb807f5c4f444de1de69f3ddcd24}\index{Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}!rimuoviPersona@{rimuoviPersona}}
+\index{rimuoviPersona@{rimuoviPersona}!Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}}
+\doxysubsubsection{\texorpdfstring{rimuoviPersona()}{rimuoviPersona()}}
+{\footnotesize\ttfamily \label{class_utente_1_1_tabella_utente_model_a206beb807f5c4f444de1de69f3ddcd24} 
+void Utente.\+Tabella\+Utente\+Model.\+rimuovi\+Persona (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_utente_1_1_utente}{Utente}}}]{u}{}\end{DoxyParamCaption})}
+
+
+
+Metodo che permette di rimuovere un utente. 
+
+Questo metodo permette rimuovere un utente dalla Observable List
+
+\begin{DoxyPrecond}{Precondizione}
+L\textquotesingle{}utente da rimuovere deve essere presente nell\textquotesingle{}Observable List 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondizione}
+L\textquotesingle{}utente è stato rimosso dall\textquotesingle{}Observable List
+\end{DoxyPostcond}
+
+\begin{DoxyParams}[1]{Parametri}
+\mbox{\texttt{in}}  & {\em u} & L\textquotesingle{}utente da rimuovere\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+\Hypertarget{class_utente_1_1_tabella_utente_model_a80663ea71f32c767b6c2077d5383b74d}\index{Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}!salvaSuBinario@{salvaSuBinario}}
+\index{salvaSuBinario@{salvaSuBinario}!Utente.TabellaUtenteModel@{Utente.TabellaUtenteModel}}
+\doxysubsubsection{\texorpdfstring{salvaSuBinario()}{salvaSuBinario()}}
+{\footnotesize\ttfamily \label{class_utente_1_1_tabella_utente_model_a80663ea71f32c767b6c2077d5383b74d} 
+void Utente.\+Tabella\+Utente\+Model.\+salva\+Su\+Binario (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Salvataggio su file binario tramite Object\+Output\+Stream. Viene salvata una List$<$\+Utente$>$. 
+
+\begin{DoxyReturn}{Restituisce}
+void 
+\end{DoxyReturn}
+
+
+La documentazione per questa classe è stata generata a partire dal seguente file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/\+Utente/\mbox{\hyperlink{_tabella_utente_model_8java}{Tabella\+Utente\+Model.\+java}}\end{DoxyCompactItemize}

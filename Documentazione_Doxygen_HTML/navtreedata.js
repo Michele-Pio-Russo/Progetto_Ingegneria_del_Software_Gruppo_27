@@ -42,7 +42,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_libro_8java.html"
+"_libreria_main_app_8java.html"
 ];
 
 var SYNCONMSG = 'cliccare per disabilitare la sincronizzazione del pannello';
