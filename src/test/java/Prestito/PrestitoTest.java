@@ -76,7 +76,7 @@ public class PrestitoTest {
      * @return void
      */
     @Test
-    public void testCostruttoreAndGetters() {
+    public void testCostruttoreEGetters() {
         System.out.println("Test: Costruttore e Getters");
         
         Utente utenteTest = creaTestUtente();
