@@ -29,10 +29,16 @@ public class MainController implements Initializable {
     @FXML
     private Button esci;     ///@brief Questo bottone serve per chiudere l'applicazione
 
-    
+    @FXML
     private Stage mainStage;     ///@brief Riferimento allo stage (finestra) principale dell'applicazione
+    
+    @FXML
     private Scene sceneUtente;   ///@brief Riferimento alla scena che contiene l'interfaccia di gestione Utenti
+    
+    @FXML
     private Scene sceneLibro;    ///@brief Riferimento alla scena che contiene l'interfaccia di gestione Libri
+    
+    @FXML
     private Scene scenePrestito; ///@brief Riferimento alla scena che contiene l'interfaccia di gestione Prestiti
 
     /**

@@ -299,7 +299,7 @@ public class TabellaLibroController {
      * * @return void
      */
     
-    @FXML   
+        @FXML   
         private void onRimuovi() {
         // controllo se il model esiste 
         if(tabellaLibroModel == null){
