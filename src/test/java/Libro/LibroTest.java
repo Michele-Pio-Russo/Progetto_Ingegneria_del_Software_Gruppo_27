@@ -1,3 +1,14 @@
+/**
+ * @file LibroTest.java
+ * @brief Classe di test per la classe Libro
+ *
+ * Questa classe verifica il corretto funzionamento dei metodi della classe Libro
+ * inclusi costruttore, getter, setter, equals e toString.
+ *
+ * @author Luca Longo
+ * @date 15 Dicembre 2025
+ * @version 1.0
+ */
 package Libro;
 
 import org.junit.jupiter.api.Test;
@@ -5,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LibroTest {
 
-    private static final double DELTA = 0.001;
+    private static final double DELTA = 0.001; ///@brief Tolleranza per il confronto di valori double
     
     private final String TITOLO_TEST = "Il Signore degli Anelli";
     private final String AUTORE_TEST = "J.R.R. Tolkien";
@@ -15,10 +26,32 @@ public class LibroTest {
     private final String USURA_TEST = "Nuovo";
     private final int COPIE_TEST = 5;
 
+    /**
+     * @brief Metodo di supporto per creare un libro di test
+     *
+     * Istanzia un oggetto Libro precompilato con le costanti definite nella classe di test
+     * per evitare la duplicazione del codice di inizializzazione.
+     *
+     * @pre Nessuna precondizione specifica.
+     * @post Viene restituito un oggetto Libro valido e inizializzato.
+     *
+     * @return Libro Un'istanza della classe Libro con dati di test.
+     */
     private Libro createTestBook() {
         return new Libro(TITOLO_TEST, AUTORE_TEST, ISBN_TEST, ANNO_TEST, PREZZO_TEST, USURA_TEST, COPIE_TEST);
     }
 
+    /**
+     * @brief Test del costruttore e dei metodi Getter
+     *
+     * Verifica che un oggetto Libro venga istanziato correttamente e che i metodi getter
+     * restituiscano i valori passati al costruttore.
+     *
+     * @pre La classe Libro deve essere compilata correttamente.
+     * @post Tutti i valori restituiti dai getter devono corrispondere alle costanti di test.
+     *
+     * @return void
+     */
     @Test
     public void testCostruttoreAndGetters() {
         System.out.println("Test: Costruttore e Getters");
@@ -34,6 +67,16 @@ public class LibroTest {
         assertEquals(USURA_TEST, instance.getUsura(), "Lo stato di usura non corrisponde.");
     }
 
+    /**
+     * @brief Test dei metodi Setter
+     *
+     * Verifica che i metodi setter modifichino correttamente lo stato dell'oggetto Libro.
+     *
+     * @pre Un oggetto Libro deve essere stato istanziato.
+     * @post Gli attributi dell'oggetto devono corrispondere ai nuovi valori impostati.
+     *
+     * @return void
+     */
     @Test
     public void testSetters() {
         System.out.println("Test: Setters");
@@ -65,6 +108,18 @@ public class LibroTest {
         assertEquals(nuovaUsura, instance.getUsura(), "setUsura non ha funzionato.");
     }
 
+    /**
+     * @brief Test del metodo equals
+     *
+     * Verifica la logica di uguaglianza tra due oggetti Libro, basata principalmente sul codice ISBN.
+     * Testa uguaglianza per riferimento, uguaglianza logica (stesso ISBN), disuguaglianza (ISBN diverso),
+     * confronto con null e confronto con oggetti di tipo diverso.
+     *
+     * @pre Due o più istanze di Libro (o null/altri oggetti) per il confronto.
+     * @post Il metodo equals deve restituire true solo se l'ISBN coincide, false altrimenti.
+     *
+     * @return void
+     */
     @Test
     public void testEquals() {
         System.out.println("Test: equals()");
@@ -90,6 +145,16 @@ public class LibroTest {
         assertFalse(libro1.equals(altraClasse), "equals() fallito: confronto con classe diversa.");
     }
 
+    /**
+     * @brief Test del metodo toString
+     *
+     * Verifica che la stringa generata dal metodo toString rispetti il formato atteso.
+     *
+     * @pre Un oggetto Libro valido.
+     * @post La stringa restituita deve contenere tutti i campi formattati correttamente.
+     *
+     * @return void
+     */
     @Test
     public void testToString() {
         System.out.println("Test: toString()");
