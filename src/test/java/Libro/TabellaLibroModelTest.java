@@ -20,7 +20,6 @@ public class TabellaLibroModelTest {
     private TabellaLibroModel model; /// @brief Istanza del modello da testare
     private final String FILE_BINARIO = "libri.bin"; /// @brief Nome del file binario per il test di persistenza
     
-    // Costanti per i dati di test
     private final String TITOLO = "Test Book";          /// @brief Titolo del libro di test
     private final String AUTORE = "Test Author";        /// @brief Autore del libro di test
     private final String ISBN = "123-4567890123";       /// @brief ISBN del libro di test
@@ -137,16 +136,13 @@ public class TabellaLibroModelTest {
         
         model.aggiungiLibro(TITOLO, AUTORE, ISBN, ANNO, PREZZO, USURA, COPIE);
         
-        // Verifica dimensione
         assertEquals(sizeIniziale + 1, model.getLibri().size());
         
-        // Cerca il libro per ISBN
         Libro libroAggiunto = findLibroByIsbn(model.getLibri(), ISBN)
                                 .orElse(null);
         
         assertNotNull(libroAggiunto, "Il libro con ISBN atteso non è stato trovato.");
         
-        // Verifica l'integrità dei dati
         assertEquals(TITOLO, libroAggiunto.getTitolo());
     }
 
@@ -165,22 +161,17 @@ public class TabellaLibroModelTest {
     public void testRimuoviLibro() {
         System.out.println("testRimuoviLibro");
         
-        // Fase 1: Aggiunta
         model.aggiungiLibro(TITOLO, AUTORE, ISBN, ANNO, PREZZO, USURA, COPIE);
         
-        // Recupera l'oggetto *effettivamente aggiunto* dal model.
         Libro libroDaRimuovere = findLibroByIsbn(model.getLibri(), ISBN)
                                     .orElseThrow(() -> new AssertionError("Il libro non è stato aggiunto correttamente."));
         
         int sizeIniziale = model.getLibri().size();
         
-        // Fase 2: Rimozione
         model.rimuoviLibro(libroDaRimuovere); 
         
-        // Fase 3: Verifica
         assertEquals(sizeIniziale - 1, model.getLibri().size(), "La dimensione della lista non è diminuita.");
         
-        // Verifica che non sia più presente (cercando per ISBN)
         assertFalse(findLibroByIsbn(model.getLibri(), ISBN).isPresent(), "Il libro non è stato rimosso dalla lista.");
     }
 
@@ -211,7 +202,6 @@ public class TabellaLibroModelTest {
         ObservableList<Libro> libriCaricati = nuovoModel.getLibri();
         assertEquals(1, libriCaricati.size());
         
-        // Trova l'oggetto caricato tramite ISBN.
         Libro libroCaricato = findLibroByIsbn(libriCaricati, ISBN)
                                     .orElseThrow(() -> new AssertionError("Il libro non è stato caricato dal binario."));
         
@@ -234,7 +224,6 @@ public class TabellaLibroModelTest {
     public void testCostruttoreSenzaFile() {
         System.out.println("testCostruttoreSenzaFile");
         
-        // Verifica pre-condizione
         assertFalse(new File(FILE_BINARIO).exists(), "Pre-condizione: Il file binario non deve esistere.");
         
         TabellaLibroModel modelSenzaFile = new TabellaLibroModel();

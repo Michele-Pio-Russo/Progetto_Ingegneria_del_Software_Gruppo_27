@@ -29,7 +29,6 @@ public class TabellaUtenteControllerTest {
     private TabellaUtenteController controller;
     private TabellaUtenteModel model; /// @brief Model per la gestione degli utenti
 
-    // Componenti FXML da iniettare
     private TextField nomeField;      /// @brief Campo di testo per il nome
     private TextField cognomeField;   /// @brief Campo di testo per il cognome
     private TextField matricolaField; /// @brief Campo di testo per la matricola

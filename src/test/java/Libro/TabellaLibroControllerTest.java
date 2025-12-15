@@ -28,7 +28,6 @@ public class TabellaLibroControllerTest {
     private TabellaLibroController controller;
     private TabellaLibroModel model; /// @brief Model per la gestione dei libri
 
-    // Componenti FXML da iniettare
     private TextField titoloField;            /// @brief Campo di testo per il titolo del libro
     private TextField autoreField;            /// @brief Campo di testo per l'autore del libro
     private TextField isbnField;              /// @brief Campo di testo per l'ISBN del libro
