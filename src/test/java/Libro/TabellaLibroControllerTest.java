@@ -116,32 +116,32 @@ public class TabellaLibroControllerTest {
         
         tabella = new TableView<>();
 
-        injectField(controller, "titolo", titoloField);
-        injectField(controller, "autore", autoreField);
-        injectField(controller, "isbn", isbnField);
-        injectField(controller, "annoPubblicazione", annoPubblicazioneField);
-        injectField(controller, "copie", copieField);
-        injectField(controller, "prezzo", prezzoField);
-        injectField(controller, "usura", usuraField);
-        injectField(controller, "cercaField", cercaField);
+        impostaCampo(controller, "titolo", titoloField);
+        impostaCampo(controller, "autore", autoreField);
+        impostaCampo(controller, "isbn", isbnField);
+        impostaCampo(controller, "annoPubblicazione", annoPubblicazioneField);
+        impostaCampo(controller, "copie", copieField);
+        impostaCampo(controller, "prezzo", prezzoField);
+        impostaCampo(controller, "usura", usuraField);
+        impostaCampo(controller, "cercaField", cercaField);
 
-        injectField(controller, "aggiuntaLib", aggiuntaLibButton);
-        injectField(controller, "aggiunta", aggiuntaButton);
-        injectField(controller, "rimozione", rimozioneButton);
-        injectField(controller, "modifica", modificaButton);
-        injectField(controller, "esci", esciButton);
-        injectField(controller, "searchType", searchTypeButton);
-        injectField(controller, "X", xButton);
-        injectField(controller, "tabella", tabella);
+        impostaCampo(controller, "aggiuntaLib", aggiuntaLibButton);
+        impostaCampo(controller, "aggiunta", aggiuntaButton);
+        impostaCampo(controller, "rimozione", rimozioneButton);
+        impostaCampo(controller, "modifica", modificaButton);
+        impostaCampo(controller, "esci", esciButton);
+        impostaCampo(controller, "searchType", searchTypeButton);
+        impostaCampo(controller, "X", xButton);
+        impostaCampo(controller, "tabella", tabella);
 
         // Injection delle colonne (necessarie perché il metodo initialize() le usa)
-        injectField(controller, "titoloCol", new TableColumn<Libro, String>());
-        injectField(controller, "autoreCol", new TableColumn<Libro, String>());
-        injectField(controller, "isbnCol", new TableColumn<Libro, String>());
-        injectField(controller, "annoPubblicazioneCol", new TableColumn<Libro, Integer>());
-        injectField(controller, "copieCol", new TableColumn<Libro, Integer>());
-        injectField(controller, "prezzoCol", new TableColumn<Libro, Double>());
-        injectField(controller, "usuraCol", new TableColumn<Libro, String>());
+        impostaCampo(controller, "titoloCol", new TableColumn<Libro, String>());
+        impostaCampo(controller, "autoreCol", new TableColumn<Libro, String>());
+        impostaCampo(controller, "isbnCol", new TableColumn<Libro, String>());
+        impostaCampo(controller, "annoPubblicazioneCol", new TableColumn<Libro, Integer>());
+        impostaCampo(controller, "copieCol", new TableColumn<Libro, Integer>());
+        impostaCampo(controller, "prezzoCol", new TableColumn<Libro, Double>());
+        impostaCampo(controller, "usuraCol", new TableColumn<Libro, String>());
 
         Platform.runLater(() -> {
             try {
@@ -168,7 +168,7 @@ public class TabellaLibroControllerTest {
      *
      * @return void
      */
-    private void injectField(Object target, String fieldName, Object value) throws Exception {
+    private void impostaCampo(Object target, String fieldName, Object value) throws Exception {
         Field field = target.getClass().getDeclaredField(fieldName);
         field.setAccessible(true);
         field.set(target, value);
@@ -184,7 +184,7 @@ public class TabellaLibroControllerTest {
      *
      * @return void
      */
-    private void invokeMethod(Object target, String methodName) throws Exception {
+    private void invocaMetodo(Object target, String methodName) throws Exception {
         Method method = target.getClass().getDeclaredMethod(methodName);
         method.setAccessible(true);
         method.invoke(target);
@@ -208,7 +208,7 @@ public class TabellaLibroControllerTest {
                 titoloField.setDisable(true);
                 aggiuntaLibButton.setDisable(true);
 
-                invokeMethod(controller, "onAggiungi");
+                invocaMetodo(controller, "onAggiungi");
 
                 assertFalse(titoloField.isDisable());
                 assertFalse(autoreField.isDisable());
@@ -247,7 +247,7 @@ public class TabellaLibroControllerTest {
                 
                 aggiuntaLibButton.setDisable(false);
 
-                invokeMethod(controller, "onAggiungiLib");
+                invocaMetodo(controller, "onAggiungiLib");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -286,13 +286,13 @@ public class TabellaLibroControllerTest {
             try {
                 searchTypeButton.setText("T"); 
                 
-                invokeMethod(controller, "onCambio");
+                invocaMetodo(controller, "onCambio");
                 assertEquals("A", searchTypeButton.getText()); 
 
-                invokeMethod(controller, "onCambio");
+                invocaMetodo(controller, "onCambio");
                 assertEquals("I", searchTypeButton.getText()); 
 
-                invokeMethod(controller, "onCambio");
+                invocaMetodo(controller, "onCambio");
                 assertEquals("T", searchTypeButton.getText()); 
 
             } catch (Exception e) {
@@ -327,7 +327,7 @@ public class TabellaLibroControllerTest {
             cercaField.setText("Java Programming");
 
             try {
-                invokeMethod(controller, "onCerca");
+                invocaMetodo(controller, "onCerca");
             } catch (Exception e) {
                 fail(e.getMessage());
             }
@@ -357,7 +357,7 @@ public class TabellaLibroControllerTest {
             cercaField.setText("Testo di ricerca");
             
             try {
-                invokeMethod(controller, "onCancellaCerca");
+                invocaMetodo(controller, "onCancellaCerca");
             } catch (Exception e) {
                 fail(e.getMessage());
             }
@@ -389,13 +389,13 @@ public class TabellaLibroControllerTest {
                 rimozioneButton.setDisable(true);
                 tabella.setEditable(false);
 
-                invokeMethod(controller, "onModifica");
+                invocaMetodo(controller, "onModifica");
 
                 assertEquals("Termina modifica", modificaButton.getText());
                 assertTrue(tabella.isEditable());
                 assertFalse(rimozioneButton.isDisable());
 
-                invokeMethod(controller, "onModifica");
+                invocaMetodo(controller, "onModifica");
 
                 assertEquals("Modifica", modificaButton.getText());
                 assertFalse(tabella.isEditable());

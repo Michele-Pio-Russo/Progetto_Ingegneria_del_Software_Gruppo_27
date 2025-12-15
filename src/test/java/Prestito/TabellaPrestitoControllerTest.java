@@ -128,29 +128,29 @@ public class TabellaPrestitoControllerTest {
         tabella = new TableView<>();
 
         // Injection via Reflection
-        injectField(controller, "nome", nomeField);
-        injectField(controller, "cognome", cognomeField);
-        injectField(controller, "titolo", titoloField);
-        injectField(controller, "isbn", isbnField);
-        injectField(controller, "scadenza", scadenzaField);
-        injectField(controller, "cercaField", cercaField);
+        impostaCampo(controller, "nome", nomeField);
+        impostaCampo(controller, "cognome", cognomeField);
+        impostaCampo(controller, "titolo", titoloField);
+        impostaCampo(controller, "isbn", isbnField);
+        impostaCampo(controller, "scadenza", scadenzaField);
+        impostaCampo(controller, "cercaField", cercaField);
 
-        injectField(controller, "aggiuntaPre", aggiuntaPreButton);
-        injectField(controller, "aggiunta", aggiuntaButton);
-        injectField(controller, "rimozione", rimozioneButton);
-        injectField(controller, "modifica", modificaButton);
-        injectField(controller, "esci", esciButton);
-        injectField(controller, "searchType", searchTypeButton);
-        injectField(controller, "X", xButton);
-        injectField(controller, "cerca", cercaButton);
-        injectField(controller, "tabella", tabella);
+        impostaCampo(controller, "aggiuntaPre", aggiuntaPreButton);
+        impostaCampo(controller, "aggiunta", aggiuntaButton);
+        impostaCampo(controller, "rimozione", rimozioneButton);
+        impostaCampo(controller, "modifica", modificaButton);
+        impostaCampo(controller, "esci", esciButton);
+        impostaCampo(controller, "searchType", searchTypeButton);
+        impostaCampo(controller, "X", xButton);
+        impostaCampo(controller, "cerca", cercaButton);
+        impostaCampo(controller, "tabella", tabella);
 
         // Injection delle colonne
-        injectField(controller, "nomeCol", new TableColumn<Prestito, String>());
-        injectField(controller, "cognomeCol", new TableColumn<Prestito, String>());
-        injectField(controller, "titoloCol", new TableColumn<Prestito, String>());
-        injectField(controller, "isbnCol", new TableColumn<Prestito, String>());
-        injectField(controller, "scadenzaCol", new TableColumn<Prestito, LocalDate>());
+        impostaCampo(controller, "nomeCol", new TableColumn<Prestito, String>());
+        impostaCampo(controller, "cognomeCol", new TableColumn<Prestito, String>());
+        impostaCampo(controller, "titoloCol", new TableColumn<Prestito, String>());
+        impostaCampo(controller, "isbnCol", new TableColumn<Prestito, String>());
+        impostaCampo(controller, "scadenzaCol", new TableColumn<Prestito, LocalDate>());
 
         Platform.runLater(() -> {
             try {
@@ -177,7 +177,7 @@ public class TabellaPrestitoControllerTest {
      *
      * @return void
      */
-    private void injectField(Object target, String fieldName, Object value) throws Exception {
+    private void impostaCampo(Object target, String fieldName, Object value) throws Exception {
         Field field = target.getClass().getDeclaredField(fieldName);
         field.setAccessible(true);
         field.set(target, value);
@@ -193,7 +193,7 @@ public class TabellaPrestitoControllerTest {
      *
      * @return void
      */
-    private void invokeMethod(Object target, String methodName) throws Exception {
+    private void invocaMetodo(Object target, String methodName) throws Exception {
         Method method = target.getClass().getDeclaredMethod(methodName);
         method.setAccessible(true);
         method.invoke(target);
@@ -217,7 +217,7 @@ public class TabellaPrestitoControllerTest {
                 nomeField.setDisable(true);
                 aggiuntaPreButton.setDisable(true);
 
-                invokeMethod(controller, "onAggiungi");
+                invocaMetodo(controller, "onAggiungi");
 
                 assertFalse(nomeField.isDisable());
                 assertFalse(cognomeField.isDisable());
@@ -265,7 +265,7 @@ public class TabellaPrestitoControllerTest {
                 
                 aggiuntaPreButton.setDisable(false);
 
-                invokeMethod(controller, "onAggiungiPre");
+                invocaMetodo(controller, "onAggiungiPre");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -304,10 +304,10 @@ public class TabellaPrestitoControllerTest {
             try {
                 assertEquals("N", searchTypeButton.getText());
 
-                invokeMethod(controller, "onCambio");
+                invocaMetodo(controller, "onCambio");
                 assertEquals("T", searchTypeButton.getText());
 
-                invokeMethod(controller, "onCambio");
+                invocaMetodo(controller, "onCambio");
                 assertEquals("N", searchTypeButton.getText());
 
             } catch (Exception e) {
@@ -346,7 +346,7 @@ public class TabellaPrestitoControllerTest {
             cercaField.setText("Mario");
 
             try {
-                invokeMethod(controller, "onCerca");
+                invocaMetodo(controller, "onCerca");
             } catch (Exception e) {
                 fail(e.getMessage());
             }
@@ -375,7 +375,7 @@ public class TabellaPrestitoControllerTest {
         Platform.runLater(() -> {
             cercaField.setText("Testo");
             try {
-                invokeMethod(controller, "onCancellaCerca");
+                invocaMetodo(controller, "onCancellaCerca");
             } catch (Exception e) {
                 fail(e.getMessage());
             }
@@ -404,13 +404,13 @@ public class TabellaPrestitoControllerTest {
                 assertEquals("Modifica", modificaButton.getText());
                 assertFalse(tabella.isEditable());
 
-                invokeMethod(controller, "onModifica");
+                invocaMetodo(controller, "onModifica");
                 
                 assertEquals("Termina modifica", modificaButton.getText());
                 assertTrue(tabella.isEditable());
                 assertFalse(rimozioneButton.isDisable());
 
-                invokeMethod(controller, "onModifica");
+                invocaMetodo(controller, "onModifica");
                 
                 assertEquals("Modifica", modificaButton.getText());
                 assertFalse(tabella.isEditable());
