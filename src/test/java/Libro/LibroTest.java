@@ -18,13 +18,13 @@ public class LibroTest {
 
     private static final double DELTA = 0.001; ///@brief Tolleranza per il confronto di valori double
     
-    private final String TITOLO_TEST = "Il Signore degli Anelli";
-    private final String AUTORE_TEST = "J.R.R. Tolkien";
-    private final String ISBN_TEST = "978-8845292613";
-    private final int ANNO_TEST = 1954;
-    private final double PREZZO_TEST = 18.50;
-    private final String USURA_TEST = "Nuovo";
-    private final int COPIE_TEST = 5;
+    private final String TITOLO_TEST = "Il Signore degli Anelli";   ///@brief String placeholder utilizzata per contenere il titolo da usare nei test
+    private final String AUTORE_TEST = "J.R.R. Tolkien";    ///@brief String placeholder utilizzata per contenere l'autore da usare nei test
+    private final String ISBN_TEST = "978-8845292613";  ///@brief String placeholder utilizzata per contenere il codice isbn da usare nei test
+    private final int ANNO_TEST = 1954; ///@brief String placeholder utilizzata per contenere l'anno da usare nei test
+    private final double PREZZO_TEST = 18.50;   ///@brief String placeholder utilizzata per contenere il prezzo da usare nei test
+    private final String USURA_TEST = "Nuovo";  ///@brief String placeholder utilizzata per contenere l'usura da usare nei test
+    private final int COPIE_TEST = 5;   ///@brief String placeholder utilizzata per contenere il numero di copie da usare nei test
 
     /**
      * @brief Metodo di supporto per creare un libro di test

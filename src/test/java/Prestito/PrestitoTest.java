@@ -18,15 +18,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PrestitoTest {
     
-    private final String NOME_UTENTE = "Mario";
-    private final String COGNOME_UTENTE = "Rossi";
-    private final String MATRICOLA_UTENTE = "M12345";
-    private final String EMAIL_UTENTE = "mario.rossi@mail.it";
-    private final LocalDate ISCRIZIONE_UTENTE = LocalDate.of(2024, 1, 1);
+    private final String NOME_UTENTE = "Mario"; ///@brief String placeholder utilizzata per contenere il nome da usare nei test
+    private final String COGNOME_UTENTE = "Rossi";  ///@brief String placeholder utilizzata per contenere il cognome da usare nei test
+    private final String MATRICOLA_UTENTE = "M12345";   ///@brief String placeholder utilizzata per contenere la matricola da usare nei test
+    private final String EMAIL_UTENTE = "mario.rossi@mail.it";  ///@brief String placeholder utilizzata per contenere l'email da usare nei test
+    private final LocalDate ISCRIZIONE_UTENTE = LocalDate.of(2024, 1, 1);   ///@brief String placeholder utilizzata per contenere la data d'iscrizione da usare nei test
     
-    private final String TITOLO_LIBRO = "Codice Pulito";
-    private final String ISBN_LIBRO = "978-0132350884";
-    private final LocalDate DATA_SCADENZA_TEST = LocalDate.of(2025, 12, 13).plusDays(30);
+    private final String TITOLO_LIBRO = "Codice Pulito";    ///@brief String placeholder utilizzata per contenere il titolo da usare nei test
+    private final String ISBN_LIBRO = "978-0132350884"; ///@brief String placeholder utilizzata per contenere il codice isbn da usare nei test
+    private final LocalDate DATA_SCADENZA_TEST = LocalDate.of(2025, 12, 13).plusDays(30);   ///@brief String placeholder utilizzata per contenere la data di scadenza da usare nei test
     
     /**
      * @brief Metodo helper per creare un Utente di test standardizzato

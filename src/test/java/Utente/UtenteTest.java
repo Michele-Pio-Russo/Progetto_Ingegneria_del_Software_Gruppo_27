@@ -1,4 +1,4 @@
-    \/**
+    /**
  * @file TabellaUtenteTest.java
  * @brief Classe di test per la classe Utente
  * 
@@ -18,12 +18,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UtenteTest {
     
-    private final String NOME_TEST = "Giulia";
-    private final String COGNOME_TEST = "Bianchi";
-    private final String MATRICOLA_TEST = "M987654";
-    private final String EMAIL_TEST = "giulia.bianchi@esempio.it";
-    private final LocalDate ISCRIZIONE_TEST = LocalDate.of(2024, 9, 1);
-    private final int LIBRI_IN_PRESTITO_BASE = 0; 
+    private final String NOME_TEST = "Giulia";  ///@brief String placeholder utilizzata per contenere il nome da usare nei test
+    private final String COGNOME_TEST = "Bianchi";  ///@brief String placeholder utilizzata per contenere il cognome da usare nei test
+    private final String MATRICOLA_TEST = "M987654";    ///@brief String placeholder utilizzata per contenere la matricola da usare nei test
+    private final String EMAIL_TEST = "giulia.bianchi@esempio.it";  ///@brief String placeholder utilizzata per contenere l'email da usare nei test
+    private final LocalDate ISCRIZIONE_TEST = LocalDate.of(2024, 9, 1); ///@brief String placeholder utilizzata per contenere la data d'iscrizione da usare nei test
+    private final int LIBRI_IN_PRESTITO_BASE = 0;   ///@brief String placeholder utilizzata per contenere il numero di libri in prestito da usare nei test
 
     /**
      * @brief Metodo di supporto per creare un utente di test
