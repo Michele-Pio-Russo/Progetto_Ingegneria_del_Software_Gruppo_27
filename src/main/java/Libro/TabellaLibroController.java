@@ -108,10 +108,13 @@ public class TabellaLibroController {
     @FXML
     private TableColumn<Libro, String> usuraCol; ///@brief Colonna che contiene la condizione di usura dei libri che sono stati inseriti
     
+    @FXML
     private TabellaLibroModel tabellaLibroModel; ///@brief Model associato al controller
     
+    @FXML
     private Stage principale;///@brief Stage unico dell'applicazione
     
+    @FXML
     private Scene scenaPrincipale;///@brief Scena iniziale dell'applicazione
     
    

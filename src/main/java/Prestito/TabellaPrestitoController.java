@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.LocalDateStringConverter;
 
 public class TabellaPrestitoController {
-@FXML
+    @FXML
     private Button aggiunta; ///@brief Bottone che permette di sbloccare la sezione dell'interfaccia per inserire nuovi prestiti nella tabella dei prestiti
     
     @FXML
