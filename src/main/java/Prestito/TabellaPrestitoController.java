@@ -4,7 +4,7 @@
  *
  * Il controller permette di aggiungere, modificare, emilinare dei prestiti dalla tabella dei prestiti
  *
- * @author Michele Pio Russo
+ * @author Gruppo 27
  * @date 8 Dicembre 2025
  * @version 1.0
  */

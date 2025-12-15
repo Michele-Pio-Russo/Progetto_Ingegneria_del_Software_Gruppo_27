@@ -4,7 +4,7 @@
  *
  * Questo model permette di aggiungere e rimuovere libri
  *
- * @author Gerardo Russo
+ * @author Gruppo 27
  * @date 8 dicembre 2025
  * @version 1.0
  */

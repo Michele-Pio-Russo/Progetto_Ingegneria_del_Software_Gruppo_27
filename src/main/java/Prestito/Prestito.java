@@ -6,7 +6,7 @@
  * ottenere e modificare informazioni relative agli attributi, inoltre il metodo toString permette di stampare 
  * le informazioni relative alla classe Prestito
  *
- * @author Gianmichele Trotta
+ * @author Gruppo 27
  * @date 8 Dicembre 2025
  * @version 1.0
  */

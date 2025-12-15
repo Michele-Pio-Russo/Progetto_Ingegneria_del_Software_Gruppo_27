@@ -1,3 +1,13 @@
+/**
+ * @file MainController.java
+ * @brief Questo file contiene il controller del main
+ *
+ * Questa classe permette di gestire il main
+ *
+ * @author Gruppo 27
+ * @date 8 dicembre 2025
+ * @version 1.0
+ */
 package it.unisa.diem.oop.progetto_ing_software_libreria;
 
 import java.net.URL;

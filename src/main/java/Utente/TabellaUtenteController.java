@@ -4,7 +4,7 @@
      *
      * Il controller permette di aggiungere, modificare, emilinare degli utenti dalla tabella dei utenti
      *
-     * @author Michele Pio Russo
+     * @author Gruppo 27
      * @date 8 Dicembre 2025
      * @version 1.0
      */

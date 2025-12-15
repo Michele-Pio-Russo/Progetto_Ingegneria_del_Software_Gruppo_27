@@ -1,3 +1,13 @@
+/**
+ * @file LibreriaMainApp.java
+ * @brief Questo file contiene il main del progetto
+ *
+ * Questa classe permette di eseguire il progetto
+ *
+ * @author Gruppo 27
+ * @date 8 dicembre 2025
+ * @version 1.0
+ */
 package it.unisa.diem.oop.progetto_ing_software_libreria;
 
 import javafx.application.Application;
