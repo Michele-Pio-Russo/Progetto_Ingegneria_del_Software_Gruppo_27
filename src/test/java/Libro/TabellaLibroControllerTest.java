@@ -88,16 +88,13 @@ public class TabellaLibroControllerTest {
     void setUp() throws Exception {
         controller = new TabellaLibroController();
         
-        // Istanziamo il modello VERO. 
-        // Nota: Questo potrebbe tentare di caricare/salvare file reali su disco.
+        
         model = new TabellaLibroModel(); 
         
-        // Resettiamo la lista del model per partire puliti ad ogni test
         if (model.getLibri() != null) {
             model.getLibri().clear();
         }
 
-        // --- Inizializzazione Componenti Grafici ---
         titoloField = new TextField();
         autoreField = new TextField();
         isbnField = new TextField();
@@ -119,7 +116,6 @@ public class TabellaLibroControllerTest {
         
         tabella = new TableView<>();
 
-        // --- Injection dei campi tramite Reflection ---
         injectField(controller, "titolo", titoloField);
         injectField(controller, "autore", autoreField);
         injectField(controller, "isbn", isbnField);
@@ -147,21 +143,18 @@ public class TabellaLibroControllerTest {
         injectField(controller, "prezzoCol", new TableColumn<Libro, Double>());
         injectField(controller, "usuraCol", new TableColumn<Libro, String>());
 
-        // --- Configurazione del Controller ---
         Platform.runLater(() -> {
             try {
-                // Simuliamo la chiamata automatica di @FXML initialize()
                 Method initMethod = TabellaLibroController.class.getDeclaredMethod("initialize");
                 initMethod.setAccessible(true);
                 initMethod.invoke(controller);
                 
-                // Impostiamo il model e Stage/Scene a null (non usati in questi test specifici)
                 controller.setModel(model, null, null);
             } catch (Exception e) {
-                e.printStackTrace(); // Utile per debuggare reflection
+                e.printStackTrace();
             }
         });
-        Thread.sleep(100); // Breve attesa per assicurare che initialize abbia finito
+        Thread.sleep(100); 
     }
 
     /**
@@ -212,14 +205,11 @@ public class TabellaLibroControllerTest {
     void testAbilitaInserimento() throws Exception {
         Platform.runLater(() -> {
             try {
-                // Setup iniziale
                 titoloField.setDisable(true);
                 aggiuntaLibButton.setDisable(true);
 
-                // Azione: Clicca su "Aggiungi" (quello che sblocca i campi)
                 invokeMethod(controller, "onAggiungi");
 
-                // Verifica
                 assertFalse(titoloField.isDisable());
                 assertFalse(autoreField.isDisable());
                 assertFalse(aggiuntaLibButton.isDisable());
@@ -247,7 +237,6 @@ public class TabellaLibroControllerTest {
 
         Platform.runLater(() -> {
             try {
-                // 1. Popoliamo i campi di testo
                 titoloField.setText("Il Signore degli Anelli");
                 autoreField.setText("Tolkien");
                 isbnField.setText("888888");
@@ -256,10 +245,8 @@ public class TabellaLibroControllerTest {
                 usuraField.setText("Nuovo");
                 copieField.setText("10");
                 
-                // Abilitiamo il bottone (simulando che l'utente abbia cliccato prima su "Nuovo")
                 aggiuntaLibButton.setDisable(false);
 
-                // 2. Invochiamo l'azione di salvataggio
                 invokeMethod(controller, "onAggiungiLib");
 
             } catch (Exception e) {
@@ -272,14 +259,12 @@ public class TabellaLibroControllerTest {
 
         latch.await(2, TimeUnit.SECONDS);
 
-        // 3. Verifiche sul Model Reale
         assertFalse(model.getLibri().isEmpty(), "La lista dei libri non deve essere vuota");
         
         Libro l = model.getLibri().get(model.getLibri().size() - 1);
         assertEquals("Il Signore degli Anelli", l.getTitolo());
         assertEquals("Tolkien", l.getAutore());
         
-        // 4. Verifica UI (Campi puliti e disabilitati)
         assertTrue(titoloField.getText().isEmpty());
         assertTrue(titoloField.isDisable());
     }
@@ -299,16 +284,16 @@ public class TabellaLibroControllerTest {
     void testCambioTipoRicerca() throws Exception {
         Platform.runLater(() -> {
             try {
-                searchTypeButton.setText("T"); // Partiamo da Titolo
+                searchTypeButton.setText("T"); 
                 
                 invokeMethod(controller, "onCambio");
-                assertEquals("A", searchTypeButton.getText()); // Autore
+                assertEquals("A", searchTypeButton.getText()); 
 
                 invokeMethod(controller, "onCambio");
-                assertEquals("I", searchTypeButton.getText()); // ISBN
+                assertEquals("I", searchTypeButton.getText()); 
 
                 invokeMethod(controller, "onCambio");
-                assertEquals("T", searchTypeButton.getText()); // Titolo
+                assertEquals("T", searchTypeButton.getText()); 
 
             } catch (Exception e) {
                 fail(e.getMessage());
@@ -330,16 +315,14 @@ public class TabellaLibroControllerTest {
      */
     @Test
     void testRicercaPerTitolo() throws Exception {
-        // Creiamo e aggiungiamo libri direttamente al model reale
         Libro l1 = new Libro("Java Programming", "Rossi", "111", 2020, 20.0f, "Nuovo", 5);
         Libro l2 = new Libro("C++ Guide", "Verdi", "222", 2019, 30.0f, "Usato", 3);
 
         Platform.runLater(() -> {
             model.getLibri().addAll(l1, l2);
-            // Forza aggiornamento vista
+            
             tabella.setItems(model.getLibri());
 
-            // Impostiamo GUI per ricerca
             searchTypeButton.setText("T");
             cercaField.setText("Java Programming");
 
@@ -371,7 +354,6 @@ public class TabellaLibroControllerTest {
     @Test
     void testCancellaCerca() throws Exception {
         Platform.runLater(() -> {
-            // Setup stato "sporco"
             cercaField.setText("Testo di ricerca");
             
             try {
@@ -380,9 +362,8 @@ public class TabellaLibroControllerTest {
                 fail(e.getMessage());
             }
 
-            // Verifiche
             assertTrue(cercaField.getText().isEmpty());
-            // La tabella deve mostrare di nuovo tutti i libri presenti nel model
+
             assertEquals(model.getLibri().size(), tabella.getItems().size());
         });
         Thread.sleep(200);
@@ -403,19 +384,17 @@ public class TabellaLibroControllerTest {
     void testAttivaModalitaModifica() throws Exception {
         Platform.runLater(() -> {
             try {
-                // Stato iniziale
+
                 modificaButton.setText("Modifica");
                 rimozioneButton.setDisable(true);
                 tabella.setEditable(false);
 
-                // --- Attivazione ---
                 invokeMethod(controller, "onModifica");
 
                 assertEquals("Termina modifica", modificaButton.getText());
                 assertTrue(tabella.isEditable());
                 assertFalse(rimozioneButton.isDisable());
 
-                // --- Disattivazione ---
                 invokeMethod(controller, "onModifica");
 
                 assertEquals("Modifica", modificaButton.getText());

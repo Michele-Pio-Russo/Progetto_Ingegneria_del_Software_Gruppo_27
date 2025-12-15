@@ -109,7 +109,9 @@ public class TabellaPrestitoModel {
     public void rimuoviPrestito(Prestito p) { 
         prestiti.remove(p);
     }
-        /**
+    
+    
+     /**
      * @brief Salvataggio su file binario tramite ObjectOutputStream.
      * Viene salvata una List<Prestito>.
      * 
