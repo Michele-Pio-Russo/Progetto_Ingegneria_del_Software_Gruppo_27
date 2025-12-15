@@ -133,7 +133,6 @@ public class TabellaLibroControllerTest {
         impostaCampo(controller, "X", xButton);
         impostaCampo(controller, "tabella", tabella);
 
-        // Injection delle colonne (necessarie perché il metodo initialize() le usa)
         impostaCampo(controller, "titoloCol", new TableColumn<Libro, String>());
         impostaCampo(controller, "autoreCol", new TableColumn<Libro, String>());
         impostaCampo(controller, "isbnCol", new TableColumn<Libro, String>());

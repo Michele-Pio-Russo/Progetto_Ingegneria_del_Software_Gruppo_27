@@ -142,6 +142,7 @@ public class TabellaPrestitoModelTest {
         assertEquals(sizeIniziale + 1, model.getPrestiti().size());
         assertTrue(model.getPrestiti().contains(prestitoTest));
         
+        // Test aggiunta secondo elemento
         Prestito prestitoDuplicato = new Prestito(utenteTest, libroTest, dataScadenzaTest.plusDays(1));
         model.aggiungiPrestito(utenteTest, libroTest, dataScadenzaTest.plusDays(1));
         assertEquals(sizeIniziale + 2, model.getPrestiti().size());

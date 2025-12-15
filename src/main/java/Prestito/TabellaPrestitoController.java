@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.LocalDateStringConverter;
 
 public class TabellaPrestitoController {
-    @FXML
+@FXML
     private Button aggiunta; ///@brief Bottone che permette di sbloccare la sezione dell'interfaccia per inserire nuovi prestiti nella tabella dei prestiti
     
     @FXML
@@ -95,20 +95,11 @@ public class TabellaPrestitoController {
     @FXML
     private TableColumn<Prestito, String> cognomeCol; ///@brief Colonna che contiene il prezzo dei libri associati ai prestiti
 
-    @FXML
     private TabellaPrestitoModel tabellaPrestitoModel; ///@brief Model associato al controller, gestisce la logica dei dati dei prestiti
-    
-    @FXML
-    private Scene scenaPrincipale; ///@brief Scena iniziale dell'applicazione
-    
-    @FXML
-    private Stage principale; ///@brief Stage unico dell'applicazione
-    
-    @FXML
-    private TabellaLibroModel tabellaLibroModel; ///@brief Model associato al controller di libro
-    
-    @FXML
-    private TabellaUtenteModel tabellaUtenteModel;///@brief Model associato al controller di utente
+    private Scene scenaPrincipale;
+    private Stage principale;
+    private TabellaLibroModel tabellaLibroModel;
+    private TabellaUtenteModel tabellaUtenteModel;
     
     /**
      * @brief Metodo di inizializzazione chiamato automaticamente dal JavaFX Loader

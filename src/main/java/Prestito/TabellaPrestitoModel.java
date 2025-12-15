@@ -34,7 +34,7 @@ import javafx.collections.ObservableList;
 
 public class TabellaPrestitoModel {
         private ObservableList<Prestito> prestiti; /// @brief Questa ObservableList è una lista che contiene tutti i prestiti
-        private final String FILE_BINARIO = "prestiti.bin"; /// @brief File binario utilizzato per salvare i prestiti
+        private final String FILE_BINARIO = "prestiti.bin";
         
                /**
  * @brief Costruttore della classe TabellaPrestitoModel
@@ -109,9 +109,7 @@ public class TabellaPrestitoModel {
     public void rimuoviPrestito(Prestito p) { 
         prestiti.remove(p);
     }
-    
-    
-     /**
+        /**
      * @brief Salvataggio su file binario tramite ObjectOutputStream.
      * Viene salvata una List<Prestito>.
      * 

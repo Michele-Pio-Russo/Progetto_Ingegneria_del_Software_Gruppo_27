@@ -1,12 +1,3 @@
-/**
- * @file MainController.java
- * @brief Controller principale per la gestione del menu iniziale della libreria
- *  Questa classe gestisce la navigazione tra le varie sezioni dell'applicazione (Utenti, Libri, Prestiti) cambiando la scena visualizzata sullo stage principale. 
- * @author Gruppo 27
- * @date 15 Dicembre 2025
- * @version 1.0
- */
-
 package it.unisa.diem.oop.progetto_ing_software_libreria;
 
 import java.net.URL;
@@ -38,16 +29,10 @@ public class MainController implements Initializable {
     @FXML
     private Button esci;     ///@brief Questo bottone serve per chiudere l'applicazione
 
-    @FXML
+    
     private Stage mainStage;     ///@brief Riferimento allo stage (finestra) principale dell'applicazione
-    
-    @FXML
     private Scene sceneUtente;   ///@brief Riferimento alla scena che contiene l'interfaccia di gestione Utenti
-    
-    @FXML
     private Scene sceneLibro;    ///@brief Riferimento alla scena che contiene l'interfaccia di gestione Libri
-    
-    @FXML
     private Scene scenePrestito; ///@brief Riferimento alla scena che contiene l'interfaccia di gestione Prestiti
 
     /**

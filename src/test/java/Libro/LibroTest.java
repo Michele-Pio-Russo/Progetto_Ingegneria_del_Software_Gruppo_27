@@ -26,6 +26,7 @@ public class LibroTest {
     private final String USURA_TEST = "Nuovo";  ///@brief String placeholder utilizzata per contenere l'usura da usare nei test
     private final int COPIE_TEST = 5;   ///@brief String placeholder utilizzata per contenere il numero di copie da usare nei test
 
+
     /**
      * @brief Metodo di supporto per creare un libro di test
      *

@@ -27,6 +27,7 @@ public class PrestitoTest {
     private final String TITOLO_LIBRO = "Codice Pulito";    ///@brief String placeholder utilizzata per contenere il titolo da usare nei test
     private final String ISBN_LIBRO = "978-0132350884"; ///@brief String placeholder utilizzata per contenere il codice isbn da usare nei test
     private final LocalDate DATA_SCADENZA_TEST = LocalDate.of(2025, 12, 13).plusDays(30);   ///@brief String placeholder utilizzata per contenere la data di scadenza da usare nei test
+
     
     /**
      * @brief Metodo helper per creare un Utente di test standardizzato
