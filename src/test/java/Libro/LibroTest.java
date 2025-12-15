@@ -5,7 +5,7 @@
  * Questa classe verifica il corretto funzionamento dei metodi della classe Libro
  * inclusi costruttore, getter, setter, equals e toString.
  *
- * @author Luca Longo
+ * @author Gruppo 27
  * @date 15 Dicembre 2025
  * @version 1.0
  */

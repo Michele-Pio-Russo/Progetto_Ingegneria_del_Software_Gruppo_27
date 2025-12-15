@@ -1,3 +1,11 @@
+/**
+ * @file TabellaPrestitoModelTest.java
+ * @brief principale (Entry Point) dell'applicazione Gestione Libreria.
+ * Questa classe si occupa di inizializzare l'ambiente JavaFX, caricare le viste FXML, istanziare i modelli (Model) e i controller, e collegare le dipendenze tra loro secondo il pattern MVC.
+ * @author Gruppo 27
+ * @date 15 Dicembre 2025
+ * @version 1.0
+ */
 package it.unisa.diem.oop.progetto_ing_software_libreria;
 
 import javafx.application.Application;
@@ -10,13 +18,7 @@ import Utente.*;
 import Prestito.*;
 import java.net.URL;
 
-/**
- * @file LibreriaMainApp.java
- * @brief Classe principale (Entry Point) dell'applicazione Gestione Libreria.
- * * Questa classe si occupa di inizializzare l'ambiente JavaFX, caricare le viste FXML,
- * istanziare i modelli (Model) e i controller, e collegare le dipendenze tra loro
- * secondo il pattern MVC.
- */
+
 public class LibreriaMainApp extends Application {
 
     /**

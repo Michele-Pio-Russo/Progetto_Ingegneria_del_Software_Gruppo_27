@@ -1,3 +1,12 @@
+/**
+ * @file PrestitoTest.java
+ * @brief Questo file contiene i test unitari per la classe Prestito che gestisce l'associazione tra Utente e Libro
+ *
+ * @author Gruppo 27
+ * @date 15 Dicembre 2025
+ * @version 1.0
+ */
+
 package Prestito;
 
 import Libro.Libro;
@@ -5,6 +14,7 @@ import Utente.Utente;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
 
 public class PrestitoTest {
     
@@ -18,18 +28,53 @@ public class PrestitoTest {
     private final String ISBN_LIBRO = "978-0132350884";
     private final LocalDate DATA_SCADENZA_TEST = LocalDate.of(2025, 12, 13).plusDays(30);
     
+    /**
+     * @brief Metodo helper per creare un Utente di test standardizzato
+     *
+     * @pre Nessuna
+     * @post Restituisce un oggetto Utente popolato con le costanti definite
+     *
+     * @return Un'istanza valida di Utente
+     */
     private Utente createTestUtente() {
         return new Utente(NOME_UTENTE, COGNOME_UTENTE, MATRICOLA_UTENTE, EMAIL_UTENTE, ISCRIZIONE_UTENTE);
     }
     
+    /**
+     * @brief Metodo helper per creare un Libro di test standardizzato
+     *
+     * @pre Nessuna
+     * @post Restituisce un oggetto Libro popolato con le costanti definite
+     *
+     * @return Un'istanza valida di Libro
+     */
     private Libro createTestLibro() {
         return new Libro(TITOLO_LIBRO, "Robert C. Martin", ISBN_LIBRO, 2008, 30.0, "Ottimo", 2);
     }
     
+    /**
+     * @brief Metodo helper per creare un Prestito di test
+     *
+     * @pre Devono essere forniti un Utente, un Libro e una data valida
+     * @post Restituisce un oggetto Prestito che associa l'utente al libro
+     * @param[in] utente L'utente che richiede il prestito
+     * @param[in] libro Il libro oggetto del prestito
+     * @param[in] scadenza La data di scadenza del prestito
+     *
+     * @return Un'istanza valida di Prestito
+     */
     private Prestito createTestPrestito(Utente utente, Libro libro, LocalDate scadenza) {
         return new Prestito(utente, libro, scadenza);
     }
 
+    /**
+     * @brief Test del costruttore e dei metodi getter per verificare la corretta inizializzazione
+     *
+     * @pre Nessuna precondizione
+     * @post L'oggetto viene creato non nullo e i valori restituiti corrispondono a quelli attesi
+     *
+     * @return void
+     */
     @Test
     public void testCostruttoreAndGetters() {
         System.out.println("Test: Costruttore e Getters");
@@ -47,6 +92,14 @@ public class PrestitoTest {
         assertEquals(DATA_SCADENZA_TEST, instance.getDataDiScadenza());
     }
 
+    /**
+     * @brief Test dei setter relativi all'Utente associato al prestito
+     *
+     * @pre Esiste un'istanza valida di Prestito
+     * @post I dati dell'utente vengono aggiornati sia nel prestito che nell'oggetto Utente originale
+     *
+     * @return void
+     */
     @Test
     public void testSettersUtente() {
         System.out.println("Test: setNome / setCognome");
@@ -68,6 +121,14 @@ public class PrestitoTest {
         assertEquals(nuovoNome, utenteTest.getNome());
     }
     
+    /**
+     * @brief Test dei setter relativi al Libro associato al prestito
+     *
+     * @pre Esiste un'istanza valida di Prestito
+     * @post I dati del libro vengono aggiornati sia nel prestito che nell'oggetto Libro originale
+     *
+     * @return void
+     */
     @Test
     public void testSettersLibro() {
         System.out.println("Test: setTitolo / setIsbn");
@@ -89,6 +150,14 @@ public class PrestitoTest {
         assertEquals(nuovoTitolo, libroTest.getTitolo());
     }
 
+    /**
+     * @brief Test della modifica della data di scadenza del prestito
+     *
+     * @pre Esiste un'istanza valida di Prestito con una data iniziale
+     * @post La data di scadenza viene aggiornata correttamente al nuovo valore
+     *
+     * @return void
+     */
     @Test
     public void testSetDataDiScadenza() {
         System.out.println("Test: setDataDiScadenza");
@@ -103,6 +172,14 @@ public class PrestitoTest {
         assertEquals(nuovaData, instance.getDataDiScadenza());
     }
     
+    /**
+     * @brief Test del metodo equals per verificare l'uguaglianza tra prestiti
+     *
+     * @pre Vengono create istanze diverse con combinazioni di Nome Utente e ISBN uguali o diversi
+     * @post Restituisce true se Nome Utente e ISBN corrispondono, false altrimenti
+     *
+     * @return void
+     */
     @Test
     public void testEquals() {
         System.out.println("Test: equals() (Nome Utente E ISBN Libro)");
@@ -132,6 +209,14 @@ public class PrestitoTest {
         assertFalse(instance.equals("Sono una Stringa"));
     }
 
+    /**
+     * @brief Test del metodo toString per la rappresentazione testuale dell'oggetto
+     *
+     * @pre L'oggetto Prestito e i suoi componenti (Utente, Libro) sono inizializzati
+     * @post La stringa generata deve contenere la formattazione corretta dei dati interni
+     *
+     * @return void
+     */
     @Test
     public void testToString() {
         System.out.println("Test: toString()");

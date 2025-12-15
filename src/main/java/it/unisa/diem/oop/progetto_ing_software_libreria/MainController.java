@@ -1,3 +1,12 @@
+/**
+ * @file MainController.java
+ * @brief Controller principale per la gestione del menu iniziale della libreria
+ *  Questa classe gestisce la navigazione tra le varie sezioni dell'applicazione (Utenti, Libri, Prestiti) cambiando la scena visualizzata sullo stage principale. 
+ * @author Gruppo 27
+ * @date 15 Dicembre 2025
+ * @version 1.0
+ */
+
 package it.unisa.diem.oop.progetto_ing_software_libreria;
 
 import java.net.URL;

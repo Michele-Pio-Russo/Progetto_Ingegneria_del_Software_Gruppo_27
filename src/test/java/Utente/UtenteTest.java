@@ -1,3 +1,12 @@
+/**
+ * @file TabellaUtenteTest.java
+ * @brief Questo file contiene i test unitari per il modello (Model) che gestisce i dati dei prestiti
+ *
+ * @author Gruppo 27
+ * @date 15 Dicembre 2025
+ * @version 1.0
+ */
+
 package Utente;
 
 import java.time.LocalDate;

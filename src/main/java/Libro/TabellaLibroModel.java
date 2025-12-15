@@ -26,7 +26,7 @@ import java.util.List;
 
 public class TabellaLibroModel {
         private ObservableList<Libro> libri; /// @brief Questa ObservableList è una lista che contiene tutti i libri
-        private final String FILE_BINARIO = "libri.bin";
+        private final String FILE_BINARIO = "libri.bin";  ///@brief File binario su cui salvare i dati
 
         /**
  * @brief Costruttore della classe TabellaLibroModel

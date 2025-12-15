@@ -1,3 +1,12 @@
+/**
+ * @file TabellaPrestitoModelTest.java
+ * @brief Questo file contiene i test unitari per il modello (Model) che gestisce i dati dei prestiti
+ *
+ * @author Gruppo 27
+ * @date 15 Dicembre 2025
+ * @version 1.0
+ */
+
 package Prestito;
 
 import Libro.Libro;
@@ -8,10 +17,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import java.time.LocalDate;
 
+
 public class TabellaPrestitoModelTest {
     
-    private TabellaPrestitoModel model;
-    private final String FILE_BINARIO = "prestiti.bin";
+    private TabellaPrestitoModel model; /// @brief Istanza del modello da testare
+    private final String FILE_BINARIO = "prestiti.bin"; /// @brief Nome del file per il test di persistenza
 
     private final String NOME_UTENTE = "Mario";
     private final String COGNOME_UTENTE = "Rossi";
@@ -32,6 +42,17 @@ public class TabellaPrestitoModelTest {
     private Prestito prestitoTest;
     private LocalDate dataScadenzaTest;
 
+    /**
+     * @brief Configurazione dell'ambiente prima di ogni test
+     *
+     * Inizializza gli oggetti Utente, Libro e Prestito di test, pulisce eventuali file residui
+     * e istanzia un nuovo modello vuoto.
+     *
+     * @pre Nessun file residuo deve interferire con il test
+     * @post Il modello è pronto e gli oggetti di test sono inizializzati
+     *
+     * @return void
+     */
     @BeforeEach
     public void setUp() {
         cleanupFile();
@@ -45,11 +66,29 @@ public class TabellaPrestitoModelTest {
         model = new TabellaPrestitoModel();
     }
 
+    /**
+     * @brief Pulizia dell'ambiente dopo ogni test
+     *
+     * Rimuove il file binario creato durante l'esecuzione del test.
+     *
+     * @pre Il test è terminato
+     * @post Il file di salvataggio viene eliminato
+     *
+     * @return void
+     */
     @AfterEach
     public void tearDown() {
         cleanupFile();
     }
     
+    /**
+     * @brief Metodo helper privato per eliminare il file binario
+     *
+     * @pre Nessuna
+     * @post Se il file esisteva, viene cancellato
+     *
+     * @return void
+     */
     private void cleanupFile() {
         File file = new File(FILE_BINARIO);
         if (file.exists()) {
@@ -57,6 +96,16 @@ public class TabellaPrestitoModelTest {
         }
     }
 
+    /**
+     * @brief Test del metodo getter per la lista dei prestiti
+     *
+     * Verifica che la lista restituita sia valida (non nulla) e inizialmente vuota.
+     *
+     * @pre Il modello è appena stato istanziato
+     * @post Ritorna una ObservableList vuota
+     *
+     * @return void
+     */
     @Test
     public void testGetPrestiti() {
         System.out.println("testGetPrestiti");
@@ -67,6 +116,17 @@ public class TabellaPrestitoModelTest {
         assertTrue(result.isEmpty());
     }
 
+    /**
+     * @brief Test per l'aggiunta di un nuovo prestito
+     *
+     * Verifica che l'aggiunta incrementi la dimensione della lista e che l'elemento
+     * sia effettivamente presente.
+     *
+     * @pre La lista ha una dimensione N
+     * @post La lista ha dimensione N+1 e contiene il nuovo prestito
+     *
+     * @return void
+     */
     @Test
     public void testAggiungiPrestito() {
         System.out.println("testAggiungiPrestito");
@@ -83,6 +143,16 @@ public class TabellaPrestitoModelTest {
         assertEquals(sizeIniziale + 2, model.getPrestiti().size());
     }
 
+    /**
+     * @brief Test per la rimozione di un prestito esistente
+     *
+     * Verifica che la rimozione decrementi la dimensione della lista e che l'elemento non sia più presente.
+     *
+     * @pre La lista contiene il prestito da rimuovere
+     * @post Il prestito è rimosso e la dimensione della lista diminuisce di 1
+     *
+     * @return void
+     */
     @Test
     public void testRimuoviPrestito() {
         System.out.println("testRimuoviPrestito");
@@ -98,6 +168,16 @@ public class TabellaPrestitoModelTest {
         assertEquals(sizeIniziale - 1, model.getPrestiti().size());
     }
 
+    /**
+     * @brief Test della persistenza dei dati (Salvataggio e Caricamento)
+     *
+     * Verifica che i prestiti salvati su file vengano correttamente ricaricati da una nuova istanza del modello.
+     *
+     * @pre Il modello contiene dei prestiti e viene invocato il salvataggio
+     * @post Una nuova istanza del modello carica correttamente i dati dal file
+     *
+     * @return void
+     */
     @Test
     public void testPersistenza() {
         System.out.println("testPersistenza");
@@ -122,6 +202,17 @@ public class TabellaPrestitoModelTest {
         assertEquals(dataScadenzaTest, prestitoCaricato.getDataDiScadenza());
     }
     
+    /**
+     * @brief Test del comportamento del costruttore in assenza di file di salvataggio
+     *
+     * Verifica che il modello venga inizializzato correttamente (con lista vuota)
+     * anche se il file binario non esiste.
+     *
+     * @pre Il file binario non esiste
+     * @post Il modello è inizializzato senza errori e con lista vuota
+     *
+     * @return void
+     */
     @Test
     public void testCostruttoreSenzaFile() {
         System.out.println("testCostruttoreSenzaFile");
