@@ -37,7 +37,7 @@ public class LibroTest {
      *
      * @return Libro Un'istanza della classe Libro con dati di test.
      */
-    private Libro createTestBook() {
+    private Libro creaTestLibro() {
         return new Libro(TITOLO_TEST, AUTORE_TEST, ISBN_TEST, ANNO_TEST, PREZZO_TEST, USURA_TEST, COPIE_TEST);
     }
 
@@ -53,18 +53,18 @@ public class LibroTest {
      * @return void
      */
     @Test
-    public void testCostruttoreAndGetters() {
+    public void testCostruttoreEGetters() {
         System.out.println("Test: Costruttore e Getters");
         
-        Libro instance = createTestBook();
+        Libro istanza = creaTestLibro();
 
-        assertEquals(TITOLO_TEST, instance.getTitolo(), "Il titolo non corrisponde.");
-        assertEquals(AUTORE_TEST, instance.getAutore(), "L'autore non corrisponde.");
-        assertEquals(ISBN_TEST, instance.getIsbn(), "L'ISBN non corrisponde.");
-        assertEquals(COPIE_TEST, instance.getCopie(), "Il numero di copie non corrisponde.");
-        assertEquals(ANNO_TEST, instance.getAnnoPubblicazione(), "L'anno di pubblicazione non corrisponde.");
-        assertEquals(PREZZO_TEST, instance.getPrezzo(), DELTA, "Il prezzo non corrisponde.");
-        assertEquals(USURA_TEST, instance.getUsura(), "Lo stato di usura non corrisponde.");
+        assertEquals(TITOLO_TEST, istanza.getTitolo(), "Il titolo non corrisponde.");
+        assertEquals(AUTORE_TEST, istanza.getAutore(), "L'autore non corrisponde.");
+        assertEquals(ISBN_TEST, istanza.getIsbn(), "L'ISBN non corrisponde.");
+        assertEquals(COPIE_TEST, istanza.getCopie(), "Il numero di copie non corrisponde.");
+        assertEquals(ANNO_TEST, istanza.getAnnoPubblicazione(), "L'anno di pubblicazione non corrisponde.");
+        assertEquals(PREZZO_TEST, istanza.getPrezzo(), DELTA, "Il prezzo non corrisponde.");
+        assertEquals(USURA_TEST, istanza.getUsura(), "Lo stato di usura non corrisponde.");
     }
 
     /**
@@ -81,7 +81,7 @@ public class LibroTest {
     public void testSetters() {
         System.out.println("Test: Setters");
         
-        Libro instance = createTestBook();
+        Libro istanza = creaTestLibro();
         
         String nuovoTitolo = "Lo Hobbit";
         String nuovoAutore = "Christopher Tolkien";
@@ -91,21 +91,21 @@ public class LibroTest {
         double nuovoPrezzo = 25.99;
         String nuovaUsura = "Usato";
         
-        instance.setTitolo(nuovoTitolo);
-        instance.setAutore(nuovoAutore);
-        instance.setIsbn(nuovoIsbn);
-        instance.setCopie(nuoveCopie);
-        instance.setAnnoPubblicazione(nuovoAnno);
-        instance.setPrezzo(nuovoPrezzo);
-        instance.setUsura(nuovaUsura);
+        istanza.setTitolo(nuovoTitolo);
+        istanza.setAutore(nuovoAutore);
+        istanza.setIsbn(nuovoIsbn);
+        istanza.setCopie(nuoveCopie);
+        istanza.setAnnoPubblicazione(nuovoAnno);
+        istanza.setPrezzo(nuovoPrezzo);
+        istanza.setUsura(nuovaUsura);
         
-        assertEquals(nuovoTitolo, instance.getTitolo(), "setTitolo non ha funzionato.");
-        assertEquals(nuovoAutore, instance.getAutore(), "setAutore non ha funzionato.");
-        assertEquals(nuovoIsbn, instance.getIsbn(), "setIsbn non ha funzionato.");
-        assertEquals(nuoveCopie, instance.getCopie(), "setCopie non ha funzionato.");
-        assertEquals(nuovoAnno, instance.getAnnoPubblicazione(), "setAnnoPubblicazione non ha funzionato.");
-        assertEquals(nuovoPrezzo, instance.getPrezzo(), DELTA, "setPrezzo non ha funzionato.");
-        assertEquals(nuovaUsura, instance.getUsura(), "setUsura non ha funzionato.");
+        assertEquals(nuovoTitolo, istanza.getTitolo(), "setTitolo non ha funzionato.");
+        assertEquals(nuovoAutore, istanza.getAutore(), "setAutore non ha funzionato.");
+        assertEquals(nuovoIsbn, istanza.getIsbn(), "setIsbn non ha funzionato.");
+        assertEquals(nuoveCopie, istanza.getCopie(), "setCopie non ha funzionato.");
+        assertEquals(nuovoAnno, istanza.getAnnoPubblicazione(), "setAnnoPubblicazione non ha funzionato.");
+        assertEquals(nuovoPrezzo, istanza.getPrezzo(), DELTA, "setPrezzo non ha funzionato.");
+        assertEquals(nuovaUsura, istanza.getUsura(), "setUsura non ha funzionato.");
     }
 
     /**
@@ -124,8 +124,8 @@ public class LibroTest {
     public void testEquals() {
         System.out.println("Test: equals()");
         
-        Libro libro1 = createTestBook();
-        Libro libro2 = createTestBook();
+        Libro libro1 = creaTestLibro();
+        Libro libro2 = creaTestLibro();
         
         Libro libroDiverso = new Libro("Un altro libro", "Autore B", "000-0000000000", 2020, 10.0, "Ottimo", 1);
         
@@ -159,7 +159,7 @@ public class LibroTest {
     public void testToString() {
         System.out.println("Test: toString()");
         
-        Libro instance = createTestBook();
+        Libro istanza = creaTestLibro();
         
         String expResult = "Libro{" +
                 "titolo='" + TITOLO_TEST + '\'' +
@@ -171,7 +171,7 @@ public class LibroTest {
                 ", usura='" + USURA_TEST + '\'' +
                 '}';
         
-        String result = instance.toString();
+        String result = istanza.toString();
         
         assertEquals(expResult, result, "Il metodo toString() non produce il formato atteso.");
     }
