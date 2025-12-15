@@ -119,7 +119,6 @@
         @FXML
         private void initialize() {
 
-               //collego le colonne ai getter di utente
             nomeCol.setCellValueFactory(new PropertyValueFactory<Utente, String>("nome"));
             cognomeCol.setCellValueFactory(new PropertyValueFactory<Utente, String>("cognome"));
             matricolaCol.setCellValueFactory(new PropertyValueFactory<Utente, String>("matricola"));
@@ -128,7 +127,6 @@
             libriInPrestitoCol.setCellValueFactory(new PropertyValueFactory<Utente, Integer>("libriInPrestito"));
 
 
-        // Rendo la tabella non editabile
             tabella.setEditable(false);
 
             rimozione.setDisable(true);
@@ -249,16 +247,14 @@
                 return;
             }
 
-            // otteniamo l'utente selezionato da interfaccia libro
             Utente utenteSelezionato = tabella.getSelectionModel().getSelectedItem();
 
-            // nel caso non sia stato selezionato nessun utente, diamo un errore
             if(utenteSelezionato == null) {
                 mostraErrore("Rimozione fallita!", "Utente da rimuovere non trovato");
                 return;
             }
 
-            // Parte di conferma: 
+  
             Alert conferma = new Alert(Alert.AlertType.CONFIRMATION);
             conferma.setTitle("Conferma rimozione");
             conferma.setHeaderText("Rimuovere l'utente selezionato?");
@@ -266,7 +262,7 @@
 
             Optional<ButtonType> risultato = conferma.showAndWait();
 
-            // controllo finale e rimozione
+         
             if (risultato.isPresent() && risultato.get() == ButtonType.OK) {
                 tabellaUtenteModel.rimuoviPersona(utenteSelezionato);
                 tabellaUtenteModel.salvaSuBinario();
@@ -408,35 +404,29 @@
                 return;
             }
 
-            // Prendiamo tutti gli attributi di utente sottoforma di stringa
             String strNome = nome.getText().trim();
             String strCognome = cognome.getText().trim();
             String strMatricola = matricola.getText().trim();
             String strEmail = email.getText().trim();
 
-            // controllo se uno o più parametri sono vuoti, nel caso mando un messaggio di errore
             if (strNome.isEmpty() || strCognome.isEmpty() || strMatricola.isEmpty() || strEmail.isEmpty()) {
                 mostraErrore("Dati mancanti!", "Inserire ogni attributo");
                 return;
             }
 
-            //Gestisco eventuali incongruenze sulla matricola
             if (strMatricola.length() != 10) {
                 mostraErrore("Attenzione!", "Inserire una matricola valida");
                 return;
             }
 
-            //Aggiunta e salvataggio su file di testo dell'utente
             tabellaUtenteModel.aggiungiPersona(strNome, strCognome, strMatricola, strEmail, LocalDate.now());
             tabellaUtenteModel.salvaSuBinario();
 
-            //Puliamo i campi di utente
             nome.clear();
             cognome.clear();
             matricola.clear();
             email.clear();
 
-            //Disabilito le textfield e il bottone di aggiunta
             aggiuntaUt.setDisable(true);
             nome.setDisable(true);
             cognome.setDisable(true);

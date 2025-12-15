@@ -34,7 +34,7 @@ import javafx.collections.ObservableList;
 
 public class TabellaPrestitoModel {
         private ObservableList<Prestito> prestiti; /// @brief Questa ObservableList è una lista che contiene tutti i prestiti
-        private final String FILE_BINARIO = "prestiti.bin";
+        private final String FILE_BINARIO = "prestiti.bin"; /// @brief File binario utilizzato per salvare i prestiti
         
                /**
  * @brief Costruttore della classe TabellaPrestitoModel
